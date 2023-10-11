@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'Cascadia-Mono';
+  src: url('./assets/fonts/CascadiaMono.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cascadia-Mono-Italic';
+  src: url('./assets/fonts/CascadiaMonoItalic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'tinos-normal';
+  src: url('./assets/fonts/tinos-latin-400-normal.woff2') format('woff2');
+}
+
+.title {
+  font-family: tinos-normal;
+  letter-spacing: 0.2em;
+}
+
+.equipment {
+  font-family: Cascadia-Mono-Italic;
+}
