@@ -36,3 +36,9 @@ code {
 .equipment {
   font-family: Cascadia-Mono-Italic;
 }
+
+.invisible-button {
+  background: transparent;
+  border: none;
+  color: transparent;
+}
