@@ -1,6 +1,20 @@
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { starterPackages, arcanum, names } from './oddpendium';
+
+const [stats, setStats] = createStore({
+  str: '10',
+  dex: '10',
+  wil: '10',
+  hp: '1',
+});
+
+const [money, setMoney] = createStore({
+  shillings: '0',
+  pennies: '0',
+  guilders: '0',
+});
+
 // Global writable storing an array of players in game.
 let player = {
   id: 0,
@@ -89,7 +103,11 @@ export function generatePlayer() {
   player.onScreen = false;
   player.category = 'player';
 
-  console.log('generatePlayer called', player);
+  setStats("str", player.str);
+  setStats("dex", player.dex);
+  setStats("wil", player.wil);
+  setStats("hp", player.hp);
+  console.log('stats: ', stats);
   // updateAbilities(player);
   // getStarterPackage(player);
   // myPlayer.set(player);
@@ -100,3 +118,60 @@ export function savePlayer() {
   console.log('savePlayer called', player);
 
 }
+
+// Function to modify a stat attribute based on click type
+const modifyStat = (attribute, increment) => {
+  setStats(attribute, (prevValue) => String(parseInt(prevValue, 10) + increment));
+  console.log("modifyStat called: ", attribute, increment);
+};
+
+// Function to modify a stat attribute based on click type
+const modifyMoney = (attribute, increment) => {
+  setMoney(attribute, (prevValue) => String(parseInt(prevValue, 10) + increment));
+};
+
+function Equipment() {
+  return (
+    <div class="grid grid-cols-7 select-none text-xl text-blue-200">
+      <div class="hover:text-blue-300 cursor-pointer"
+        on:click={() => modifyStat('str', 1)} // Increment on left-click
+        on:contextmenu={(e) => {
+          e.preventDefault();
+          modifyStat('str', -1); // Decrement on right-click
+        }}>S{stats.str}
+        </div>
+        <div class="hover:text-blue-300 cursor-pointer"
+          on:click={() => modifyStat('dex', 1)} // Increment on left-click
+          on:contextmenu={(e) => {
+            e.preventDefault();
+            modifyStat('dex', -1); // Decrement on right-click
+          }}>D{stats.dex}
+        </div>
+        <div class="hover:text-blue-300 cursor-pointer"
+          on:click={() => modifyStat('wil', 1)} // Increment on left-click
+          on:contextmenu={(e) => {
+            e.preventDefault();
+            modifyStat('wil', -1); // Decrement on right-click
+          }}>W{stats.wil}
+        </div>
+        <div class="hover:text-blue-300 cursor-pointer"
+          on:click={() => modifyStat('hp', 1)} // Increment on left-click
+          on:contextmenu={(e) => {
+            e.preventDefault();
+            modifyStat('hp', -1); // Decrement on right-click
+        }}>H{stats.hp}
+        </div>
+        <div class="hover:text-blue-300 cursor-pointer"
+          on:click={() => modifyMoney('shillings', 1)} // Increment on left-click
+          on:contextmenu={(e) => {
+            e.preventDefault();
+            modifyMoney('shillings', -1); // Decrement on right-click
+          }}>&fnof;{money.guilders}/{money.shillings}/{money.pennies}
+        </div>
+        <div></div>
+        <div></div>
+      </div>
+    );
+  }
+  
+  export default Equipment;
