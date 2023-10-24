@@ -1,7 +1,15 @@
+/*
+This component contains functions and data related to a players array.
+Players can be directly managed or can be companions. The players array is
+an array of 8 players which is synchronised across all players.
+The index is assigned by the server.
+*/
+
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { starterPackages, arcanum, names } from './oddpendium';
 
+// Can the stats store be removed?
 const [stats, setStats] = createStore({
   str: '10',
   dex: '10',

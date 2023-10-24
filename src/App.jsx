@@ -20,9 +20,7 @@ function App() {
         <div class="col-span-2 row-start-17"></div>
         <div class="row-start-18 font-cascadia text-sm text-white">{name()}</div>                    {/* Player name */}
         <div class="col-start-2 row-start-18 font-cascadia text-white text-right">
-          <div class="flex flex-row-reverse pl-">
-            <Menu />
-          </div>
+          <Menu />
         </div>
         <div class="col-start-1 row-start-19 font-cascadia text-white">
           <Actor />
