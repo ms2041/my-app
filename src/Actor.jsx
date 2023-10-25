@@ -24,7 +24,7 @@ const [money, setMoney] = createStore({
 });
 
 // Global writable storing an array of players in game.
-let player = {
+const [player, setPlayer] = createStore({
   id: 0,
   classification: '',
   name: '',
@@ -41,7 +41,8 @@ let player = {
   guilders: 0,
   onScreen: false,
   category: ''
-};
+});
+export { player, setPlayer };
 
 let item = {
   name: '',
@@ -96,30 +97,23 @@ export function getPlayerName() {
 }
 
 export function generatePlayer() {
-  player.id = 1;
-  player.classification = 'player';
-  player.name = getPlayerName();
-  player.str = getRandom3d6();
-  player.dex = getRandom3d6();
-  player.wil = getRandom3d6();
-  player.hp = getRandomInt(6) + 1;
-  player.equipment = ['', '', '', '', '', '', '', '', '', '', '', ''];
-  player.equipmentPtr = 0;
-  player.shillings = 0;
-  player.pennies = 0;
-  player.guilders = 0;
-  player.onScreen = false;
-  player.category = 'player';
-
-  setStats("str", player.str);
-  setStats("dex", player.dex);
-  setStats("wil", player.wil);
-  setStats("hp", player.hp);
-  console.log('stats: ', stats);
-  // updateAbilities(player);
-  // getStarterPackage(player);
-  // myPlayer.set(player);
-  return player;
+  setPlayer({
+    id: 1,
+    classification: 'player',
+    name: getPlayerName(),
+    str: getRandom3d6(),
+    dex: getRandom3d6(),
+    wil: getRandom3d6(),
+    hp: getRandomInt(6) + 1,
+    equipment: ['long sword', 'musket', 'dagger', '', '', '', '', '', '', '', '', ''],
+    equipmentPtr: 0,
+    shillings: 0,
+    pennies: 0,
+    guilders: 0,
+    onScreen: false,
+    category: 'player'
+  });
+  console.log('generatePlayer called.')
 }
 
 export function savePlayer() {
@@ -127,54 +121,90 @@ export function savePlayer() {
 
 }
 
-// Function to modify a stat attribute based on click type
-const modifyStat = (attribute, increment) => {
-  setStats(attribute, (prevValue) => String(parseInt(prevValue, 10) + increment));
-  console.log("modifyStat called: ", attribute, increment);
-};
+// Function to modify an attribute based on click type
+function modifyPlayerAttribute(attribute, increment) {
+  setPlayer((prevPlayer) => {
+    // Create a copy of the previous player object
+    const updatedPlayer = { ...prevPlayer };
 
-// Function to modify a stat attribute based on click type
-const modifyMoney = (attribute, increment) => {
-  setMoney(attribute, (prevValue) => String(parseInt(prevValue, 10) + increment));
-};
+    // Check if the attribute exists in the player object
+    if (attribute in updatedPlayer) {
+      // Increment the attribute by the specified value
+      updatedPlayer[attribute] += increment;
+    }
+
+    return updatedPlayer; // Return the updated player object
+  });
+}
+
+function modifyMoney(currency, amount) {
+  setPlayer((prevPlayer) => {
+    const updatedPlayer = { ...prevPlayer };
+
+    if (currency === 'shillings') {
+      updatedPlayer.shillings += amount;
+    } else if (currency === 'pennies') {
+      updatedPlayer.pennies += amount;
+    } else if (currency === 'guilders') {
+      updatedPlayer.guilders += amount;
+    }
+
+    return updatedPlayer;
+  });
+}
+
+function handleCurrencyClick(event, currency) {
+  event.preventDefault();
+
+  if (event.buttons === 1) {
+    // Left-click (buttons = 1)
+    modifyMoney(currency, 1);
+  } else if (event.buttons === 2) {
+    // Right-click (buttons = 2)
+    modifyMoney(currency, -1);
+  }
+}
 
 function Equipment() {
   return (
     <div class="grid grid-cols-7 select-none text-xl text-blue-200">
       <div class="hover:text-blue-300 cursor-pointer"
-        on:click={() => modifyStat('str', 1)} // Increment on left-click
+        on:click={() => modifyPlayerAttribute('str', 1)} // Increment on left-click
         on:contextmenu={(e) => {
           e.preventDefault();
-          modifyStat('str', -1); // Decrement on right-click
-        }}>S{stats.str}
+          modifyPlayerAttribute('str', -1); // Decrement on right-click
+        }}>S{player.str}
         </div>
         <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyStat('dex', 1)} // Increment on left-click
+          on:click={() => modifyPlayerAttribute('dex', 1)} // Increment on left-click
           on:contextmenu={(e) => {
             e.preventDefault();
-            modifyStat('dex', -1); // Decrement on right-click
-          }}>D{stats.dex}
+            modifyPlayerAttribute('dex', -1); // Decrement on right-click
+          }}>D{player.dex}
         </div>
         <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyStat('wil', 1)} // Increment on left-click
+          on:click={() => modifyPlayerAttribute('wil', 1)} // Increment on left-click
           on:contextmenu={(e) => {
             e.preventDefault();
-            modifyStat('wil', -1); // Decrement on right-click
-          }}>W{stats.wil}
+            modifyPlayerAttribute('wil', -1); // Decrement on right-click
+          }}>W{player.wil}
         </div>
         <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyStat('hp', 1)} // Increment on left-click
+          on:click={() => modifyPlayerAttribute('hp', 1)} // Increment on left-click
           on:contextmenu={(e) => {
             e.preventDefault();
-            modifyStat('hp', -1); // Decrement on right-click
-        }}>H{stats.hp}
+            modifyPlayerAttribute('hp', -1); // Decrement on right-click
+        }}>H{player.hp}
         </div>
-        <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyMoney('shillings', 1)} // Increment on left-click
-          on:contextmenu={(e) => {
-            e.preventDefault();
-            modifyMoney('shillings', -1); // Decrement on right-click
-          }}>&fnof;{money.guilders}/{money.shillings}/{money.pennies}
+        <div class="flex">
+  <span class="hover:text-blue-300 cursor-pointer" 
+        on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{player.shillings}</span>
+  
+  <span class="hover:text-blue-300 cursor-pointer" 
+        on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{player.pennies}</span>
+  
+  <span class="hover:text-blue-300 cursor-pointer" 
+        on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{player.guilders}</span>
         </div>
         <div></div>
         <div></div>
