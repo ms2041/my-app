@@ -113,7 +113,7 @@ export function generatePlayer() {
     onScreen: false,
     category: 'player'
   });
-  console.log('generatePlayer called.')
+  console.log('generatePlayer called. ', player.name)
 }
 
 export function savePlayer() {
@@ -165,9 +165,9 @@ function handleCurrencyClick(event, currency) {
   }
 }
 
-function Equipment() {
+function Player() {
   return (
-    <div class="grid grid-cols-7 select-none text-xl text-blue-200">
+    <div class="grid grid-cols-6 select-none text-xl font-marta tracking-widest text-blue-200">
       <div class="hover:text-blue-300 cursor-pointer"
         on:click={() => modifyPlayerAttribute('str', 1)} // Increment on left-click
         on:contextmenu={(e) => {
@@ -197,19 +197,16 @@ function Equipment() {
         }}>H{player.hp}
         </div>
         <div class="flex">
-  <span class="hover:text-blue-300 cursor-pointer" 
-        on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{player.shillings}</span>
-  
-  <span class="hover:text-blue-300 cursor-pointer" 
-        on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{player.pennies}</span>
-  
-  <span class="hover:text-blue-300 cursor-pointer" 
-        on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{player.guilders}</span>
+          <span class="hover:text-blue-300 cursor-pointer" 
+            on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{player.shillings}</span>
+          <span class="hover:text-blue-300 cursor-pointer" 
+            on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{player.pennies}</span>
+          <span class="hover:text-blue-300 cursor-pointer" 
+            on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{player.guilders}</span>
         </div>
-        <div></div>
         <div></div>
       </div>
     );
   }
   
-  export default Equipment;
+  export default Player;

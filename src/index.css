@@ -28,9 +28,24 @@ code {
   src: url('./assets/fonts/tinos-latin-400-normal.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'algreya-regular';
+  src: url('./assets/fonts/Alegreya-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'marta';
+  src: url('./assets/fonts/Marta.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'phosphorus-tribromide';
+  src: url('./assets/fonts/Phosphorus Tribromide.woff2') format('woff2');
+}
+
 .title {
-  font-family: tinos-normal;
-  letter-spacing: 0.2em;
+  font-family: marta;
+  letter-spacing: 0.8em;
 }
 
 .equipment {

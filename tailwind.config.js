@@ -22,7 +22,10 @@ module.exports = {
       },
       fontFamily: {
         'tinos': ['tinos-normal'],
-        'cascadia': ['Cascadia-Mono-Italic']
+        'cascadia': ['Cascadia-Mono-Italic'],
+        'alegreya': ['algreya-regular'],
+        'marta': ['marta'],
+        'phosphorus-tribromide': ['phosphorus-tribromide']
       }
     },
   },
