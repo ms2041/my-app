@@ -7,6 +7,8 @@ The index is assigned by the server.
 
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
+import Equipment from './Equipment';
+
 import { starterPackages, arcanum, names } from './oddpendium';
 
 // Can the stats store be removed?
@@ -113,7 +115,7 @@ export function generatePlayer() {
     onScreen: false,
     category: 'player'
   });
-  console.log('generatePlayer called. ', player.name)
+  console.log('generatePlayer called. ', player.name, player.str)
 }
 
 export function savePlayer() {
@@ -167,46 +169,55 @@ function handleCurrencyClick(event, currency) {
 
 function Player() {
   return (
-    <div class="grid grid-cols-6 select-none text-xl font-marta tracking-widest text-blue-200">
-      <div class="hover:text-blue-300 cursor-pointer"
-        on:click={() => modifyPlayerAttribute('str', 1)} // Increment on left-click
-        on:contextmenu={(e) => {
-          e.preventDefault();
-          modifyPlayerAttribute('str', -1); // Decrement on right-click
-        }}>S{player.str}
-        </div>
-        <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyPlayerAttribute('dex', 1)} // Increment on left-click
-          on:contextmenu={(e) => {
-            e.preventDefault();
-            modifyPlayerAttribute('dex', -1); // Decrement on right-click
-          }}>D{player.dex}
-        </div>
-        <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyPlayerAttribute('wil', 1)} // Increment on left-click
-          on:contextmenu={(e) => {
-            e.preventDefault();
-            modifyPlayerAttribute('wil', -1); // Decrement on right-click
-          }}>W{player.wil}
-        </div>
-        <div class="hover:text-blue-300 cursor-pointer"
-          on:click={() => modifyPlayerAttribute('hp', 1)} // Increment on left-click
-          on:contextmenu={(e) => {
-            e.preventDefault();
-            modifyPlayerAttribute('hp', -1); // Decrement on right-click
-        }}>H{player.hp}
-        </div>
-        <div class="flex">
-          <span class="hover:text-blue-300 cursor-pointer" 
-            on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{player.shillings}</span>
-          <span class="hover:text-blue-300 cursor-pointer" 
-            on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{player.pennies}</span>
-          <span class="hover:text-blue-300 cursor-pointer" 
-            on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{player.guilders}</span>
-        </div>
-        <div></div>
+    <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1">
+      <div class="col-span-8 bg-neutral-800 rounded">{player.name}</div>
+      <div class="col-span-9 row-span-5 col-start-10">
+        <Equipment />
       </div>
-    );
-  }
+      <div class="col-span-8 row-start-2">
+        <div class="grid grid-cols-6 select-none text-xl font-marta tracking-widest text-blue-200 bg-neutral-800 rounded">
+          <div class="hover:text-blue-300 cursor-pointer"
+            on:click={() => modifyPlayerAttribute('str', 1)} // Increment on left-click
+            on:contextmenu={(e) => {
+              e.preventDefault();
+              modifyPlayerAttribute('str', -1); // Decrement on right-click
+            }}>S{player.str}
+          </div>
+          <div class="hover:text-blue-300 cursor-pointer"
+            on:click={() => modifyPlayerAttribute('dex', 1)} // Increment on left-click
+            on:contextmenu={(e) => {
+              e.preventDefault();
+              modifyPlayerAttribute('dex', -1); // Decrement on right-click
+            }}>D{player.dex}
+          </div>
+          <div class="hover:text-blue-300 cursor-pointer"
+            on:click={() => modifyPlayerAttribute('wil', 1)} // Increment on left-click
+            on:contextmenu={(e) => {
+              e.preventDefault();
+              modifyPlayerAttribute('wil', -1); // Decrement on right-click
+            }}>W{player.wil}
+          </div>
+          <div class="hover:text-blue-300 cursor-pointer"
+            on:click={() => modifyPlayerAttribute('hp', 1)} // Increment on left-click
+            on:contextmenu={(e) => {
+              e.preventDefault();
+              modifyPlayerAttribute('hp', -1); // Decrement on right-click
+          }}>H{player.hp}
+          </div>
+          <div class="flex">
+            <span class="hover:text-blue-300 cursor-pointer" 
+              on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{player.shillings}</span>
+            <span class="hover:text-blue-300 cursor-pointer" 
+              on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{player.pennies}</span>
+            <span class="hover:text-blue-300 cursor-pointer" 
+              on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{player.guilders}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-8 row-start-3 bg-neutral-800 rounded">4</div>
+      <div class="col-span-8 row-span-2 row-start-4 bg-neutral-800 rounded">5</div>
+    </div>
+  );
+}
   
-  export default Player;
+export default Player;
