@@ -8,8 +8,12 @@ The index is assigned by the server.
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import Equipment from './Equipment';
-
+import { getStarterPackage } from './Equipment';
+import { getRandomInt, getRandom3d6} from './utils';
 import { starterPackages, arcanum, names } from './oddpendium';
+
+let playerIndex = 0;
+let companionIndex = 1;
 
 const [money, setMoney] = createStore({
   shillings: '0',
@@ -18,6 +22,31 @@ const [money, setMoney] = createStore({
 });
 
 // Global writable storing an array of players in game.
+const defaultPlayer = {
+  id: 0,
+  classification: '',
+  name: '',
+  str: 0,
+  dex: 0,
+  wil: 0,
+  hp: 0,
+  equipment: ['', '', '', '', '', '', '', '', '', ''],
+  equipmentPtr: 0,
+  companion: '',
+  specialInformation: '',
+  shillings: 0,
+  pennies: 0,
+  guilders: 0,
+  onScreen: false,
+  category: '',
+};
+
+const initialPlayers = new Array(8).fill(defaultPlayer); // Initialize an array of 8 default player objects
+
+const [players, setPlayers] = createStore(initialPlayers);
+
+export { players, setPlayers };
+
 const [player, setPlayer] = createStore({
   id: 0,
   classification: '',
@@ -77,73 +106,14 @@ export const sobriquets =
     'Mischievous', 'Neglectful', 'Blighted', 'Tardy', 'Jaunty', 'Careless', 'Drowsy', 'Towering'
   ]
 
-// Random number functions.
-function getRandomInt(max) {  
-  return Math.floor(Math.random() * max);
-}
-
-function getRandom3d6() {
-  return (getRandomInt(6) + 1 + getRandomInt(6) + 1 + getRandomInt(6) + 1);
-}
-
 function getPlayerName() {
   return(names[getRandomInt(names.length)]);
 }
 
-function getHighestAbility() {
+export function getHighestAbility() {
   const { str, dex, wil } = player;
   return Math.max(str, dex, wil);
 }
-
-function getArcana() {
-  let item = arcanum[getRandomInt(arcanum.length)];
-  console.log ('getArcana called ', item.name);
-  return (item);
-}
-
-function incrementEquipmentPtr() {
-  setPlayer((prevPlayer) => {
-    const updatedPlayer = { ...prevPlayer };
-    updatedPlayer.equipmentPtr++;
-    return updatedPlayer;
-  });
-}
-
-
-function addArcana(item, index) {
-  setPlayer({ equipment: { ...player.equipment, [index]: item + '*' } });
-  incrementEquipmentPtr();
-}
-
-function getStarterPackage() {
-  // Choose a starter package and initialise player with equipment.
-  let i = player.hp - 1;
-  let j = getHighestAbility() - 3; // The range of the array is from 3 - 18.
-  let selectedPackage = starterPackages[i][j];
-  console.log('Column, Row: ', starterPackages.length, starterPackages[0].length, i, j, starterPackages[i][j], player.equipmentPtr);
-
-  const newEquipment = [...selectedPackage.equipment];
-
-  // Ensure the equipment array has a length of 10
-  while (newEquipment.length < 10) {
-    newEquipment.push(''); // Fill with empty strings
-  }
-  setPlayer({equipment: newEquipment});
-  setPlayer({equipmentPtr: selectedPackage.equipment.length});
-
-  if (selectedPackage.arcanum) {
-    let selectedArcana = getArcana();
-    console.log('Selected arcana: ', selectedArcana.name, player.equipmentPtr);
-    addArcana(selectedArcana.name, player.equipmentPtr);
-    console.log('Arcana added ', player.equipment, ' at ', player.equipmentPtr)
-  }
-  setPlayer({companion: selectedPackage.companion});
-  setPlayer({specialInformation: selectedPackage.specialInformation});
-
-  console.log('getStarterPackage called ', player);
-
-  return starterPackages[i][j];
-} 
 
 export function generatePlayer() {
   setPlayer({
