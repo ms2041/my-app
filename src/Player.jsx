@@ -26,7 +26,7 @@ const [player, setPlayer] = createStore({
   dex: 0,
   wil: 0,
   hp: 0,
-  equipment: ['', '', '', '', '', '', '', '', '', '', '', ''],
+  equipment: ['', '', '', '', '', '', '', '', '', ''],
   equipmentPtr: 0,
   companion: '',
   specialInformation: '',
@@ -101,8 +101,18 @@ function getArcana() {
   return (item);
 }
 
+function incrementEquipmentPtr() {
+  setPlayer((prevPlayer) => {
+    const updatedPlayer = { ...prevPlayer };
+    updatedPlayer.equipmentPtr++;
+    return updatedPlayer;
+  });
+}
+
+
 function addArcana(item, index) {
   setPlayer({ equipment: { ...player.equipment, [index]: item + '*' } });
+  incrementEquipmentPtr();
 }
 
 function getStarterPackage() {
@@ -112,8 +122,15 @@ function getStarterPackage() {
   let selectedPackage = starterPackages[i][j];
   console.log('Column, Row: ', starterPackages.length, starterPackages[0].length, i, j, starterPackages[i][j], player.equipmentPtr);
 
-  setPlayer({equipment: [...selectedPackage.equipment]});
+  const newEquipment = [...selectedPackage.equipment];
+
+  // Ensure the equipment array has a length of 10
+  while (newEquipment.length < 10) {
+    newEquipment.push(''); // Fill with empty strings
+  }
+  setPlayer({equipment: newEquipment});
   setPlayer({equipmentPtr: selectedPackage.equipment.length});
+
   if (selectedPackage.arcanum) {
     let selectedArcana = getArcana();
     console.log('Selected arcana: ', selectedArcana.name, player.equipmentPtr);
@@ -126,7 +143,7 @@ function getStarterPackage() {
   console.log('getStarterPackage called ', player);
 
   return starterPackages[i][j];
-}
+} 
 
 export function generatePlayer() {
   setPlayer({
