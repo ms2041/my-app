@@ -11,14 +11,6 @@ import Equipment from './Equipment';
 
 import { starterPackages, arcanum, names } from './oddpendium';
 
-// Can the stats store be removed?
-const [stats, setStats] = createStore({
-  str: '10',
-  dex: '10',
-  wil: '10',
-  hp: '1',
-});
-
 const [money, setMoney] = createStore({
   shillings: '0',
   pennies: '0',
@@ -94,8 +86,46 @@ function getRandom3d6() {
   return (getRandomInt(6) + 1 + getRandomInt(6) + 1 + getRandomInt(6) + 1);
 }
 
-export function getPlayerName() {
+function getPlayerName() {
   return(names[getRandomInt(names.length)]);
+}
+
+function getHighestAbility() {
+  const { str, dex, wil } = player;
+  return Math.max(str, dex, wil);
+}
+
+function getArcana() {
+  let item = arcanum[getRandomInt(arcanum.length)];
+  console.log ('getArcana called ', item.name);
+  return (item);
+}
+
+function addArcana(item, index) {
+  setPlayer({ equipment: { ...player.equipment, [index]: item + '*' } });
+}
+
+function getStarterPackage() {
+  // Choose a starter package and initialise player with equipment.
+  let i = player.hp - 1;
+  let j = getHighestAbility() - 3; // The range of the array is from 3 - 18.
+  let selectedPackage = starterPackages[i][j];
+  console.log('Column, Row: ', starterPackages.length, starterPackages[0].length, i, j, starterPackages[i][j], player.equipmentPtr);
+
+  setPlayer({equipment: [...selectedPackage.equipment]});
+  setPlayer({equipmentPtr: selectedPackage.equipment.length});
+  if (selectedPackage.arcanum) {
+    let selectedArcana = getArcana();
+    console.log('Selected arcana: ', selectedArcana.name, player.equipmentPtr);
+    addArcana(selectedArcana.name, player.equipmentPtr);
+    console.log('Arcana added ', player.equipment, ' at ', player.equipmentPtr)
+  }
+  setPlayer({companion: selectedPackage.companion});
+  setPlayer({specialInformation: selectedPackage.specialInformation});
+
+  console.log('getStarterPackage called ', player);
+
+  return starterPackages[i][j];
 }
 
 export function generatePlayer() {
@@ -107,7 +137,7 @@ export function generatePlayer() {
     dex: getRandom3d6(),
     wil: getRandom3d6(),
     hp: getRandomInt(6) + 1,
-    equipment: ['long sword', 'musket', 'dagger', '', '', '', '', '', '', '', '', ''],
+    equipment: ['', '', '', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
     shillings: 0,
     pennies: 0,
@@ -115,7 +145,10 @@ export function generatePlayer() {
     onScreen: false,
     category: 'player'
   });
-  console.log('generatePlayer called. ', player.name, player.str)
+
+  getStarterPackage();
+
+  console.log('generatePlayer called. ', player.name);
 }
 
 export function savePlayer() {
@@ -170,12 +203,13 @@ function handleCurrencyClick(event, currency) {
 function Player() {
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1">
-      <div class="col-span-8 bg-neutral-800 rounded">{player.name}</div>
+      <div class="col-span-7 bg-neutral-800 rounded">{player.name}</div>
+      <div class="col-span-1 bg-neutral-800 rounded text-right">{player.companion ? '&' : null}</div> {/* & displayed if companion==true */}
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
       </div>
       <div class="col-span-8 row-start-2">
-        <div class="grid grid-cols-6 select-none text-xl font-marta tracking-widest text-blue-200 bg-neutral-800 rounded">
+        <div class="grid grid-cols-6 select-none text-lg h-full tracking-widest text-blue-200 bg-neutral-800 rounded">
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('str', 1)} // Increment on left-click
             on:contextmenu={(e) => {
@@ -214,8 +248,8 @@ function Player() {
           </div>
         </div>
       </div>
-      <div class="col-span-8 row-start-3 bg-neutral-800 rounded">4</div>
-      <div class="col-span-8 row-span-2 row-start-4 bg-neutral-800 rounded">5</div>
+      <div class="col-span-8 row-start-3 bg-neutral-800 rounded">{player.specialInformation}</div>
+      <div class="col-span-8 row-span-2 row-start-4 bg-neutral-800 rounded">Haiku goes here!</div>
     </div>
   );
 }
