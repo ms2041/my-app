@@ -11,41 +11,13 @@ import Equipment from './Equipment';
 import { getStarterPackage } from './Equipment';
 import { getRandomInt, getRandom3d6} from './utils';
 import { starterPackages, arcanum, names } from './oddpendium';
-
-let playerIndex = 0;
-let companionIndex = 1;
+import { players, setPlayers, updatePlayer, playerIndex, companionIndex } from './Cast';
 
 const [money, setMoney] = createStore({
   shillings: '0',
   pennies: '0',
   guilders: '0',
 });
-
-// Global writable storing an array of players in game.
-const defaultPlayer = {
-  id: 0,
-  classification: '',
-  name: '',
-  str: 0,
-  dex: 0,
-  wil: 0,
-  hp: 0,
-  equipment: ['', '', '', '', '', '', '', '', '', ''],
-  equipmentPtr: 0,
-  companion: '',
-  specialInformation: '',
-  shillings: 0,
-  pennies: 0,
-  guilders: 0,
-  onScreen: false,
-  category: '',
-};
-
-const initialPlayers = new Array(8).fill(defaultPlayer); // Initialize an array of 8 default player objects
-
-const [players, setPlayers] = createStore(initialPlayers);
-
-export { players, setPlayers };
 
 const [player, setPlayer] = createStore({
   id: 0,
@@ -111,12 +83,13 @@ function getPlayerName() {
 }
 
 export function getHighestAbility() {
-  const { str, dex, wil } = player;
+  const { str, dex, wil } = players[playerIndex()];
   return Math.max(str, dex, wil);
 }
 
-export function generatePlayer() {
-  setPlayer({
+export function generatePlayers() {
+  const index = playerIndex();
+  const newPlayer = {
     id: 1,
     classification: 'player',
     name: getPlayerName(),
@@ -126,17 +99,22 @@ export function generatePlayer() {
     hp: getRandomInt(6) + 1,
     equipment: ['', '', '', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
+    companion: '',
+    specialInformation: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     onScreen: false,
     category: 'player'
-  });
+  };
+
+  // Use the updatePlayer function to update the player at the specified index
+  updatePlayer(index, newPlayer);
+  console.log('updatePlayer called. ', index, newPlayer, players[index]);
 
   getStarterPackage();
-
-  console.log('generatePlayer called. ', player.name);
 }
+
 
 export function savePlayer() {
   console.log('savePlayer called', player);
@@ -145,33 +123,37 @@ export function savePlayer() {
 
 // Function to modify an attribute based on click type
 function modifyPlayerAttribute(attribute, increment) {
-  setPlayer((prevPlayer) => {
-    // Create a copy of the previous player object
-    const updatedPlayer = { ...prevPlayer };
+  const index = playerIndex();
 
-    // Check if the attribute exists in the player object
-    if (attribute in updatedPlayer) {
-      // Increment the attribute by the specified value
-      updatedPlayer[attribute] += increment;
-    }
+  // Create an object with the updated property
+  const updatedProperties = { [attribute]: players[index][attribute] + increment };
 
-    return updatedPlayer; // Return the updated player object
-  });
+  // Use the updatePlayer function to update the player at the specified index
+  updatePlayer(index, updatedProperties);
+  console.log('modifyPlayerAttribute: ', attribute, updatedProperties)
+
 }
 
 function modifyMoney(currency, amount) {
-  setPlayer((prevPlayer) => {
-    const updatedPlayer = { ...prevPlayer };
+  setPlayers((prevPlayers) => {
+    const newPlayers = [...prevPlayers];
+    const index = playerIndex();
 
-    if (currency === 'shillings') {
-      updatedPlayer.shillings += amount;
-    } else if (currency === 'pennies') {
-      updatedPlayer.pennies += amount;
-    } else if (currency === 'guilders') {
-      updatedPlayer.guilders += amount;
+    if (index >= 0 && index < 8) {
+      const updatedPlayer = { ...newPlayers[index] };
+
+      if (currency === 'shillings') {
+        updatedPlayer.shillings += amount;
+      } else if (currency === 'pennies') {
+        updatedPlayer.pennies += amount;
+      } else if (currency === 'guilders') {
+        updatedPlayer.guilders += amount;
+      }
+
+      newPlayers[index] = updatedPlayer;
     }
 
-    return updatedPlayer;
+    return newPlayers;
   });
 }
 
@@ -189,9 +171,9 @@ function handleCurrencyClick(event, currency) {
 
 function Player() {
   return (
-    <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1">
-      <div class="col-span-7 bg-neutral-800 rounded">{player.name}</div>
-      <div class="col-span-1 bg-neutral-800 rounded text-right">{player.companion ? '&' : null}</div> {/* & displayed if companion==true */}
+    <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 select-none">
+      <div class="col-span-7 bg-neutral-800 rounded">{players[playerIndex()].name}</div>
+      <div class="col-span-1 bg-neutral-800 rounded text-right">{players[playerIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
       </div>
@@ -202,40 +184,40 @@ function Player() {
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('str', -1); // Decrement on right-click
-            }}>S{player.str}
+            }}>S{players[playerIndex()].str}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('dex', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('dex', -1); // Decrement on right-click
-            }}>D{player.dex}
+            }}>D{players[playerIndex()].dex}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('wil', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('wil', -1); // Decrement on right-click
-            }}>W{player.wil}
+            }}>W{players[playerIndex()].wil}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('hp', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('hp', -1); // Decrement on right-click
-          }}>H{player.hp}
+          }}>H{players[playerIndex()].hp}
           </div>
           <div class="flex">
             <span class="hover:text-blue-300 cursor-pointer" 
-              on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{player.shillings}</span>
+              on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{players[playerIndex()].shillings}</span>
             <span class="hover:text-blue-300 cursor-pointer" 
-              on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{player.pennies}</span>
+              on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{players[playerIndex()].pennies}</span>
             <span class="hover:text-blue-300 cursor-pointer" 
-              on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{player.guilders}</span>
+              on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{players[playerIndex()].guilders}</span>
           </div>
         </div>
       </div>
-      <div class="col-span-8 row-start-3 bg-neutral-800 rounded">{player.specialInformation}</div>
+      <div class="col-span-8 row-start-3 bg-neutral-800 rounded">{players[playerIndex()].specialInformation}</div>
       <div class="col-span-8 row-span-2 row-start-4 bg-neutral-800 rounded">Haiku goes here!</div>
     </div>
   );
