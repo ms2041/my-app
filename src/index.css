@@ -43,6 +43,16 @@ code {
   src: url('./assets/fonts/Phosphorus Tribromide.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'hultog-v2';
+  src: url('./assets/fonts/Hultog V2.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'hultog-italic-v2';
+  src: url('./assets/fonts/Hultog Italic V2.woff2') format('woff2');
+}
+
 .title {
   font-family: marta;
   letter-spacing: 0.8em;
@@ -56,4 +66,13 @@ code {
   background: transparent;
   border: none;
   color: transparent;
+}
+
+.modal-equipment {
+  position: relative;
+  z-index: 2;
+  background: antiquewhite;
+  padding: 1rem;
+  min-height: 640px;
+  min-width: 640px;
 }

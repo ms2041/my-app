@@ -25,7 +25,9 @@ module.exports = {
         'cascadia': ['Cascadia-Mono-Italic'],
         'alegreya': ['algreya-regular'],
         'marta': ['marta'],
-        'phosphorus-tribromide': ['phosphorus-tribromide']
+        'phosphorus-tribromide': ['phosphorus-tribromide'],
+        'hultog': ['hultog-v2'],
+        'hultog-italic': ['hultog-italic-v2'],
       }
     },
   },

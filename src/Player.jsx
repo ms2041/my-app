@@ -171,7 +171,7 @@ function handleCurrencyClick(event, currency) {
 
 function Player() {
   return (
-    <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 select-none">
+    <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
       <div class="col-span-7 bg-neutral-800 rounded">{players[playerIndex()].name}</div>
       <div class="col-span-1 bg-neutral-800 rounded text-right">{players[playerIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
       <div class="col-span-9 row-span-5 col-start-10">

@@ -163,7 +163,7 @@ export const starterPackages = [
       specialInformation: ''
     },
     {
-      equipment: ['Sword (d6)', 'Pistol (d6)', 'Crude Armour'],
+      equipment: ['Sword (d6)', 'Pistol (d6)', 'Simple Armour'],
       arcanum: false,
       companion: '',
       specialInformation: ''
@@ -726,7 +726,7 @@ export const items = [
   {
     category: 'Hand Weapon',
     name: 'Dagger',
-    description: 'Silent but deadly. Can be thrusted or thrown.',
+    description: 'Silent but deadly. Can be thrust or thrown.',
     slots: 1,
     number: 0,
     damage: 6,
@@ -1537,7 +1537,7 @@ const whatIsBeyondTheDarkeness = [
   { number: 70, feature: 'Open Vault', hazard: 'Cursing Hag', spoils: 'Metal Staff' },
   { number: 75, feature: 'Flooded Sewer', hazard: 'Frightened Cat', spoils: 'Set of Modern Armour' },
   { number: 77, feature: 'Abandoned Tramway', hazard: 'Holographic Spiders', spoils: 'Modern Armour' },
-  { number: 80, feature: 'Gun Workshop', hazard: 'Gusts of Wind', spoils: 'Crude Armour' },
+  { number: 80, feature: 'Gun Workshop', hazard: 'Gusts of Wind', spoils: 'Simple Armour' },
   { number: 82, feature: 'Gunpowder Store', hazard: 'Ghostly Hands', spoils: 'White Boulder' },
   { number: 84, feature: 'Dog Pit', hazard: 'Dust Tornadoes', spoils: 'Drinking Horn' },
   { number: 88, feature: 'Alchemy Lab', hazard: 'Acidic Ooze', spoils: 'Beast Tusk (50S)' },
@@ -1578,7 +1578,7 @@ const spoils = [
   { number: 65, spoils: "Metal Staff" },
   { number: 67, spoils: "Set of Modern Armour" },
   { number: 70, spoils: "Modern Armour" },
-  { number: 74, spoils: "Crude Armour" },
+  { number: 74, spoils: "Simple Armour" },
   { number: 78, spoils: "White Boulder" },
   { number: 80, spoils: "Drinking Horn" },
   { number: 82, spoils: "Beast Tusk (50S)" },
