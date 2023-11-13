@@ -12,8 +12,14 @@ function App() {
 
   return (
     <div class="relative h-screen flex items-center justify-center bg-black">
-      <img class="w-[896px]" src={stage} /> {/* 896px width stage for iMac screen */}
-      <div class="absolute w-[796px] h-[1092px] grid grid-cols-18 grid-rows-22 gap-1 justify-end"> {/* Usable Stage */}
+      <svg class="absolute w-[896px] h-[1092px] z-0 flex items-center justify-center">
+        {/* Stage */}
+        <rect class="stage" />
+
+        {/* Map Window */}
+        <rect class="map-window flex items-center justify-center" y="50" x="50" rx="10"></rect>
+      </svg>
+        <div class="absolute w-[796px] h-[1092px] grid grid-cols-18 grid-rows-22 gap-1 justify-end" z-10> {/* Usable Stage */}
         <div class="col-span-18"></div>
         <div class="col-span-18 row-start-2 text-center p-4 font-marta tracking-widest font-bold text-xl">{title()}</div> {/* Title or Scene */}
         <div class="col-span-18 row-span-14 row-start-3">map</div> 

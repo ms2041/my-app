@@ -2,6 +2,12 @@ import { player, setPlayer, getHighestAbility } from './Player';
 import { players, setPlayers, playerIndex, companionIndex, updatePlayer } from './Cast';
 import { starterPackages, arcanum } from './oddpendium';
 import { getRandomInt } from './utils';
+import EquipmentModal from './EquipmentModal';
+import { createSignal } from 'solid-js';
+
+
+const [showModal, setShowModal] = createSignal(false);
+const [selectedItem, setSelectedItem] = createSignal(null);
 
 function reorderEquipment() {
   setPlayers((prevPlayers) => {
@@ -124,6 +130,8 @@ export function getStarterPackage() {
 function handleLeftClick(slot) {
   console.log('handleLeftClick: ', slot, players[playerIndex()].equipment, players[playerIndex()].equipmentPtr);
   if (players[playerIndex()].equipment[slot] === '') {
+    setSelectedItem(null); // Reset selected item when selecting an empty slot
+    setShowModal(true);
     selectEquipment(slot);
   } else {
     removeEquipment(slot);
@@ -134,7 +142,14 @@ function handleLeftClick(slot) {
 // Add equipment to equipment array.
 function selectEquipment(index) {
   console.log('selectEquipment: ', index);
+  setSelectedItem(players[playerIndex()].equipment[index]);
+  setShowModal(true);
 }
+
+function closeModal() {
+  setShowModal(false);
+}
+
 
 function Equipment() {
   return (
@@ -159,6 +174,9 @@ function Equipment() {
         on:click={() => handleLeftClick(8)}>{players[playerIndex()].equipment[8] || ''}</div>
       <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
         on:click={() => handleLeftClick(9)}>{players[playerIndex()].equipment[9] || ''}</div>
+      {showModal() && (
+        <EquipmentModal onClose={closeModal} selectedItem={selectedItem()} />
+      )}
     </div>
   );
 }

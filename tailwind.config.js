@@ -20,6 +20,9 @@ module.exports = {
         '16': 'repeat(16, minmax(0, 1fr))',
         '18': 'repeat(18, minmax(0, 1fr))'
       },
+      spacing: {
+        '128': '32rem',
+      },
       fontFamily: {
         'tinos': ['tinos-normal'],
         'cascadia': ['Cascadia-Mono-Italic'],
