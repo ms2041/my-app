@@ -55,24 +55,6 @@ code {
 
 /* index.css */
 
-.stage {
-  width: 896px;
-  height: 1092px;
-  fill: #4b5563; /* Neutral-800 color */
-}
-
-.map-window {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 796px;
-  height: 796px;
-  rx: 10; /* Rounded corners */
-  fill: #edf2f7; /* Neutral-200 color */
-}
-
-
-
 .title {
   font-family: marta;
   letter-spacing: 0.8em;

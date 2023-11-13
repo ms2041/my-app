@@ -4,22 +4,20 @@ import stage from './assets/ui/polaroid-positive.svg';
 import Menu from './Menu';
 import Player from './Player';
 import { players, setPlayers } from './Cast';
+import EquipmentModal from './EquipmentModal';
 
 function App() {
   const [title, setTitle] = createSignal('THE UNFATHOMABLE UNDERWORLD');
-  const [name, setName] = createSignal('Seven Against Thebes');
-  const [specialInfo, setSpecialInfo] = createSignal('Prosthetic leg');
 
   return (
     <div class="relative h-screen flex items-center justify-center bg-black">
-      <svg class="absolute w-[896px] h-[1092px] z-0 flex items-center justify-center">
-        {/* Stage */}
-        <rect class="stage" />
-
+      {/* Stage */}
+      <div class="z-0 w-[896px] h-[1092px] flex justify-center bg-neutral-900">
         {/* Map Window */}
-        <rect class="map-window flex items-center justify-center" y="50" x="50" rx="10"></rect>
-      </svg>
-        <div class="absolute w-[796px] h-[1092px] grid grid-cols-18 grid-rows-22 gap-1 justify-end" z-10> {/* Usable Stage */}
+        <div class="z-10 relative top-[50px] w-[796px] h-[796px] rounded-2xl bg-neutral-200">
+        </div>
+      </div>
+        <div class="absolute w-[796px] h-[1092px] grid grid-cols-18 grid-rows-22 gap-1 justify-end"> {/* Usable Stage */}
         <div class="col-span-18"></div>
         <div class="col-span-18 row-start-2 text-center p-4 font-marta tracking-widest font-bold text-xl">{title()}</div> {/* Title or Scene */}
         <div class="col-span-18 row-span-14 row-start-3">map</div> 
