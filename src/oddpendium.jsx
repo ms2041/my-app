@@ -926,6 +926,7 @@ export const items = [
   },
   {
     category:'Tool',
+    name: 'Skeleton Key',
     description: 'Can open most doors and padlocks.',
     slots: 1,
     number: 0,

@@ -8,8 +8,9 @@ import { createSignal } from 'solid-js';
 
 const [showModal, setShowModal] = createSignal(false);
 const [selectedItem, setSelectedItem] = createSignal(null);
+const [selectedSlot, setSelectedSlot] = createSignal(null);
 
-function reorderEquipment() {
+export function reorderEquipment() {
   setPlayers((prevPlayers) => {
     const newPlayers = [...prevPlayers];
     const currentPlayer = newPlayers[playerIndex()];
@@ -72,12 +73,13 @@ function getArcana() {
 }
 
 // Increment the equipmentPtr for a specific player
-function incrementEquipmentPtr() {
+export function incrementEquipmentPtr() {
   updatePlayer(playerIndex(), { equipmentPtr: players[playerIndex()].equipmentPtr + 1 });
   console.log('incrementEquipmentPtr: ', players[playerIndex()].equipmentPtr);
 }
 
-function addEquipment(item, slot) {
+export function addEquipment(item, slot) {
+  console.log('addEquipment: ', item, slot);
   setPlayers((prevPlayers) => {
     const newPlayers = [...prevPlayers];
 
@@ -127,8 +129,16 @@ export function getStarterPackage() {
   return starterPackages[i][j];
 } 
 
+// Add equipment to equipment array.
+function selectEquipment(index) {
+  console.log('selectEquipment: ', index);
+  setSelectedItem(players[playerIndex()].equipment[index]);
+  setShowModal(true);
+}
+
 function handleLeftClick(slot) {
-  console.log('handleLeftClick: ', slot, players[playerIndex()].equipment, players[playerIndex()].equipmentPtr);
+  setSelectedSlot(slot);
+  console.log('handleLeftClick: ', slot, players[playerIndex()].equipment, players[playerIndex()].equipmentPtr, ' Slot: ', selectedSlot());
   if (players[playerIndex()].equipment[slot] === '') {
     setSelectedItem(null); // Reset selected item when selecting an empty slot
     setShowModal(true);
@@ -137,13 +147,6 @@ function handleLeftClick(slot) {
     removeEquipment(slot);
     reorderEquipment();
   }
-}
-
-// Add equipment to equipment array.
-function selectEquipment(index) {
-  console.log('selectEquipment: ', index);
-  setSelectedItem(players[playerIndex()].equipment[index]);
-  setShowModal(true);
 }
 
 function closeModal() {
@@ -175,7 +178,7 @@ function Equipment() {
       <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
         on:click={() => handleLeftClick(9)}>{players[playerIndex()].equipment[9] || ''}</div>
       {showModal() && (
-        <EquipmentModal onClose={closeModal} selectedItem={selectedItem()} />
+        <EquipmentModal onClose={closeModal} selectedSlot={[selectedSlot, setSelectedSlot]} />
       )}
     </div>
   );
