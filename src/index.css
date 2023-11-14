@@ -69,12 +69,3 @@ code {
   border: none;
   color: transparent;
 }
-
-.modal-equipment {
-  position: relative;
-  z-index: 2;
-  background: antiquewhite;
-  padding: 1rem;
-  min-height: 640px;
-  min-width: 640px;
-}

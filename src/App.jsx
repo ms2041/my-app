@@ -22,10 +22,10 @@ function App() {
         <div class="col-span-18 row-start-2 text-center p-4 font-marta tracking-widest font-bold text-xl">{title()}</div> {/* Title or Scene */}
         <div class="col-span-18 row-span-14 row-start-3">map</div> 
         <div class="col-span-18 row-start-17"></div> {/* Blank row */}
-        <div class="col-span-18 col-start-18 row-start-18 font-cascadia text-white text-right bg-neutral-800 rounded p-1 select-none">
+        <div class="col-span-18 col-start-18 row-start-18 font-cascadia text-white text-right rounded p-1 select-none">
           <Menu />
         </div>
-        <div class="col-span-18 col-start-1 row-span-3 row-start-19 font-cascadia bg-neutral-200 rounded text-white">
+        <div class="col-span-18 col-start-1 row-span-3 row-start-19 font-cascadia rounded text-white">
           <Player player={players[playerIndex]}/>
         </div>
         <div class="col-span-18 col-start-1 row-start-22"></div> {/* Blank row */}

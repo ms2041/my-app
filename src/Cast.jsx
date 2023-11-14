@@ -5,7 +5,8 @@ const [playerIndex, setPlayerIndex] = createSignal(0);
 export { playerIndex, setPlayerIndex };
 const [companionIndex, setCompanionIndex] = createSignal(1);
 export { companionIndex, setCompanionIndex };
-
+const [displayIndex, setDisplayIndex] = createSignal(0);
+export { displayIndex, setDisplayIndex };
 
 const defaultPlayer = {
   id: 0,
@@ -15,6 +16,7 @@ const defaultPlayer = {
   dex: 0,
   wil: 0,
   hp: 0,
+  abilities: ['', '', '', '', '', '', '', '', '', ''],
   equipment: ['', '', '', '', '', '', '', '', '', ''],
   equipmentPtr: 0,
   companion: '',
@@ -27,7 +29,6 @@ const defaultPlayer = {
 };
 
 const initialPlayers = new Array(8).fill(defaultPlayer);
-
 const [players, setPlayers] = createStore(initialPlayers);
 
 function updatePlayer(playerIndex, updatedProperties) {

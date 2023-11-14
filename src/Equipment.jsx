@@ -157,25 +157,25 @@ function closeModal() {
 function Equipment() {
   return (
     <div class="grid grid-cols-2 grid-rows-5 h-full gap-1 text-sm">
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(0)}>{players[playerIndex()].equipment[0] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(1)}>{players[playerIndex()].equipment[1] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(2)}>{players[playerIndex()].equipment[2] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(3)}>{players[playerIndex()].equipment[3] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(4)}>{players[playerIndex()].equipment[4] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(5)}>{players[playerIndex()].equipment[5] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(6)}>{players[playerIndex()].equipment[6] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(7)}>{players[playerIndex()].equipment[7] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(8)}>{players[playerIndex()].equipment[8] || ''}</div>
-      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer"
+      <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2"
         on:click={() => handleLeftClick(9)}>{players[playerIndex()].equipment[9] || ''}</div>
       {showModal() && (
         <EquipmentModal onClose={closeModal} selectedSlot={[selectedSlot, setSelectedSlot]} />

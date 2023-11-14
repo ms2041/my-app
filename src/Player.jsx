@@ -10,8 +10,8 @@ import { createStore } from 'solid-js/store';
 import Equipment from './Equipment';
 import { getStarterPackage } from './Equipment';
 import { getRandomInt, getRandom3d6} from './utils';
-import { starterPackages, arcanum, names } from './oddpendium';
-import { players, setPlayers, updatePlayer, playerIndex, companionIndex } from './Cast';
+import { starterPackages, arcanum, names, companions } from './oddpendium';
+import { players, setPlayers, updatePlayer, playerIndex, companionIndex, displayIndex, setDisplayIndex } from './Cast';
 
 const [money, setMoney] = createStore({
   shillings: '0',
@@ -27,6 +27,7 @@ const [player, setPlayer] = createStore({
   dex: 0,
   wil: 0,
   hp: 0,
+  abilities: ['', '', '', '', '', '', '', '', '', ''],
   equipment: ['', '', '', '', '', '', '', '', '', ''],
   equipmentPtr: 0,
   companion: '',
@@ -87,7 +88,20 @@ export function getHighestAbility() {
   return Math.max(str, dex, wil);
 }
 
-export function generatePlayers() {
+function getCompanion(companionName) {
+  const companion = companions.find((companion) => companion.companion === companionName);
+  console.log('getCompanion: ', companionName, companion)
+  return companion || null;
+}
+
+function generateCompanion() {
+  const index = companionIndex();
+  const newCompanion = getCompanion(players[playerIndex()].companion);
+  updatePlayer(index, newCompanion);
+  console.log('generateCompanion:', newCompanion);
+}
+
+export function generatePlayer() {
   const index = playerIndex();
   const newPlayer = {
     id: 1,
@@ -97,6 +111,7 @@ export function generatePlayers() {
     dex: getRandom3d6(),
     wil: getRandom3d6(),
     hp: getRandomInt(6) + 1,
+    abilities: ['', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
     companion: '',
@@ -113,8 +128,10 @@ export function generatePlayers() {
   console.log('updatePlayer called. ', index, newPlayer, players[index]);
 
   getStarterPackage();
+  if (players[index].companion) {
+    generateCompanion();
+  }
 }
-
 
 export function savePlayer() {
   console.log('savePlayer called', player);
@@ -172,13 +189,13 @@ function handleCurrencyClick(event, currency) {
 function Player() {
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
-      <div class="col-span-7 bg-neutral-800 rounded">{players[playerIndex()].name}</div>
-      <div class="col-span-1 bg-neutral-800 rounded text-right">{players[playerIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
+      <div class="col-span-7 rounded">{players[playerIndex()].name}</div>
+      <div class="col-span-1 rounded text-right">{players[playerIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
       </div>
       <div class="col-span-8 row-start-2">
-        <div class="grid grid-cols-6 select-none text-lg h-full tracking-widest text-blue-200 bg-neutral-800 rounded">
+        <div class="grid grid-cols-6 select-none text-lg h-full tracking-widest text-blue-200 rounded">
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('str', 1)} // Increment on left-click
             on:contextmenu={(e) => {
@@ -217,8 +234,8 @@ function Player() {
           </div>
         </div>
       </div>
-      <div class="col-span-8 row-start-3 bg-neutral-800 rounded">{players[playerIndex()].specialInformation}</div>
-      <div class="col-span-8 row-span-2 row-start-4 bg-neutral-800 rounded">Haiku goes here!</div>
+      <div class="col-span-8 row-start-3 rounded">{players[playerIndex()].specialInformation}</div>
+      <div class="col-span-8 row-span-2 row-start-4 rounded">Haiku goes here!</div>
     </div>
   );
 }
