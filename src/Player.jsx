@@ -40,6 +40,13 @@ const [player, setPlayer] = createStore({
 });
 export { player, setPlayer };
 
+const [equipmentToggle, setEquipmentToggle] = createSignal(true);
+export { equipmentToggle, setEquipmentToggle };
+
+function toggleEquipmentDisplay() {
+  setEquipmentToggle(prevValue => !prevValue);
+}
+
 let item = {
   name: '',
   bulky: Boolean,
@@ -84,8 +91,19 @@ function getPlayerName() {
 }
 
 export function getHighestAbility() {
-  const { str, dex, wil } = players[playerIndex()];
+  const { str, dex, wil } = players[displayIndex()];
   return Math.max(str, dex, wil);
+}
+
+// Function to toggle between player index and companion index
+function toggleDisplayIndex() {
+  if (players[displayIndex()].companion) {
+    if (displayIndex() == playerIndex()) {
+      setDisplayIndex(companionIndex());
+    } else {
+      setDisplayIndex(playerIndex());
+    }
+  }
 }
 
 function getCompanion(companionName) {
@@ -96,13 +114,13 @@ function getCompanion(companionName) {
 
 function generateCompanion() {
   const index = companionIndex();
-  const newCompanion = getCompanion(players[playerIndex()].companion);
+  const newCompanion = getCompanion(players[displayIndex()].companion);
   updatePlayer(index, newCompanion);
   console.log('generateCompanion:', newCompanion);
 }
 
 export function generatePlayer() {
-  const index = playerIndex();
+  const index = displayIndex();
   const newPlayer = {
     id: 1,
     classification: 'player',
@@ -140,7 +158,7 @@ export function savePlayer() {
 
 // Function to modify an attribute based on click type
 function modifyPlayerAttribute(attribute, increment) {
-  const index = playerIndex();
+  const index = displayIndex();
 
   // Create an object with the updated property
   const updatedProperties = { [attribute]: players[index][attribute] + increment };
@@ -154,7 +172,7 @@ function modifyPlayerAttribute(attribute, increment) {
 function modifyMoney(currency, amount) {
   setPlayers((prevPlayers) => {
     const newPlayers = [...prevPlayers];
-    const index = playerIndex();
+    const index = displayIndex();
 
     if (index >= 0 && index < 8) {
       const updatedPlayer = { ...newPlayers[index] };
@@ -189,8 +207,9 @@ function handleCurrencyClick(event, currency) {
 function Player() {
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
-      <div class="col-span-7 rounded">{players[playerIndex()].name}</div>
-      <div class="col-span-1 rounded text-right">{players[playerIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
+      <div class="col-span-7 rounded bg-neutral-800 cursor-pointer">{players[displayIndex()].name}</div>
+      <div class="col-span-1 rounded text-right bg-neutral-800 cursor-pointer"onClick={toggleDisplayIndex}>{players[displayIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
+      <div class="co-span-1 text-right cursor-pointer" on:click={() => toggleEquipmentDisplay()}>*</div>
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
       </div>
@@ -201,40 +220,40 @@ function Player() {
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('str', -1); // Decrement on right-click
-            }}>S{players[playerIndex()].str}
+            }}>S{players[displayIndex()].str}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('dex', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('dex', -1); // Decrement on right-click
-            }}>D{players[playerIndex()].dex}
+            }}>D{players[displayIndex()].dex}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('wil', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('wil', -1); // Decrement on right-click
-            }}>W{players[playerIndex()].wil}
+            }}>W{players[displayIndex()].wil}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPlayerAttribute('hp', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPlayerAttribute('hp', -1); // Decrement on right-click
-          }}>H{players[playerIndex()].hp}
+          }}>H{players[displayIndex()].hp}
           </div>
           <div class="flex">
             <span class="hover:text-blue-300 cursor-pointer" 
-              on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{players[playerIndex()].shillings}</span>
+              on:mousedown={(e) => handleCurrencyClick(e, 'shillings')}>&fnof;{players[displayIndex()].shillings}</span>
             <span class="hover:text-blue-300 cursor-pointer" 
-              on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{players[playerIndex()].pennies}</span>
+              on:mousedown={(e) => handleCurrencyClick(e, 'pennies')}>/{players[displayIndex()].pennies}</span>
             <span class="hover:text-blue-300 cursor-pointer" 
-              on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{players[playerIndex()].guilders}</span>
+              on:mousedown={(e) => handleCurrencyClick(e, 'guilders')}>/{players[displayIndex()].guilders}</span>
           </div>
         </div>
       </div>
-      <div class="col-span-8 row-start-3 rounded">{players[playerIndex()].specialInformation}</div>
+      <div class="col-span-8 row-start-3 rounded">{players[displayIndex()].specialInformation}</div>
       <div class="col-span-8 row-span-2 row-start-4 rounded">Haiku goes here!</div>
     </div>
   );

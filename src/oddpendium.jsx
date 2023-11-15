@@ -177,9 +177,9 @@ export const starterPackages = [
       specialInformation: ''
     },
     {
-      equipment: ['Longaxe (d8 B)', 'Ferret', 'Fire Oil'],
+      equipment: ['Longaxe (d8 B)', 'Fire Oil'],
       arcanum: false,
-      companion: '',
+      companion: 'Ferret',
       specialInformation: ''
     },
     {
@@ -543,9 +543,9 @@ export const starterPackages = [
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Rifle (d8 B)', 'Mace (d6)', 'Eagle'],
+      equipment: ['Rifle (d8 B)', 'Mace (d6)', 'Posion'],
       arcanum: false,
-      companion: 'Poison',
+      companion: 'Eagle',
       specialInformation: ''
     },
     {
@@ -599,7 +599,38 @@ export const starterPackages = [
   ]
 ];
 
+export const abilitiesFirstList = [
+  'Canary',
+  'Eagle',
+  'Hawk',
+  'Hound',
+  'Mule',
+  'Mutt',
+  'Mutt with telepathic link',
+  'Pigeon',
+  'Talking Parrot'
+];
+
 export const companions = [
+  {
+    id: 0,
+    classification: '',
+    name: 'Canary',
+    str: getRandom1d6(),
+    dex: 10,
+    wil: 10,
+    hp: 0,
+    abilities: ['Claws (1)', '', '', '', '', '', '', '', '', ''],
+    equipment: ['', '', '', '', '', '', '', '', '', ''],
+    equipmentPtr: 0,
+    companion: 'Canary',
+    specialInformation: '',
+    shillings: 0,
+    pennies: 0,
+    guilders: 0,
+    onScreen: false,
+    category: 'companion',
+  },
   {
     id: 0,
     classification: '',
@@ -622,15 +653,15 @@ export const companions = [
   {
     id: 0,
     classification: '',
-    name: 'Ferret',
-    str: getRandom1d6(),
+    name: 'Fugitive',
+    str: 10,
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Bite (1d4)', '', '', '', '', '', '', '', '', ''],
-    equipment: ['', '', '', '', '', '', '', '', '', ''],
+    abilities: ['Hand Attack (1d4)', '', '', '', '', '', '', '', '', ''],
+    equipment: ['Dagger (1d6)', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
-    companion: 'Ferret',
+    companion: 'Fugitive',
     specialInformation: '',
     shillings: 0,
     pennies: 0,
@@ -638,6 +669,7 @@ export const companions = [
     onScreen: false,
     category: 'companion',
   },
+
   {
     id: 0,
     classification: '',
@@ -706,7 +738,7 @@ export const companions = [
     abilities: ['Bite (1d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
-    companion: '',
+    companion: 'Mule',
     specialInformation: '',
     shillings: 0,
     pennies: 0,
@@ -755,26 +787,7 @@ export const companions = [
   {
     id: 0,
     classification: '',
-    name: 'Canary',
-    str: getRandom1d6(),
-    dex: 10,
-    wil: 10,
-    hp: 0,
-    abilities: ['Claws (1)', '', '', '', '', '', '', '', '', ''],
-    equipment: ['', '', '', '', '', '', '', '', '', ''],
-    equipmentPtr: 0,
-    companion: 'Canary',
-    specialInformation: '',
-    shillings: 0,
-    pennies: 0,
-    guilders: 0,
-    onScreen: false,
-    category: 'companion',
-  },
-  {
-    id: 0,
-    classification: '',
-    name: 'Pidgeon',
+    name: 'Pigeon',
     str: getRandom1d6(),
     dex: 10,
     wil: 10,
@@ -782,7 +795,7 @@ export const companions = [
     abilities: ['Claws (1)', 'Messenger', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
-    companion: 'Pidgeon',
+    companion: 'Pigeon',
     specialInformation: '',
     shillings: 0,
     pennies: 0,
