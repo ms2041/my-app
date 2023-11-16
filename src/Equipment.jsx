@@ -160,7 +160,7 @@ function Equipment() {
     <div class="grid grid-cols-2 grid-rows-5 h-full gap-1 text-base">
       {equipmentToggle()
         ? players[displayIndex()].equipment.map((equipmentItem, index) => (
-            <div class="bg-neutral-800 rounded p-1 hover:text-blue-300 cursor-pointer px-2" on:click={() => handleLeftClick(index)}>
+            <div class=" rounded p-1 hover:text-blue-300 bg-neutral-800 cursor-pointer px-2" on:click={() => handleLeftClick(index)}>
               {equipmentItem || ''}
             </div>
           ))

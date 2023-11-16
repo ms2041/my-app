@@ -36,6 +36,15 @@ const defaultPlayer = {
 const initialPlayers = new Array(8).fill(defaultPlayer);
 const [players, setPlayers] = createStore(initialPlayers);
 
+// Functions to convert to and from JSON.
+export function playersToJson(playersArray) {
+  return JSON.stringify(playersArray);
+}
+
+export function JsonToPlayers(jsonString) {
+  return JSON.parse(jsonString);
+}
+
 function updatePlayer(index, updatedProperties) {
   console.log('Inside updatePlayer: ', index, updatedProperties);
 

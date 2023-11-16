@@ -207,8 +207,8 @@ function handleCurrencyClick(event, currency) {
 function Player() {
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
-      <div class="col-span-7 rounded bg-neutral-800 cursor-pointer">{players[displayIndex()].name}</div>
-      <div class="col-span-1 rounded text-right bg-neutral-800 cursor-pointer"onClick={toggleDisplayIndex}>{players[displayIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
+      <div class="col-span-7 rounded cursor-pointer text-xl">{players[displayIndex()].name}</div>
+      <div class="col-span-1 rounded text-right cursor-pointer"onClick={toggleDisplayIndex}>{players[displayIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
       <div class="co-span-1 text-right cursor-pointer" on:click={() => toggleEquipmentDisplay()}>*</div>
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
