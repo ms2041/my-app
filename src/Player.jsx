@@ -1,44 +1,27 @@
 /*
 This component contains functions and data related to a players array.
 Players can be directly managed or can be companions. The players array is
-an array of 8 players which is synchronised across all players.
+an array of MAX_PCS players which is synchronised across all players.
 The index is assigned by the server.
 */
 
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import Equipment from './Equipment';
+import PcModal from './PcModal';
 import { getStarterPackage } from './Equipment';
-import { getRandomInt, getRandom3d6} from './utils';
+import { getRandomInt, getRandom3d6} from './generalUtils';
 import { starterPackages, arcanum, names, companions } from './oddpendium';
 import { players, setPlayers, updatePlayer, playerIndex, companionIndex, displayIndex, setDisplayIndex } from './Cast';
+import { MAX_PCS } from './constants';
+
+const [showPcModal, setShowPcModal] = createSignal(false);
 
 const [money, setMoney] = createStore({
   shillings: '0',
   pennies: '0',
   guilders: '0',
 });
-
-const [player, setPlayer] = createStore({
-  id: 0,
-  classification: '',
-  name: '',
-  str: 0,
-  dex: 0,
-  wil: 0,
-  hp: 0,
-  abilities: ['', '', '', '', '', '', '', '', '', ''],
-  equipment: ['', '', '', '', '', '', '', '', '', ''],
-  equipmentPtr: 0,
-  companion: '',
-  specialInformation: '',
-  shillings: 0,
-  pennies: 0,
-  guilders: 0,
-  onScreen: false,
-  category: ''
-});
-export { player, setPlayer };
 
 const [equipmentToggle, setEquipmentToggle] = createSignal(true);
 export { equipmentToggle, setEquipmentToggle };
@@ -96,7 +79,7 @@ export function getHighestAbility() {
 }
 
 // Function to toggle between player index and companion index
-function toggleDisplayIndex() {
+function displayCompanionToggle() {
   if (players[displayIndex()].companion) {
     if (displayIndex() == playerIndex()) {
       setDisplayIndex(companionIndex());
@@ -104,6 +87,23 @@ function toggleDisplayIndex() {
       setDisplayIndex(playerIndex());
     }
   }
+}
+
+function incrementDisplayIndex() {
+  setDisplayIndex(prevIndex => prevIndex + 1);
+}
+
+function handleNameClick() {
+  setShowPcModal(true);
+/*  const nextIndex = displayIndex() + 1;
+  if (players[displayIndex()].companion) // Finish this code.
+  if (nextIndex > MAX_PCS) {
+    nextIndex = 1;
+  } else {
+    if (players[nextIndex].name != '') {
+      incrementDisplayIndex();
+    }
+  } */
 }
 
 function getCompanion(companionName) {
@@ -122,8 +122,9 @@ function generateCompanion() {
 export function generatePlayer() {
   const index = displayIndex();
   const newPlayer = {
-    id: 1,
+    id: 0,
     classification: 'player',
+    category: 'player',
     name: getPlayerName(),
     str: getRandom3d6(),
     dex: getRandom3d6(),
@@ -138,7 +139,8 @@ export function generatePlayer() {
     pennies: 0,
     guilders: 0,
     onScreen: false,
-    category: 'player'
+    x: 0,
+    y: 0,
   };
 
   // Use the updatePlayer function to update the player at the specified index
@@ -152,7 +154,7 @@ export function generatePlayer() {
 }
 
 export function savePlayer() {
-  console.log('savePlayer called', player);
+  console.log('savePlayer called');
 
 }
 
@@ -174,7 +176,7 @@ function modifyMoney(currency, amount) {
     const newPlayers = [...prevPlayers];
     const index = displayIndex();
 
-    if (index >= 0 && index < 8) {
+    if (index >= 0 && index < MAX_PCS) {
       const updatedPlayer = { ...newPlayers[index] };
 
       if (currency === 'shillings') {
@@ -204,11 +206,16 @@ function handleCurrencyClick(event, currency) {
   }
 }
 
+function closePcModal() {
+  setShowPcModal(false);
+}
+
+
 function Player() {
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
-      <div class="col-span-7 rounded cursor-pointer text-xl">{players[displayIndex()].name}</div>
-      <div class="col-span-1 rounded text-right cursor-pointer"onClick={toggleDisplayIndex}>{players[displayIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
+      <div class="col-span-7 rounded cursor-pointer text-xl" onClick={handleNameClick}>{players[displayIndex()].name}</div>
+      <div class="col-span-1 rounded text-right cursor-pointer"onClick={displayCompanionToggle}>{players[displayIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
       <div class="co-span-1 text-right cursor-pointer" on:click={() => toggleEquipmentDisplay()}>*</div>
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
@@ -255,6 +262,9 @@ function Player() {
       </div>
       <div class="col-span-8 row-start-3 rounded">{players[displayIndex()].specialInformation}</div>
       <div class="col-span-8 row-span-2 row-start-4 rounded">Haiku goes here!</div>
+      {showPcModal() && (
+        <PcModal onClose={closePcModal} />
+      )}
     </div>
   );
 }

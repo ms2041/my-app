@@ -1,12 +1,12 @@
 import { getHighestAbility, equipmentToggle } from './Player';
 import { players, setPlayers, playerIndex, companionIndex, displayIndex, updatePlayer, abilitiesFirst } from './Cast';
 import { starterPackages, arcanum } from './oddpendium';
-import { getRandomInt } from './utils';
+import { getRandomInt } from './generalUtils';
 import EquipmentModal from './EquipmentModal';
 import { createSignal } from 'solid-js';
 
 
-const [showModal, setShowModal] = createSignal(false);
+const [showEquipmentModal, setShowEquipmentModal] = createSignal(false);
 const [selectedItem, setSelectedItem] = createSignal(null);
 const [selectedSlot, setSelectedSlot] = createSignal(null);
 
@@ -133,7 +133,7 @@ export function getStarterPackage() {
 function selectEquipment(index) {
   console.log('selectEquipment: ', index);
   setSelectedItem(players[displayIndex()].equipment[index]);
-  setShowModal(true);
+  setShowEquipmentModal(true);
 }
 
 function handleLeftClick(slot) {
@@ -141,7 +141,7 @@ function handleLeftClick(slot) {
   console.log('handleLeftClick: ', slot, players[displayIndex()].equipment, players[displayIndex()].equipmentPtr, ' Slot: ', selectedSlot());
   if (players[displayIndex()].equipment[slot] === '') {
     setSelectedItem(null); // Reset selected item when selecting an empty slot
-    setShowModal(true);
+    setShowEquipmentModal(true);
     selectEquipment(slot);
   } else {
     removeEquipment(slot);
@@ -149,8 +149,8 @@ function handleLeftClick(slot) {
   }
 }
 
-function closeModal() {
-  setShowModal(false);
+function closeEquipmentModal() {
+  setShowEquipmentModal(false);
 }
 
 
@@ -168,8 +168,8 @@ function Equipment() {
             <div class="bg-neutral-800 rounded p-1 cursor-not-allowed px-2">{ability}</div>
           ))
       }
-      {showModal() && (
-        <EquipmentModal onClose={closeModal} selectedSlot={[selectedSlot, setSelectedSlot]} />
+      {showEquipmentModal() && (
+        <EquipmentModal onClose={closeEquipmentModal} selectedSlot={[selectedSlot, setSelectedSlot]} />
       )}
     </div>
   );

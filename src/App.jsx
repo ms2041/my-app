@@ -6,6 +6,11 @@ import Player from './Player';
 import { players, setPlayers } from './Cast';
 import EquipmentModal from './EquipmentModal';
 
+// Supabase related.
+import { createClient } from "@supabase/supabase-js";
+import { createResource, For } from "solid-js";
+import { supabase } from './supabase';
+
 function App() {
   const [title, setTitle] = createSignal('THE UNFATHOMABLE UNDERWORLD');
 
@@ -20,7 +25,9 @@ function App() {
         <div class="absolute w-[796px] h-[1092px] grid grid-cols-18 grid-rows-22 gap-1 justify-end"> {/* Usable Stage */}
         <div class="col-span-18"></div>
         <div class="col-span-18 row-start-2 text-center p-4 font-marta tracking-widest font-bold text-xl">{title()}</div> {/* Title or Scene */}
-        <div class="col-span-18 row-span-14 row-start-3">map</div> 
+        <div class="col-span-18 row-span-14 row-start-3 flex items-center justify-center"> {/* Centre everything in map */}
+          <div class="text-center font-hultog-italic text-lg">MAP IS CENTRED</div>
+        </div> 
         <div class="col-span-18 row-start-17"></div> {/* Blank row */}
         <div class="col-span-18 col-start-18 row-start-18 font-cascadia text-white text-right rounded p-1 select-none">
           <Menu />

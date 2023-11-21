@@ -16,6 +16,7 @@ export function abilitiesFirst(name) {
 const defaultPlayer = {
   id: 0,
   classification: '',
+  category: '',
   name: '',
   str: 0,
   dex: 0,
@@ -30,7 +31,8 @@ const defaultPlayer = {
   pennies: 0,
   guilders: 0,
   onScreen: false,
-  category: '',
+  x: 0,
+  y: 0,
 };
 
 const initialPlayers = new Array(8).fill(defaultPlayer);

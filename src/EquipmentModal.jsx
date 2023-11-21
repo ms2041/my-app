@@ -24,10 +24,10 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
           Close
         </button>
       </div>
-      <h1 class="text-gray-800 font-hultog font-bold text-center mb-8 mt-2">
+      <h1 class="text-gray-800 font-hultog-italic font-bold text-center mb-8 mt-2">
         SELECT ITEM TO EQUIP SLOT {reactiveSelectedSlot() !== null ? reactiveSelectedSlot() : 'None'}
       </h1>
-      <div class="fixed left-[28%]">
+      <div class="fixed left-[24%]">
         <div class="grid grid-cols-2 gap-4 rounded p-1">
           <div class="text-gray-500 cursor-pointer">
             {/* Display categories */}

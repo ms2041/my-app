@@ -1,4 +1,4 @@
-import { getRandom2d6, getRandom1d6 } from './utils.js';
+import { getRandom2d6, getRandom1d6 } from './generalUtils.js';
 
 // This file contains game data such as Starter Packages, lists of arcanum and other data.
 
