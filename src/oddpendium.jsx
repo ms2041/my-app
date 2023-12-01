@@ -613,7 +613,6 @@ export const abilitiesFirstList = [
 
 export const companions = [
   {
-    id: 0,
     classification: '',
     name: 'Canary',
     str: getRandom1d6(),
@@ -632,7 +631,6 @@ export const companions = [
     category: 'companion',
   },
   {
-    id: 0,
     classification: '',
     name: 'Eagle',
     str: getRandom1d6(),
@@ -651,7 +649,6 @@ export const companions = [
     category: 'companion',
   },
   {
-    id: 0,
     classification: '',
     name: 'Fugitive',
     str: 10,
@@ -671,7 +668,6 @@ export const companions = [
   },
 
   {
-    id: 0,
     classification: '',
     name: 'Hawk',
     str: 8,
@@ -709,7 +705,6 @@ export const companions = [
     category: 'companion',
   },
   {
-    id: 0,
     classification: '',
     name: 'Lighter Boy',
     str: getRandom2d6(),
@@ -728,7 +723,6 @@ export const companions = [
     category: 'companion',
   },
   {
-    id: 0,
     classification: '',
     name: 'Mule',
     str: 10,
@@ -747,7 +741,6 @@ export const companions = [
     category: 'companion',
   },
   {
-    id: 0,
     classification: '',
     name: 'Mutt',
     str: 10,
@@ -804,14 +797,13 @@ export const companions = [
     category: 'companion',
   },
   {
-    id: 0,
     classification: '',
     name: 'Talking Parrot',
     str: getRandom1d6(),
     dex: 10,
     wil: 10,
     hp: 0,
-    Abilites: ['Claws (1d4)', '', '', '', '', '', '', '', '', ''],
+    abilites: ['Claws (1d4)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     equipmentPtr: 0,
     companion: 'Talking Parrot',

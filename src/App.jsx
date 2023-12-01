@@ -1,9 +1,10 @@
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import stage from './assets/ui/polaroid-positive.svg';
+import Cast from './Cast';
 import Menu from './Menu';
-import Player from './Player';
-import { players, setPlayers } from './Cast';
+import Pc from './Pc';
+import { pcs, setPcs } from './Cast';
 import EquipmentModal from './EquipmentModal';
 
 // Supabase related.
@@ -25,7 +26,10 @@ function App() {
         <div class="absolute w-[796px] h-[1092px] grid grid-cols-18 grid-rows-22 gap-1 justify-end"> {/* Usable Stage */}
         <div class="col-span-18"></div>
         <div class="col-span-18 row-start-2 text-center p-4 font-marta tracking-widest font-bold text-xl">{title()}</div> {/* Title or Scene */}
-        <div class="col-span-18 row-span-14 row-start-3 flex items-center justify-center"> {/* Centre everything in map */}
+        <div class="col-span-18 row-start-3 text-center p-4 font-hultog-italic tracking-widest font-bold text-base">
+          <Cast />
+        </div>
+        <div class="col-span-18 row-span-14 row-start-4 flex items-center justify-center"> {/* Centre everything in map */}
           <div class="text-center font-hultog-italic text-lg">MAP IS CENTRED</div>
         </div> 
         <div class="col-span-18 row-start-17"></div> {/* Blank row */}
@@ -33,7 +37,7 @@ function App() {
           <Menu />
         </div>
         <div class="col-span-18 col-start-1 row-span-3 row-start-19 font-cascadia rounded text-white">
-          <Player player={players[playerIndex]}/>
+          <Pc pc={pcs[pcIndex]}/>
         </div>
         <div class="col-span-18 col-start-1 row-start-22"></div> {/* Blank row */}
       </div>

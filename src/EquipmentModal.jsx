@@ -10,10 +10,10 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
 
   const uniqueCategories = Array.from(new Set(items.map(item => item.category)));
 
-  // Function to find the slot when an item is clicked
-  function findSlot(clickedItem) {
+  // Function to find the items index when an item is clicked
+  function findEquipmentRecord(clickedItem) {
     const slot = items.findIndex(item => item === clickedItem);
-    console.log('findSlot: ', slot);
+    console.log('findEquipmentRecord: ', slot, items[slot].name);
     return slot;
   }
 
@@ -53,7 +53,7 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
                       onMouseEnter={() => setHoveredItem(item)}
                       onMouseLeave={() => setHoveredItem(null)}
                       onClick={() => {
-                        const slot = findSlot(item);
+                        const slot = findEquipmentRecord(item);
                         setSelectedItem(item); // Update the selected item
                         addEquipment(item.name, selectedSlot());
                         reorderEquipment();
