@@ -1,12 +1,8 @@
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import stage from './assets/ui/polaroid-positive.svg';
 import Cast from './Cast';
 import Menu from './Menu';
-import Pc from './Pc';
 import PlayerCh from './PlayerCh';
-import { pcs, setPcs } from './Cast';
-import EquipmentModal from './EquipmentModal';
 
 // Supabase related.
 import { createClient } from "@supabase/supabase-js";

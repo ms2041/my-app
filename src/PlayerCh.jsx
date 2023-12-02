@@ -1,14 +1,9 @@
 import { createSignal } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import Equipment from './Equipment';
-import Money from './Money'
-import PcModal from './PcModal';
 import { getStarterPackage } from './Equipment';
 import { getRandomInt, getRandom3d6} from './generalUtils';
 import { starterPackages, arcanum, names, companions } from './oddpendium';
 import {
-  pcs,
-  setPcs,
   updatePlayerCh,
   playerChIndex,
   setPlayerChIndex,
@@ -24,6 +19,10 @@ import {
   playerChPosition
 } from './Cast';
 import { MAX_PCS } from './constants';
+
+import Equipment from './Equipment';
+import Money from './Money'
+import PcModal from './PcModal';
 
 const [showPcModal, setShowPcModal] = createSignal(false);
 
@@ -200,7 +199,7 @@ export function generatePlayerCh() {
 
   // Use the updatePlayerCh function to update the player character at the specified index.
   updatePlayerCh(displayIndex(), 'data', generatePlayerChData());
-  console.log('generatePlayerCh called. ', displayIndex(), generatePlayerChData(), playerChData[displayIndex()]);
+  console.log('generatePlayerCh called. ', displayIndex(), playerChData[displayIndex()]);
 
   getStarterPackage();
   if (playerChData[displayIndex()].companion) {
@@ -216,15 +215,19 @@ export function savePc() {
 // Function to modify an attribute based on click type
 function modifyPcAttribute(attribute, increment) {
   const index = displayIndex();
+  const currentValue = playerChData[index][attribute];
+  
+  // Make the necessary modification to the attribute value
+  const updatedValue = currentValue + increment;
 
-  // Create an object with the updated property
-  const updatedProperties = { [attribute]: pcs[index][attribute] + increment };
+  // Create an updatedProperties object with the changed attribute value
+  const updatedProperties = { ...playerChData[index], [attribute]: updatedValue };
 
   // Use the updatePlayer function to update the player at the specified index
-  updatePlayerCh(index, updatedProperties);
-  console.log('modifyPcAttribute: ', attribute, updatedProperties)
-
+  updatePlayerCh(index, 'data', updatedProperties);
+  console.log('modifyPcAttribute: ', attribute, updatedProperties);
 }
+
 function closePcModal() {
   setShowPcModal(false);
 }
@@ -246,33 +249,33 @@ function PlayerCh() {
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPcAttribute('str', -1); // Decrement on right-click
-            }}>S{pcs[displayIndex()].str}
+            }}>S{playerChData[displayIndex()].str}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPcAttribute('dex', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPcAttribute('dex', -1); // Decrement on right-click
-            }}>D{pcs[displayIndex()].dex}
+            }}>D{playerChData[displayIndex()].dex}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPcAttribute('wil', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPcAttribute('wil', -1); // Decrement on right-click
-            }}>W{pcs[displayIndex()].wil}
+            }}>W{playerChData[displayIndex()].wil}
           </div>
           <div class="hover:text-blue-300 cursor-pointer"
             on:click={() => modifyPcAttribute('hp', 1)} // Increment on left-click
             on:contextmenu={(e) => {
               e.preventDefault();
               modifyPcAttribute('hp', -1); // Decrement on right-click
-          }}>H{pcs[displayIndex()].hp}
+          }}>H{playerChData[displayIndex()].hp}
           </div>
             <Money />
         </div>
       </div>
-      <div class="col-span-8 row-start-3 rounded">{pcs[displayIndex()].specialInformation}</div>
+      <div class="col-span-8 row-start-3 rounded">{playerChData[displayIndex()].specialInformation}</div>
       <div class="col-span-8 row-span-2 row-start-4 rounded">Haiku goes here!</div>
       {showPcModal() && (
         <PcModal onClose={closePcModal} />
