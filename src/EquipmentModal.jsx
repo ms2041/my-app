@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js';
 import { items } from './oddpendium.jsx';
 import { addEquipment, reorderEquipment } from './Equipment.jsx';
+import { playerChEquipment } from './Cast.jsx';
 
 function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot] }) {
   const [reactiveSelectedSlot, setReactiveSelectedSlot] = createSignal(selectedSlot);
@@ -57,6 +58,7 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
                         setSelectedItem(item); // Update the selected item
                         addEquipment(item.name, selectedSlot());
                         reorderEquipment();
+                        console.log('Modal add equipment: ', playerChEquipment);
                       }}
                       classList={{
                         'text-blue-400 cursor-pointer': hoveredItem() === item,

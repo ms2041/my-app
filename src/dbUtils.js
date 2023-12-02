@@ -151,6 +151,9 @@ export async function fetchPlayerChProps(tableName, columnsToSelect) {
     }
 
     console.log('Fetched player character properties:', tableName, data); // Log fetched data
+    if (tableName == 'player_ch_equipment') {
+      console.log('equipment data: ', data[0].equipment[0]);
+    }
     return data || [];
   } catch (error) {
     console.error('Error fetching player character properties:', error.message);

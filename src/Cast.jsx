@@ -22,11 +22,33 @@ const playerChEquipmentArray = [];
 const playerChMoneyArray = [];
 const playerChStateArray = [];
 const playerChPositionArray = [];
+
 for (let i = 0; i < MAX_PCS; i++) {
-  playerChDataArray.push({});
+  const playerChDataObject = {
+    classification: '',
+    category:'',
+    name: '',
+    str: 0,
+    dex: 0,
+    wil: 0,
+    hp: 0,
+    specialInformation: '',
+    companion: '',
+  }
+  playerChDataArray.push(playerChDataObject);
   playerChAbilitiesArray.push({});
-  playerChEquipmentArray.push({});
-  playerChMoneyArray.push({});
+  const equipmentObject = {
+    id: i + 1, // Assuming IDs start from 1
+    equipment: ["", "", "", "", "", "", "", "", "", ""],
+    equipmentPtr: 0,
+  };
+  playerChEquipmentArray.push(equipmentObject);
+  const moneyObject = {
+    shillings: 0,
+    pennies: 0,
+    guilders: 0,
+  }
+  playerChMoneyArray.push(moneyObject);
   playerChStateArray.push({});
   playerChPositionArray.push({});
 }
@@ -88,35 +110,36 @@ export function JsonToPcs(jsonString) {
 
 /* Copy new data to playerCh arrays, identified by index (int) and propertyType ('data',
    'abilities', 'equipment', 'money', 'state', 'position' which are Supabase tables). */
-   function updatePlayerCh(index, propertyType, updatedProperties) {
-    console.log('updatePlayerCh: ', index, propertyType, updatedProperties);
+function updatePlayerCh(index, propertyType, updatedProperties) {
+  console.log('updatePlayerCh: ', index, propertyType, updatedProperties);
   
-    const updateFunctions = {
-      data: setPlayerChData,
-      abilities: setPlayerChAbilities,
-      equipment: setPlayerChEquipment,
-      money: setPlayerChMoney,
-      state: setPlayerChState,
-      position: setPlayerChPosition,
-    };
+  const updateFunctions = {
+    data: setPlayerChData,
+    abilities: setPlayerChAbilities,
+    equipment: setPlayerChEquipment,
+    money: setPlayerChMoney,
+    state: setPlayerChState,
+    position: setPlayerChPosition,
+  };
   
-    const setFunction = updateFunctions[propertyType];
+  const setFunction = updateFunctions[propertyType];
   
-    if (setFunction) {
-      setFunction((prevArray) => {
-        const newArray = [...prevArray];
-        if (index >= 0 && index < newArray.length) {
-          newArray[index] = {
-            ...newArray[index],
-            ...updatedProperties,
-          };
-        }
-        return newArray;
-      });
-    } else {
-      console.error('Invalid propertyType:', propertyType);
-    }
+  if (setFunction) {
+    setFunction((prevArray) => {
+      const newArray = [...prevArray];
+      if (index >= 0 && index < newArray.length) {
+        newArray[index] = {
+          ...newArray[index],
+          ...updatedProperties,
+        };
+      }
+      return newArray;
+    });
+  } else {
+    console.error('Invalid propertyType:', propertyType);
   }
+  console.log('')
+}
   
 // Copy new data to pcs array, identified by index.
 function updatePc(index, updatedProperties) {
@@ -157,6 +180,11 @@ async function loadPlayerChArray() {
   setPlayerChMoney(fetchPlayerChProps('player_ch_money', '*'));
   setPlayerChState(fetchPlayerChProps('player_ch_state', '*'));
   setPlayerChPosition(fetchPlayerChProps('player_ch_position', '*'));
+  console.log('loadPlayerChArray: ', playerChEquipment);
+  const equipmentArray = await fetchPlayerChProps('player_ch_equipment', '*');
+  console.log('equipmentArray: ', equipmentArray);
+  setPlayerChEquipment(equipmentArray);
+  console.log('loadPlayerChArray 2nd try: ', playerChEquipment);
 }
 
 function Cast() {
@@ -164,6 +192,7 @@ function Cast() {
   onMount(() => {
     // Call the loadPcs function to fetch and set data on component mount
     loadPlayerChArray();
+    console.log('Cast onMount: ', playerChEquipment);
   });
   
   return (

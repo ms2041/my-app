@@ -4,6 +4,7 @@ import stage from './assets/ui/polaroid-positive.svg';
 import Cast from './Cast';
 import Menu from './Menu';
 import Pc from './Pc';
+import PlayerCh from './PlayerCh';
 import { pcs, setPcs } from './Cast';
 import EquipmentModal from './EquipmentModal';
 
@@ -32,12 +33,11 @@ function App() {
         <div class="col-span-18 row-span-14 row-start-4 flex items-center justify-center"> {/* Centre everything in map */}
           <div class="text-center font-hultog-italic text-lg">MAP IS CENTRED</div>
         </div> 
-        <div class="col-span-18 row-start-17"></div> {/* Blank row */}
         <div class="col-span-18 col-start-18 row-start-18 font-cascadia text-white text-right rounded p-1 select-none">
           <Menu />
         </div>
         <div class="col-span-18 col-start-1 row-span-3 row-start-19 font-cascadia rounded text-white">
-          <Pc pc={pcs[pcIndex]}/>
+          <PlayerCh />
         </div>
         <div class="col-span-18 col-start-1 row-start-22"></div> {/* Blank row */}
       </div>

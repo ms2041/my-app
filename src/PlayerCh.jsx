@@ -6,8 +6,23 @@ import PcModal from './PcModal';
 import { getStarterPackage } from './Equipment';
 import { getRandomInt, getRandom3d6} from './generalUtils';
 import { starterPackages, arcanum, names, companions } from './oddpendium';
-import { pcs, setPcs, pc, setPc, updatePlayerCh, playerChIndex, setPlayerChIndex, companionIndex, displayIndex, setDisplayIndex,
-         playerChData, playerChAbilities, playerChEquipment, playerChMoney, playerChState, playerChPosition } from './Cast';
+import {
+  pcs,
+  setPcs,
+  updatePlayerCh,
+  playerChIndex,
+  setPlayerChIndex,
+  companionIndex,
+  setCompanionIndex,
+  displayIndex,
+  setDisplayIndex,
+  playerChData,
+  playerChAbilities,
+  playerChEquipment,
+  playerChMoney,
+  playerChState,
+  playerChPosition
+} from './Cast';
 import { MAX_PCS } from './constants';
 
 const [showPcModal, setShowPcModal] = createSignal(false);
@@ -36,7 +51,7 @@ function getPcName() {
 
 // Used in character generation.
 export function getHighestAbility() {
-  const { str, dex, wil } = PlayerChData[displayIndex()];
+  const { str, dex, wil } = playerChData[displayIndex()];
   return Math.max(str, dex, wil);
 }
 
@@ -161,7 +176,7 @@ export function generatePlayerChState() {
   const newPlayerChState = {
     condition: 'inactive',
   }
-  return(newPlayerChMoney);
+  return(newPlayerChState);
 }
 
 export function generatePlayerChPosition() {
@@ -171,26 +186,6 @@ export function generatePlayerChPosition() {
     onscreen: false,
   }
   return(newPlayerChPosition);
-}
-
-export function generatePc() {
-  generatePlayerChData();
-  generatePlayerChEquipment();
-  generatePlayerChAbilities();
-  generatePlayerChMoney();
-  generatePlayerChState();
-  generatePlayerChPosition();
-
-  setDisplayIndex(0); // pcs[0] is reserved for player character generation.
-
-  // Use the updatePlayerCh function to update the player character at the specified index.
-  updatePlayerCh(displayIndex(), newPc);
-  console.log('updatePlayerCh called. ', displayIndex(), newPc, pcs[displayIndex()]);
-
-  getStarterPackage();
-  if (pcs[displayIndex()].companion) {
-    generateCompanion(displayIndex() + 1); // pcs[1] is reserved for companion generation.
-  }
 }
 
 export function generatePlayerCh() {
@@ -205,7 +200,7 @@ export function generatePlayerCh() {
 
   // Use the updatePlayerCh function to update the player character at the specified index.
   updatePlayerCh(displayIndex(), 'data', generatePlayerChData());
-  console.log('updatePlayerCh called. ', displayIndex(), generatePlayerChData(), playerChData[displayIndex()]);
+  console.log('generatePlayerCh called. ', displayIndex(), generatePlayerChData(), playerChData[displayIndex()]);
 
   getStarterPackage();
   if (playerChData[displayIndex()].companion) {
@@ -230,42 +225,6 @@ function modifyPcAttribute(attribute, increment) {
   console.log('modifyPcAttribute: ', attribute, updatedProperties)
 
 }
-
-function modifyMoney(currency, amount) {
-  setPcs((prevPcs) => {
-    const newPcs = [...prevPcs];
-    const index = displayIndex();
-
-    if (index >= 0 && index < MAX_PCS) {
-      const updatedPc = { ...newPcs[index] };
-
-      if (currency === 'shillings') {
-        updatedPc.shillings += amount;
-      } else if (currency === 'pennies') {
-        updatedPc.pennies += amount;
-      } else if (currency === 'guilders') {
-        updatedPc.guilders += amount;
-      }
-
-      newPcs[index] = updatedPc;
-    }
-
-    return newPcs;
-  });
-}
-
-function handleCurrencyClick(event, currency) {
-  event.preventDefault();
-
-  if (event.buttons === 1) {
-    // Left-click (buttons = 1)
-    modifyMoney(currency, 1);
-  } else if (event.buttons === 2) {
-    // Right-click (buttons = 2)
-    modifyMoney(currency, -1);
-  }
-}
-
 function closePcModal() {
   setShowPcModal(false);
 }
