@@ -1,28 +1,28 @@
 import { supabase } from './supabase.js';
-import { pcs } from './Cast.jsx';
+import { pcs, playerChData } from './Cast.jsx';
 import { createResource, For } from "solid-js";
-import { getNextPcIndex } from './Cast';
+import { getNextFreeIndex } from './Cast';
 import { getRandomInt } from './generalUtils.js';
 
-// Debug functions
-export async function readFromDb() {
-  const castList = fetchPcs();
-  console.log('readFromDb: ', castList);
+// Debug functions to test Supabase.
+export async function getCastFromDb() {
+  const castList = fetchPlayerChProps('player_ch_data', '*');
+  console.log('getCastFromDb: ', castList);
 }
 
-export async function writeToDb(updatedPc) {
-  const currentIndex = getNextPcIndex() + 1; // Assuming getNextPcIndex() fetches the appropriate index
-  const currentPcs = pcs(); // Get the current state of the 'pcs' store
+export async function savePlayerChToDb() {
+  const currentIndex = getNextFreeIndex() + 1;
+  const currentPlayerChData = playerChData[displayIndex()]; // Get the current state of the 'playerChData' store
 
-  // Create a copy of the 'pcs' array
-  const updatedPcs = [...currentPcs];
+  // Create a copy of the 'playerChData' array
+  const updatedPlayerChArray = [...playerChData];
 
   // Update the specific element at 'currentIndex' with a new object
-  updatedPcs[currentIndex] = { ...updatedPc, id: currentIndex };
+  updatedPlayerChArray[currentIndex] = { ...updatedPlayerChData, id: currentIndex };
 
-  console.log('writeToDb: ', updatedPcs);
-  // Call the 'updatePcs' function to update the row in Supabase
-  updatePcs(currentIndex, updatedPc);
+  console.log('writePlayerChDataToDb: ', updatedPlayerChArray);
+  // Call the 'updatePlayerCh' function to update the row in Supabase
+  updatePlayerCh(currentIndex, updatedPlayerChData);
 }
 
 // Function to fetch player characters from Supabase
@@ -42,25 +42,6 @@ export async function fetchPcs() {
   } catch (error) {
     console.error('Error fetching player characters:', error, error.message);
     return [];
-  }
-}
-
-// Function to update a player character in Supabase
-export async function updatePcs(index, updatedPcData) {
-  try {
-    const { data, error } = await supabase
-      .from('pcs')
-      .update(updatedPcData)
-      .match({ id: index });
-
-    if (error) {
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error updating player character:', error.message);
-    return null;
   }
 }
 
@@ -116,6 +97,23 @@ export async function readPlayerChPosition() {
   } catch (error) {
     console.error('Error fetching player characters:', error, error.message);
     return [];
+  }
+}
+
+export async function updateWholeTable(tableName, newData) {
+  try {
+    const { data, error } = await supabase
+      .from(tableName)
+      .upsert(newData);
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error updating whole table:', error.message);
+    return null;
   }
 }
 

@@ -543,7 +543,7 @@ export const starterPackages = [
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Rifle (d8 B)', 'Mace (d6)', 'Posion'],
+      equipment: ['Rifle (d8 B)', 'Mace (d6)', 'Poison'],
       arcanum: false,
       companion: 'Eagle',
       specialInformation: ''

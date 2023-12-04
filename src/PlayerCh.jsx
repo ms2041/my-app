@@ -207,11 +207,6 @@ export function generatePlayerCh() {
   }
 }
 
-
-export function savePc() {
-  console.log('savePc called');
-}
-
 // Function to modify an attribute based on click type
 function modifyPcAttribute(attribute, increment) {
   const index = displayIndex();

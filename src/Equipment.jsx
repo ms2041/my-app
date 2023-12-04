@@ -1,5 +1,5 @@
 import { getHighestAbility, equipmentToggle } from './PlayerCh';
-import { playerChEquipment, setPlayerChEquipment, playerChData, pcIndex, companionIndex, displayIndex, updatePc, abilitiesFirst } from './Cast';
+import { playerChEquipment, setPlayerChEquipment, playerChData, pcIndex, companionIndex, displayIndex, abilitiesFirst } from './Cast';
 import { starterPackages, arcanum } from './oddpendium';
 import { getRandomInt } from './generalUtils';
 import { createSignal, createEffect } from 'solid-js';

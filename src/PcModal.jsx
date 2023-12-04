@@ -1,5 +1,4 @@
-import { createSignal } from 'solid-js';
-import { generatePc } from './Pc';
+import { generatePlayerCh } from './PlayerCh';
 
 function PcModal({onClose}) {
 
@@ -18,7 +17,7 @@ function PcModal({onClose}) {
         {/* Roll and Save buttons */}
         <div class="flex space-x-4">
           {/* Roll button */}
-          <button class="text-gray-500 hover:text-slate-700" on:click={() => generatePc()}>
+          <button class="text-gray-500 hover:text-slate-700" on:click={() => generatePlayerCh()}>
             Roll
           </button>
           {/* Save button */}
