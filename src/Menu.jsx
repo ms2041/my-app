@@ -1,6 +1,6 @@
 import { fetchPlayerChProps, writeXY, readXY } from './dbUtils';
 import { setAb, readAb } from './testHarness';
-import { playerChData, displayIndex, playerChEquipment, savePlayerCh } from './Cast';
+import { playerChData, displayIndex, playerChEquipment, savePlayerCh, goHome } from './Cast';
 import { generatePlayerCh } from './PlayerCh';
 
 // Debug functions
@@ -15,7 +15,7 @@ function getEqt() {
 function Menu() {
   return (
     <div class="flex flex-row-reverse pl- text-sm tracking-widest font-phosphorus-tribromide">
-      <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => fetchPlayerChProps('player_ch_data', '*')}>Get</div>
+      <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => goHome()}>Home</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => savePlayerCh()}>Save</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => generatePlayerCh()}>Roll</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => setAb()}>setAb</div>

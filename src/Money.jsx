@@ -1,13 +1,13 @@
 import { createSignal } from 'solid-js';
 import { playerChMoney, setPlayerChMoney, displayIndex, setDisplayIndex } from './Cast';
-import { MAX_PCS } from './constants';
+import { MAX_PLAYER_CHS } from './constants';
 
 function updateMoney(currency, amount) {
   setPlayerChMoney((prevPlayerChMoney) => {
     const newPlayerChMoney = [...prevPlayerChMoney];
     const index = displayIndex();
 
-    if (index >= 0 && index < MAX_PCS) {
+    if (index >= 0 && index < MAX_PLAYER_CHS) {
       const updatedMoney = { ...newPlayerChMoney[index] };
 
       if (currency === 'shillings') {

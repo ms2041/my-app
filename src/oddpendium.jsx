@@ -6,67 +6,67 @@ export const starterPackages = [
   // 1 HP
   [
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword : d6', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Sword : d6', 'Pistol (d6)', 'Modern Armour'],
+      equipment: ['Sword : d6', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby unearthly beings',
     },
     {
-      equipment: ['Rifle : d6', 'Bayonet (d6)'],
+      equipment: ['Rifle ', 'Bayonet'],
       arcanum: true,
       companion: 'Lighter Boy',
       specialInformation: '',
     },
     {
-      equipment: ['Rifle (d8 B)', 'Modern Armour'],
+      equipment: ['Rifle', 'Modern Armour'],
       arcanum: true,
       companion: 'Hound',
       specialInformation: '',
     },
     {
-      equipment: ['Club (d6)', 'Throwing Knives'],
+      equipment: ['Club', 'Throwing Knives'],
       arcanum: true,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Pistol (d6)', 'Ether', 'Poison'],
+      equipment: ['Pistol', 'Ether', 'Poison'],
       arcanum: true,
       companion: '',
       specialInformation: '',
@@ -78,13 +78,13 @@ export const starterPackages = [
       specialInformation: '',
     },
     {
-      equipment: ['Brace of Pistols (d8 B)', 'Canary', 'Ether'],
+      equipment: ['Brace of Pistols', 'Canary', 'Ether'],
       arcanum: false,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Musket (d8 B)', 'Pocket-watch', 'Bomb'],
+      equipment: ['Musket', 'Pocket-watch', 'Bomb'],
       arcanum: false,
       companion: '',
       specialInformation: '',
@@ -96,7 +96,7 @@ export const starterPackages = [
       specialInformation: '',
     },
     {
-      equipment: ['Garotte (d6)', 'Musket (d8 B)'],
+      equipment: ['Garotte', 'Musket'],
       arcanum: false,
       companion: '',
       specialInformation: 'Mute',
@@ -105,79 +105,79 @@ export const starterPackages = [
   // 2 HP
   [
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Sword (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
       specialInformation: 'Sense nearby Arcana'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Musket', 'Hatchet'],
       arcanum: true,
       companion: 'Hawk',
       specialInformation: ''
     },
     {
-      equipment: ['Hatchet (d6)', 'Pistol (d6)', 'Bolt-Cutters'],
+      equipment: ['Hatchet', 'Pistol', 'Bolt-Cutters'],
       arcanum: true,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Musket (d8 B)'],
+      equipment: ['Musket'],
       arcanum: true,
       companion: 'Mule',
       specialInformation: ''
     },
     {
-      equipment: ['Sword (d6)', 'Pistol (d6)', 'Simple Armour'],
+      equipment: ['Sword', 'Pistol', 'Simple Armour'],
       arcanum: false,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Pistol (d6)', 'Bell', 'Steel Wire', 'Smoke-bomb'],
+      equipment: ['Pistol', 'Bell', 'Steel Wire', 'Smoke-bomb'],
       arcanum: false,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Longaxe (d8 B)', 'Fire Oil'],
+      equipment: ['Longaxe', 'Fire Oil'],
       arcanum: false,
       companion: 'Ferret',
       specialInformation: ''
@@ -189,13 +189,13 @@ export const starterPackages = [
       specialInformation: ''
     },
     {
-      equipment: ['Pistol (d6)', 'Net', 'Trumpet'],
+      equipment: ['Pistol', 'Net', 'Trumpet'],
       arcanum: false,
       companion: '',
       specialInformation: 'Prosthetic Leg'
     },
     {
-      equipment: ['Pistol (d6)', 'Grease', 'Hacksaw'],
+      equipment: ['Pistol', 'Grease', 'Hacksaw'],
       arcanum: false,
       companion: '',
       specialInformation: 'One Arm'
@@ -204,55 +204,55 @@ export const starterPackages = [
   // 3 HP
   [
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Club (d6)'],
+      equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
       specialInformation: 'Immunity to extreme heat and cold',
     },
     {
-      equipment: ['Musket (d8 B)', 'Protective Gloves'],
+      equipment: ['Musket', 'Protective Gloves'],
       arcanum: true,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Musket (d8 B)', 'Mallet', 'Marbles', 'Fancy Hat'],
+      equipment: ['Musket', 'Mallet', 'Marbles', 'Fancy Hat'],
       arcanum: true,
       companion: '',
       specialInformation: '',
@@ -264,37 +264,37 @@ export const starterPackages = [
       specialInformation: '',
     },
     {
-      equipment: ['Pistol (d6)', 'Smoke-bomb', 'Shovel'],
+      equipment: ['Pistol', 'Smoke-bomb', 'Shovel'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: '',
     },
     {
-      equipment: ['Longaxe (d8 B)', 'Throwing Axes', 'Fire Oil'],
+      equipment: ['Longaxe', 'Throwing Axes', 'Fire Oil'],
       arcanum: false,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Club (d6)', 'Ether', 'Crowbar', 'Flute'],
+      equipment: ['Club', 'Ether', 'Crowbar', 'Flute'],
       arcanum: false,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Hatchet (d6)', 'Net', 'Fire Oil'],
+      equipment: ['Hatchet', 'Net', 'Fire Oil'],
       arcanum: false,
       companion: '',
       specialInformation: 'Burnt Face',
     },
     {
-      equipment: ['Club (d6)', 'Paint', 'Crowbar'],
+      equipment: ['Club', 'Paint', 'Crowbar'],
       arcanum: false,
       companion: '',
       specialInformation: 'Loud Lungs',
     },
     {
-      equipment: ['Pistol (d6)', 'Cigars', 'Poison'],
+      equipment: ['Pistol', 'Cigars', 'Poison'],
       arcanum: false,
       companion: 'Fugitive',
       specialInformation: '',
@@ -303,97 +303,97 @@ export const starterPackages = [
   // 4 HP
   [
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)'],
+      equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
       specialInformation: 'Telepathy if target fails WIL Save',
     },
     {
-      equipment: ['Claymore (d8 B)', 'Pistol (d6)', '2 Acid Flasks'],
+      equipment: ['Claymore', 'Pistol', '2 Acid Flasks'],
       arcanum: true,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Musket (d8 B)', 'Bayonet (d6)'],
+      equipment: ['Musket', 'Bayonet'],
       arcanum: false,
       companion: 'Mutt with telepathic link',
       specialInformation: '',
     },
     {
-      equipment: ['Pistol (d6)', 'Rocket'],
+      equipment: ['Pistol', 'Rocket'],
       arcanum: false,
       companion: '',
       specialInformation: 'Toxin-Immune',
     },
     {
-      equipment: ['Musket (d8 B)', 'Portable Ram', 'Game Set'],
+      equipment: ['Musket', 'Portable Ram', 'Game Set'],
       arcanum: false,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Pistol (d6)', 'Saw', 'Animal Trap', 'Spyglass'],
+      equipment: ['Pistol', 'Saw', 'Animal Trap', 'Spyglass'],
       arcanum: false,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Bow (d6 B)', 'Knife (d6)', 'Rocket', 'Fire Oil'],
+      equipment: ['Bow (d6 B)', 'Knife', 'Rocket', 'Fire Oil'],
       arcanum: false,
       companion: '',
       specialInformation: '',
     },
     {
-      equipment: ['Pistol (d6)', 'Whip (d6)', 'Cigars'],
+      equipment: ['Pistol', 'Whip', 'Cigars'],
       arcanum: false,
       companion: '',
       specialInformation: 'Lost Eye',
     },
     {
-      equipment: ['Musket (d8 B)', 'Accordion.'],
+      equipment: ['Musket', 'Accordion.'],
       arcanum: false,
       companion: '',
       specialInformation: 'No Nose/Scent',
     },
     {
-      equipment: ['Sword (d6)', 'Shield'],
+      equipment: ['Sword', 'Shield'],
       arcanum: false,
       companion: '',
       specialInformation: 'Illiterate',
@@ -402,73 +402,73 @@ export const starterPackages = [
   // 5 HP
   [
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Blunderbuss (d8 B)', 'Hatchet (d6)'],
+      equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
       specialInformation: 'Dreams show your undiscovered surroundings'
     },
     {
-      equipment: ['Brace of Pistols (d8 B)', 'Steel Wire', 'Grappling Hook'],
+      equipment: ['Brace of Pistols', 'Steel Wire', 'Grappling Hook'],
       arcanum: true,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Machete (d6)', 'Brace of Pistols (d8 B)'],
+      equipment: ['Machete', 'Brace of Pistols'],
       arcanum: false,
       companion: 'Talking Parrot',
       specialInformation: 'Never Sleep'
     },
     {
-      equipment: ['Harpoon Gun (d8 B)', 'Baton (d6)', 'Acid'],
+      equipment: ['Harpoon Gun', 'Baton', 'Acid'],
       arcanum: false,
       companion: '',
       specialInformation: 'Slightly Magnetic'
     },
     {
-      equipment: ['Bolt-Cutters', 'Blunderbuss (d8 B)', 'Fiddle'],
+      equipment: ['Bolt-Cutters', 'Blunderbuss', 'Fiddle'],
       arcanum: false,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Pistol (d6)', 'Grease', 'Hand Drill', 'Drum'],
+      equipment: ['Pistol', 'Grease', 'Hand Drill', 'Drum'],
       arcanum: false,
       companion: '',
       specialInformation: ''
@@ -480,19 +480,19 @@ export const starterPackages = [
       specialInformation: 'Lost Eye'
     },
     {
-      equipment: ['Pistol (d6)', 'Acid', 'Animal Repellent'],
+      equipment: ['Pistol', 'Acid', 'Animal Repellent'],
       arcanum: false,
       companion: '',
       specialInformation: 'Prosthetic Hand'
     },
     {
-      equipment: ['Sword (d6)', 'Steel Wire'],
+      equipment: ['Sword', 'Steel Wire'],
       arcanum: false,
       companion: '',
       specialInformation: 'Ugly Mutation'
     },
     {
-      equipment: ['Sword (d6)', 'Tattered Clothes'],
+      equipment: ['Sword', 'Tattered Clothes'],
       arcanum: false,
       companion: 'Ferret',
       specialInformation: 'Debt (3G)'
@@ -501,85 +501,85 @@ export const starterPackages = [
   // 6 HP
   [
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Musket (d8 B)', 'Hatchet (d6)', 'Flashbang'],
+      equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
       specialInformation: 'Iron Limb'
     },
     {
-      equipment: ['Rifle (d8 B)', 'Mace (d6)', 'Poison'],
+      equipment: ['Rifle', 'Mace', 'Poison'],
       arcanum: false,
       companion: 'Eagle',
       specialInformation: ''
     },
     {
-      equipment: ['Club (d6)', '3 Bombs', 'Rocket'],
+      equipment: ['Club', '3 Bombs', 'Rocket'],
       arcanum: false,
       companion: '',
       specialInformation: 'Darkvision'
     },
     {
-      equipment: ['Maul (d8 B)', 'Dagger (d6)', 'Chain'],
+      equipment: ['Maul', 'Dagger', 'Chain'],
       arcanum: false,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Longaxe (d8 B)', 'Rum', 'Bomb'],
+      equipment: ['Longaxe', 'Rum', 'Bomb'],
       arcanum: false,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Dagger (d6)', 'Fire Oil', 'Mirror'],
+      equipment: ['Dagger', 'Fire Oil', 'Mirror'],
       arcanum: false,
       companion: '',
       specialInformation: ''
     },
     {
-      equipment: ['Pistol (d6)', 'Knife (d6)', 'Bomb', 'Saw'],
+      equipment: ['Pistol', 'Knife', 'Bomb', 'Saw'],
       arcanum: false,
       companion: '',
       specialInformation: 'Glowing Eyes'
     },
     {
-      equipment: ['Pistol (d6)', 'Bomb', 'Shovel'],
+      equipment: ['Pistol', 'Bomb', 'Shovel'],
       arcanum: false,
       companion: '',
       specialInformation: ''
@@ -591,7 +591,7 @@ export const starterPackages = [
       specialInformation: ''
     },
     {
-      equipment: ['Mace (d6)'],
+      equipment: ['Mace'],
       arcanum: false,
       companion: 'Pigeon',
       specialInformation: 'Disfigured'
@@ -599,7 +599,7 @@ export const starterPackages = [
   ]
 ];
 
-export const abilitiesFirstList = [
+export const creatureList = [
   'Canary',
   'Eagle',
   'Hawk',
@@ -841,7 +841,7 @@ export const arcanum = [
   {name: 'Gorger\’s Mask', description: 'The wearer can consume anything safely.'},
   {name: 'Tomb Box', description: 'Contains three tiny skeletons that obey whoever holds the box. They are too small to do any real damage, but are quite agile and clever.'},
   {name: 'Howling Lantern', description: 'Blowing into the lantern causes a roar that terrifies prey animals, but attracts predators.'},
-  {name: 'Rainbow Blade', description: 'This sword (d6) can fire a beam of harmless light in any colour the wielder wishes.'},
+  {name: 'Rainbow Blade', description: 'This Sword can fire a beam of harmless light in any colour the wielder wishes.'},
   {name: 'Hawk of Prosperity', description: 'A mechanical bird (3hp, d6 claws) that will only help you to accumulate wealth. Requires a Shilling each day as food.'},
   {name: 'Inquisitor\’s Hood', description: 'Speak a question with two possible answers. The target must pass a WIL Save or answer as honestly as they can. If they pass their Save you blurt out an inconvenient truth.'},
   {name: 'Winter\’s Sickle', description: 'Anybody taking Damage from this Sickle (d6) is Deprived and feels cold to their bones until they spend at least an hour warming themselves by a fire or other heat source.'},
@@ -955,7 +955,7 @@ export const items = [
   },
   {
     category: 'Hand Weapon',
-    name: 'Garotte 1d6',
+    name: 'Garrotte',
     description: 'Two handles connected by a length of flexible wire.',
     slots: 1,
     number: 0,
@@ -965,13 +965,23 @@ export const items = [
   },
   {
     category: 'Hand Weapon',
-    name: 'Mace 1d6',
+    name: 'Mace',
     description: 'Often has a flanged head to penetrate armour.',
     slots: 2,
     number: 0,
     damage: 6,
     armour: 0,
     cost: '2S'
+  },
+  {
+    category: 'Hand Weapon',
+    name: 'Machete',
+    description: 'Originally made for acricultural use.',
+    slots: 1,
+    number: 0,
+    damage: 6,
+    armour: 0,
+    cost: '1S'
   },
   {
     category: 'Hand Weapon',
@@ -985,7 +995,7 @@ export const items = [
   },
   {
     category: 'Hand Weapon',
-    name: 'Pistol 1d6',
+    name: 'Pistol',
     description: 'A flintlock can be loaded and fired in 20 seconds.',
     slots: 1,
     number: 0,
@@ -1187,6 +1197,26 @@ export const items = [
     cost: '10S'
   },
   {
+    category: 'Medicine',
+    name: 'Ether',
+    description: 'Inhalation will cause unconsciousness.',
+    slots: 1,
+    number: 0,
+    damage: 0,
+    armour: 0,
+    cost: '10S'
+  },
+  {
+    category:'Tool',
+    name: 'Barstool',
+    description: 'Would not be my weapon of choice, but will do in a pinch.',
+    number: 0,
+    slots: 1,
+    damage: 6,
+    armour: 0,
+    cost: '1S'
+  },
+  {
     category:'Tool',
     name: 'Pitchfork',
     description: 'Useful for hunting witches.',
@@ -1198,9 +1228,10 @@ export const items = [
   },
   {
     category:'Tool',
-    name: 'Barstool',
-    description: 'Would not be my weapon of choice, but will do in a pinch.',
+    name: 'Shovel',
+    description: 'The true multi-tool.',
     number: 0,
+    slots: 2,
     damage: 6,
     armour: 0,
     cost: '1S'
@@ -1221,7 +1252,7 @@ export const items = [
     description: 'Can open most doors and padlocks.',
     slots: 1,
     number: 0,
-    damage: 6,
+    damage: 0,
     armour: 0,
     cost: '1S'
   },
@@ -1231,7 +1262,17 @@ export const items = [
     description: 'Would not be my weapon of choice, but will do in a pinch.',
     slots: 1,
     number: 0,
-    damage: 6,
+    damage: 4,
+    armour: 0,
+    cost: '1S'
+  },
+  {
+    category:'Tool',
+    name: 'Bolt-Cutters',
+    description: 'Useful for escaping, breaking and entering.',
+    slots: 1,
+    number: 0,
+    damage: 0,
     armour: 0,
     cost: '1S'
   },
@@ -1241,7 +1282,7 @@ export const items = [
     description: 'Especially potent versus demons.',
     slots: 1,
     number: 0,
-    damage: 6,
+    damage: 4,
     armour: 0,
     cost: '1S'
   },

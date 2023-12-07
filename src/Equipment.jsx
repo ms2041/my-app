@@ -1,9 +1,10 @@
 import { getHighestAbility, equipmentToggle } from './PlayerCh';
-import { playerChEquipment, setPlayerChEquipment, playerChData, pcIndex, companionIndex, displayIndex, abilitiesFirst } from './Cast';
-import { starterPackages, arcanum } from './oddpendium';
+import { playerChEquipment, setPlayerChEquipment, playerChData, companionIndex, displayIndex} from './Cast';
+import { starterPackages, arcanum, items } from './oddpendium';
 import { getRandomInt } from './generalUtils';
-import { createSignal, createEffect } from 'solid-js';
-import { MAX_EQUIPMENT_SLOTS, MAX_PCS } from './constants';
+import { createSignal } from 'solid-js';
+import { MAX_EQUIPMENT_SLOTS, MAX_PLAYER_CHS } from './constants';
+
 import EquipmentModal from './EquipmentModal';
 
 
@@ -11,6 +12,7 @@ const [showEquipmentModal, setShowEquipmentModal] = createSignal(false);
 const [selectedItem, setSelectedItem] = createSignal(null);
 const [selectedSlot, setSelectedSlot] = createSignal(null);
 
+// After an item is added or deleted, the equipment array is reordered.
 export function reorderEquipment() {
   setPlayerChEquipment((prevEquipment) => {
     const newEquipment = [...prevEquipment];
@@ -72,32 +74,48 @@ function getArcana() {
   return (item);
 }
 
-// Increment the equipmentPtr for a specific player character
-export function incrementEquipmentPtr() {
-  const currentEquipmentPtr = playerChEquipment[displayIndex()].equipmentPtr;
-  setPlayerChEquipment((prevEquipment) => {
-    const updatedEquipment = [...prevEquipment];
-    updatedEquipment[displayIndex()] = {
-      ...updatedEquipment[displayIndex()],
-      equipmentPtr: currentEquipmentPtr + 1,
-    };
-    return updatedEquipment;
+// Search items array for item that matches a itemName.
+export function getItem(itemName) {
+  console.log(`Searching for item: ${itemName}`);
+  
+  const foundItem = items.find(item => {
+    console.log(`Checking item: ${item.name}`);
+    return item.name.toLowerCase() === itemName.toLowerCase();
   });
-  console.log('incrementEquipmentPtr: ', currentEquipmentPtr + 1);
+
+  if (foundItem) {
+    console.log(`Item '${itemName}' found:`, foundItem);
+    return foundItem;
+  } else {
+    console.log(`Item '${itemName}' not found.`);
+    return null;
+  }
 }
 
+// Calculate free slots available to see if item can be added.
+export function freeSlots() {
+  const index = displayIndex();
+  let slotsSum = 0;
+  for (let i = 0; i < playerChEquipment[index].equipment.length; i++) {
+    const item = getItem(playerChEquipment[index].equipment[i]);
+    if ((item != null) && (item.name != "")) {
+      slotsSum = slotsSum + item.slots;
+    }
+  }
+  console.log('freeSlots: ', MAX_EQUIPMENT_SLOTS - slotsSum);
+  return (MAX_EQUIPMENT_SLOTS - slotsSum);
+}
+
+// Add an item to a player character's equipment array.
 export function addEquipment(item, slot) {
   console.log('addEquipment: ', item, slot);
 
   setPlayerChEquipment((prevEquipment) => {
     const index = displayIndex();
 
-    if (index >= 0 && index < MAX_PCS) {
+    if (index >= 0 && index < MAX_PLAYER_CHS) {
       const updatedEquipment = [...prevEquipment];
       updatedEquipment[displayIndex()].equipment[slot] = item;
-
-      incrementEquipmentPtr(); // Assuming incrementEquipmentPtr is already updated to use playerChEquipment
-
       return updatedEquipment;
     }
 
@@ -119,8 +137,8 @@ export function getStarterPackage() {
   const updatedEquipment = Array(10).fill(''); // Create an array of length 10 filled with empty strings
 
   // Fill updatedEquipment with newEquipment data if available
-  newEquipment.forEach((item, idx) => {
-    updatedEquipment[idx] = item;
+  newEquipment.forEach((item, index) => {
+    updatedEquipment[index] = item;
   });
 
   setPlayerChEquipment((prevEquipment) => {
@@ -191,6 +209,5 @@ function Equipment() {
     </div>
   );
 }
-
 
 export default Equipment;

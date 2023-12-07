@@ -1,6 +1,5 @@
 import { supabase } from './supabase.js';
-import { pcs, playerChData } from './Cast.jsx';
-import { createResource, For } from "solid-js";
+import { playerChData } from './Cast.jsx';
 import { getNextFreeIndex } from './Cast';
 import { getRandomInt } from './generalUtils.js';
 
@@ -26,10 +25,10 @@ export async function savePlayerChToDb() {
 }
 
 // Function to fetch player characters from Supabase
-export async function fetchPcs() {
+export async function fetchPlayerChData() {
   try {
     const { data, error } = await supabase
-      .from('pcs')
+      .from('player_ch_data')
       .select('*')
       .order('id', { ascending: true });
 

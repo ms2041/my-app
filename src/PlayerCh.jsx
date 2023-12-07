@@ -18,18 +18,19 @@ import {
   playerChState,
   playerChPosition
 } from './Cast';
-import { MAX_PCS } from './constants';
+import { MAX_PLAYER_CHS } from './constants';
 
 import Equipment from './Equipment';
 import Money from './Money'
-import PcModal from './PcModal';
+import PlayerChModal from './PlayerChModal';
 
-const [showPcModal, setShowPcModal] = createSignal(false);
+const [showPlayerChModal, setshowPlayerChModal] = createSignal(false);
 
 const [equipmentToggle, setEquipmentToggle] = createSignal(true);
 export { equipmentToggle, setEquipmentToggle };
 
 function toggleEquipmentDisplay() {
+  console.log('toggleEquipmentDisplay');
   setEquipmentToggle(prevValue => !prevValue);
 }
 
@@ -65,12 +66,8 @@ function displayCompanionToggle() {
   }
 }
 
-function incrementDisplayIndex() {
-  setDisplayIndex(prevIndex => prevIndex + 1);
-}
-
 function handleNameClick() {
-  setShowPcModal(true);
+  setshowPlayerChModal(true);
 }
 
 // Returns the companion object matching companionName.
@@ -188,13 +185,6 @@ export function generatePlayerChPosition() {
 }
 
 export function generatePlayerCh() {
-  // generatePlayerChData();
-  // generatePlayerChEquipment();
-  // generatePlayerChAbilities();
-  // generatePlayerChMoney();
-  // generatePlayerChState();
-  // generatePlayerChPosition();
-
   setDisplayIndex(0); // playerChData[0] is reserved for temp player character generation.
 
   // Use the updatePlayerCh function to update the player character at the specified index.
@@ -203,7 +193,7 @@ export function generatePlayerCh() {
 
   getStarterPackage();
   if (playerChData[displayIndex()].companion) {
-    generateCompanion(displayIndex() + 1); // playerChData[1] is reserved for temp com panion generation.
+    generateCompanion(displayIndex() + 1); // playerChData[1] is reserved for temporary companion generation.
   }
 }
 
@@ -220,11 +210,11 @@ function modifyPcAttribute(attribute, increment) {
 
   // Use the updatePlayer function to update the player at the specified index
   updatePlayerCh(index, 'data', updatedProperties);
-  console.log('modifyPcAttribute: ', attribute, updatedProperties);
+  console.log('modifyPcAttribute: ', index, attribute, updatedProperties);
 }
 
-function closePcModal() {
-  setShowPcModal(false);
+function closePlayerChModal() {
+  setshowPlayerChModal(false);
 }
 
 
@@ -232,8 +222,8 @@ function PlayerCh() {
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
       <div class="col-span-7 rounded cursor-pointer text-xl" onClick={handleNameClick}>{playerChData[displayIndex()].name}</div>
-      <div class="col-span-1 rounded text-right cursor-pointer"onClick={displayCompanionToggle}>{playerChData[displayIndex()].companion ? '&' : null}</div> {/* & displayed if companion==true */}
-      <div class="co-span-1 text-right cursor-pointer" on:click={() => toggleEquipmentDisplay()}>*</div>
+      <div class="col-span-1 rounded text-right cursor-pointer" onClick={displayCompanionToggle}>{playerChData[displayIndex()].companion ? '&' : null}</div> {/* '&' displayed if companion==true */}
+      <div class="co-span-1 text-right hover:text-blue-300 cursor-pointer" on:click={() => toggleEquipmentDisplay()}>*</div>
       <div class="col-span-9 row-span-5 col-start-10">
         <Equipment />
       </div>
@@ -272,8 +262,8 @@ function PlayerCh() {
       </div>
       <div class="col-span-8 row-start-3 rounded">{playerChData[displayIndex()].specialInformation}</div>
       <div class="col-span-8 row-span-2 row-start-4 rounded">Haiku goes here!</div>
-      {showPcModal() && (
-        <PcModal onClose={closePcModal} />
+      {showPlayerChModal() && (
+        <PlayerChModal onClose={closePlayerChModal} />
       )}
     </div>
   );

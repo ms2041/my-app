@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import { items } from './oddpendium.jsx';
-import { addEquipment, reorderEquipment } from './Equipment.jsx';
+import { addEquipment, reorderEquipment, freeSlots } from './Equipment.jsx';
 import { playerChEquipment } from './Cast.jsx';
 
 function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot] }) {
@@ -56,9 +56,13 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
                       onClick={() => {
                         const slot = findEquipmentRecord(item);
                         setSelectedItem(item); // Update the selected item
-                        addEquipment(item.name, selectedSlot());
-                        reorderEquipment();
-                        console.log('Modal add equipment: ', playerChEquipment);
+                        if (freeSlots() >= item.slots) {
+                          addEquipment(item.name, selectedSlot());
+                          reorderEquipment();
+                          console.log('Modal add equipment: ', playerChEquipment);
+                        } else {
+                          console.log('Not enough equipment slots to add.');
+                        }
                       }}
                       classList={{
                         'text-blue-400 cursor-pointer': hoveredItem() === item,
