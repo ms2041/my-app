@@ -106,6 +106,22 @@ export function freeSlots() {
   return (MAX_EQUIPMENT_SLOTS - slotsSum);
 }
 
+// Find next empty slot in the inventory and return it's pointer.
+function getNextFreeSlot() {
+  // Assume that the inventory is ordered.
+  const inventory = playerChEquipment;
+  const index = displayIndex();
+  console.log('getNextFreeSlot: ', inventory, index);
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory[index].equipment[i] === '') {
+      console.log('getNextFreeSlot found: ', i);
+      return i;
+    }
+  }
+  console.log('getNextFreeSlot NOT found.');
+  return(-1);
+}
+
 // Add an item to a player character's equipment array.
 export function addEquipment(item, slot) {
   console.log('addEquipment: ', item, slot);
@@ -115,23 +131,29 @@ export function addEquipment(item, slot) {
 
     if (index >= 0 && index < MAX_PLAYER_CHS) {
       const updatedEquipment = [...prevEquipment];
-      updatedEquipment[displayIndex()].equipment[slot] = item;
-      return updatedEquipment;
+      const updatedPlayerEquipment = { ...updatedEquipment[index] }; // Create a copy of the player's equipment object
+
+      // Create a new copy of the equipment array within the player's equipment object
+      const updatedEquipmentArray = [...updatedPlayerEquipment.equipment];
+      updatedEquipmentArray[slot] = item; // Update the specific slot with the new item
+      updatedPlayerEquipment.equipment = updatedEquipmentArray; // Update the equipment array in the copied object
+
+      updatedEquipment[index] = updatedPlayerEquipment; // Update the player's equipment object in the main array
+      return updatedEquipment; // Return the updated array
     }
 
-    return prevEquipment;
+    return prevEquipment; // Return previous state if no changes are made
   });
 }
 
 export function getStarterPackage() {
   const index = displayIndex();
-  const playerEquipmentPtr = playerChEquipment[index]?.equipmentPtr ?? 0;
   const playerHP = playerChData[index]?.hp ?? 1;
 
   let i = playerHP - 1;
   let j = getHighestAbility() - 3; // The range of the array is from 3 - 18.
   let selectedPackage = starterPackages[i][j];
-  console.log('getStarterPackage Column, Row: ', index, starterPackages.length, starterPackages[0].length, i, j, starterPackages[i][j], playerEquipmentPtr);
+  console.log('getStarterPackage Column, Row: ', index, starterPackages.length, starterPackages[0].length, i, j, starterPackages[i][j]);
 
   const newEquipment = [...selectedPackage.equipment];
   const updatedEquipment = Array(10).fill(''); // Create an array of length 10 filled with empty strings
@@ -156,9 +178,10 @@ export function getStarterPackage() {
 
   if (selectedPackage.arcanum) {
     let selectedArcana = getArcana();
-    console.log('Selected arcana: ', selectedArcana.name);
-    addEquipment(selectedArcana.name, playerEquipmentPtr);
-    console.log('Arcana added ', playerChEquipment[index]?.equipment, ' at ', playerEquipmentPtr);
+    const slot = getNextFreeSlot();
+    console.log('Selected arcana + slot: ', selectedArcana.name, slot);
+    addEquipment(selectedArcana.name, slot);
+    console.log('Arcana added ', playerChEquipment[index]?.equipment, ' at ', slot);
   }
 
   console.log('getStarterPackage called ', playerChEquipment[index]);

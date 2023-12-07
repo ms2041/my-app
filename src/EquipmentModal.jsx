@@ -54,7 +54,6 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
                       onMouseEnter={() => setHoveredItem(item)}
                       onMouseLeave={() => setHoveredItem(null)}
                       onClick={() => {
-                        const slot = findEquipmentRecord(item);
                         setSelectedItem(item); // Update the selected item
                         if (freeSlots() >= item.slots) {
                           addEquipment(item.name, selectedSlot());
