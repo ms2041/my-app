@@ -55,12 +55,8 @@ function removeEquipment(slot) {
 
       console.log('removeEquipment: ', slot, playerChEquipment[displayIndex()].equipment);
 
-      // Calculate the new equipmentPtr
-      const newEquipmentPtr = equipment.filter(item => item !== '').length;
-
       newEquipment[index] = {
         ...newEquipment[index],
-        equipmentPtr: newEquipmentPtr,
       };
     }
 
@@ -168,7 +164,6 @@ export function getStarterPackage() {
     updatedPlayerEquipment[index] = {
       ...updatedPlayerEquipment[index],
       equipment: updatedEquipment,
-      equipmentPtr: updatedEquipment.length,
       // specialInformation: selectedPackage.specialInformation,
       // companion: selectedPackage.companion,
     };
@@ -198,7 +193,7 @@ function selectEquipment(index) {
 
 function handleLeftClick(slot) {
   setSelectedSlot(slot);
-  console.log('handleLeftClick: ', slot, playerChEquipment[displayIndex()].equipment, playerChEquipment[displayIndex()].equipmentPtr, ' Slot: ', selectedSlot());
+  console.log('handleLeftClick: ', slot, playerChEquipment[displayIndex()].equipment, ' Slot: ', selectedSlot());
   if (playerChEquipment[displayIndex()].equipment[slot] === '') {
     setSelectedItem(null); // Reset selected item when selecting an empty slot
     setShowEquipmentModal(true);

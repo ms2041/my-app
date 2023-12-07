@@ -154,7 +154,6 @@ export function generatePlayerChAbilities() {
 export function generatePlayerChEquipment() {
   const newPlayerChEquipment = {
     equipment: ['', '', '', '', '', '', '', '', '', ''],
-    equipmentPtr: 0,
   }
   return(newPlayerChEquipment);
 }

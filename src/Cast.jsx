@@ -43,7 +43,6 @@ for (let i = 0; i < MAX_PLAYER_CHS; i++) {
   const equipmentObject = {
     id: 0,
     equipment: ["", "", "", "", "", "", "", "", "", ""],
-    equipmentPtr: 0,
   };
   playerChEquipmentArray.push(equipmentObject);
   const moneyObject = {

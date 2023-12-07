@@ -30,7 +30,7 @@ function PlayerChModal({ onClose }) {
       {/* Display playerChData names in two columns */}
       <div className="grid grid-cols-2 gap-4 text-gray-800">
         {/* First column */}
-        <div className="ml-[45%]">
+        <div className="ml-[40%]">
           {column1Indices.map((index) => (
             <div key={index} onClick={() => addPlayerChToScene(index)} style={{ cursor: 'pointer' }}>
               {getNameOrDash(index)}
