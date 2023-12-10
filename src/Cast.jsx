@@ -112,7 +112,6 @@ export function updatePlayerCh(index, propertyType, updatedProperties) {
   } else {
     console.error('Invalid propertyType:', propertyType);
   }
-  console.log('')
 }
 
 // Iterates through playerChData from position 0 until element with empty name is found.
@@ -194,21 +193,20 @@ function copyRowWithoutId(sourceIndex, destinationIndex, sourceStore, setDestina
   const destinationArray = [...sourceArray];
 
   const { id, ...propertiesWithoutId } = sourceItem;
-  console.log('Copy Data Begin: ', sourceIndex, destinationIndex, sourceArray);
   if (destinationIndex >= 0 && destinationIndex < destinationArray.length) {
     destinationArray[destinationIndex] = { ...destinationArray[destinationIndex], ...propertiesWithoutId };
     setDestinationStore(destinationArray);
   } else {
     console.error('Invalid destination index');
   }
-  console.log('Copy Data End: ', destinationArray);
 }
 
 // Check if playerCh[0] exists elsewhere in the playerCh array.
-export function playerChExists() {
+export function playerChExists(playerChName) {
+  console.log('Check if player name exists: ', playerChName, playerChData[displayIndex()].name, playerChData[playerChIndex()].name)
   let playerChFound = false;
   for (let i = 2; i < MAX_PLAYER_CHS; i++) {
-    if (playerChData[0].name === playerChData[i].name) {
+    if (playerChName === playerChData[i].name) {
       playerChFound = true;
     }
   }
@@ -219,13 +217,14 @@ export function playerChExists() {
 export function savePlayerCh() {
   console.log('savePlayerCh - before: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex());
   let index = 0;
-  if ((playerChIndex() === displayIndex()) && playerChIndex() !== 0) {
-    console.log('Player Ch already exists - no new slot required: ', displayIndex());
-  } else {
+  if (!playerChExists(playerChData[0].name)){
     index = getNextFreeIndex();
     setPlayerChIndex(index);
+  } else {
+    console.log('Player Ch already exists - no new slot required: ', displayIndex());
   }
   console.log('savePlayerCh - after: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex(), index);
+
   if (index !== -1) {
     // displayIndex() returns 0 normally, but not always.
     copyRowWithoutId(displayIndex(), index, playerChData, setPlayerChData);
@@ -234,6 +233,19 @@ export function savePlayerCh() {
     copyRowWithoutId(displayIndex(), index, playerChMoney, setPlayerChMoney);
     copyRowWithoutId(displayIndex(), index, playerChState, setPlayerChState);
     copyRowWithoutId(displayIndex(), index, playerChPosition, setPlayerChPosition);
+
+    // Check if companion assigned. If true, copy companion.
+    if (playerChData[0].companion) {
+      console.log('Copy companion: ', playerChData[displayIndex() + 1].companion);
+      copyRowWithoutId(displayIndex() + 1, index + 1, playerChData, setPlayerChData);
+      copyRowWithoutId(displayIndex() + 1, index + 1, playerChAbilities, setPlayerChAbilities);
+      copyRowWithoutId(displayIndex() + 1, index + 1, playerChEquipment, setPlayerChEquipment);
+      copyRowWithoutId(displayIndex() + 1, index + 1, playerChMoney, setPlayerChMoney);
+      copyRowWithoutId(displayIndex() + 1, index + 1, playerChState, setPlayerChState);
+      copyRowWithoutId(displayIndex() + 1, index + 1, playerChPosition, setPlayerChPosition);
+    } else {
+      // Set companion to default playerCh.
+    }
 
     setDisplayIndex(index); // Display index is set to any player that is saved, whether existing or rolled.
     console.log('savePlayerCh - data: ', playerChData, 'displayIndex: ',displayIndex(), 'playerChIndex: ', playerChIndex());

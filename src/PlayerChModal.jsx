@@ -1,5 +1,7 @@
 import { generatePlayerCh } from './PlayerCh';
-import { playerChData } from './Cast.jsx'; // Replace './Cast.jsx' with the correct path
+import { playerChData, displayIndex, setDisplayIndex, playerChIndex, setPlayerChIndex } from './Cast.jsx'; // Replace './Cast.jsx' with the correct path
+import { createSignal } from 'solid-js';
+// ...
 
 function PlayerChModal({ onClose }) {
   // Helper function to get the name or '-'
@@ -14,7 +16,19 @@ function PlayerChModal({ onClose }) {
   // Function to add player character to scene based on index
   const addPlayerChToScene = (index) => {
     // Your logic to add player character to the scene using the index
+    setDisplayIndex(index);
+    setPlayerChIndex(index);
     console.log(`Adding player character with index ${index} to the scene`);
+  };
+
+  const handleMouseOver = (index) => {
+    // Update display index to the hovered item's index
+    setDisplayIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    // Revert display index to the default playerChIndex when mouse leaves the columns
+    setDisplayIndex(playerChIndex);
   };
 
   return (
@@ -30,17 +44,27 @@ function PlayerChModal({ onClose }) {
       {/* Display playerChData names in two columns */}
       <div className="grid grid-cols-2 gap-4 text-gray-800">
         {/* First column */}
-        <div className="ml-[40%]">
+        <div className="ml-[40%]" onMouseLeave={handleMouseLeave}>
           {column1Indices.map((index) => (
-            <div key={index} onClick={() => addPlayerChToScene(index)} style={{ cursor: 'pointer' }}>
+            <div
+              key={index}
+              onMouseOver={() => handleMouseOver(index)}
+              onClick={() => addPlayerChToScene(index)}
+              style={{ cursor: 'pointer' }}
+            >
               {getNameOrDash(index)}
             </div>
           ))}
         </div>
         {/* Second column */}
-        <div className="ml-2">
+        <div className="ml-2" onMouseLeave={handleMouseLeave}>
           {column2Indices.map((index) => (
-            <div key={index} onClick={() => addPlayerChToScene(index)} style={{ cursor: 'pointer' }}>
+            <div
+              key={index}
+              onMouseOver={() => handleMouseOver(index)}
+              onClick={() => addPlayerChToScene(index)}
+              style={{ cursor: 'pointer' }}
+            >
               {getNameOrDash(index)}
             </div>
           ))}
@@ -56,13 +80,6 @@ function PlayerChModal({ onClose }) {
           <button className="text-gray-500 hover:text-slate-700" /* Add your onClick handler */>
             Save
           </button>
-          <button className="text-gray-500 hover:text-slate-700" >
-            Add
-          </button>
-          <button className="text-gray-500 hover:text-slate-700" >
-            Remove
-          </button>
-
         </div>
       </div>
     </div>

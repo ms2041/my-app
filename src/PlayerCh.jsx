@@ -12,6 +12,7 @@ import {
   displayIndex,
   setDisplayIndex,
   playerChData,
+  setPlayerChData,
   playerChAbilities,
   playerChEquipment,
   playerChMoney,
@@ -88,20 +89,22 @@ function extractCompanionInfo(companionProperty, companionObject) {
       extractedInfo.category = companionObject.category;
       extractedInfo.name = companionObject.name;
       extractedInfo.str = companionObject.str;
-      extractedInfo.int = companionObject.int;
+      extractedInfo.dex = companionObject.dex;
       extractedInfo.wil = companionObject.wil;
       extractedInfo.hp = companionObject.hp;
       extractedInfo.specialInformation = companionObject.specialInformation;
       extractedInfo.companion = companionObject.companion;
       break;
     case 'abilities':
-      extractedInfo.ability = companionObject.ability;
+      extractedInfo.abilities = companionObject.abilities;
       break;
     case 'equipment':
       extractedInfo.equipment = companionObject.equipment;
       break;
-    case 'equipment':
-      extractedInfo.money = companionObject.money;
+    case 'money':
+      extractedInfo.shillings = companionObject.shillings;
+      extractedInfo.pennies = companionObject.pennies;
+      extractedInfo.guilders = companionObject.guilders;
       break;
     case 'state':
       extractedInfo.condition = companionObject.condition;
@@ -131,6 +134,7 @@ function generateCompanion() {
   console.log('generateCompanion:', newCompanion);
 }
 
+// Generate random player name and attributes.
 export function generatePlayerChData() {
   const newPlayerChData = {
     classification: 'playerCh',
@@ -183,6 +187,20 @@ export function generatePlayerChPosition() {
   return(newPlayerChPosition);
 }
 
+function updatePlayerChDataProperty(index, propertyName, propertyValue) {
+  setPlayerChData((prevData) => {
+    const newData = [...prevData];
+    if (index >= 0 && index < newData.length && newData[index].hasOwnProperty(propertyName)) {
+      newData[index] = {
+        ...newData[index],
+        [propertyName]: propertyValue,
+      };
+    }
+    return newData;
+  });
+}
+
+// Called when the Roll button is clicked. Generates a player ch and companion if defined by starter package.
 export function generatePlayerCh() {
   setDisplayIndex(0); // playerChData[0] is reserved for temp player character generation.
 
@@ -190,8 +208,14 @@ export function generatePlayerCh() {
   updatePlayerCh(displayIndex(), 'data', generatePlayerChData());
   console.log('generatePlayerCh called. ', displayIndex(), playerChData[displayIndex()]);
 
-  getStarterPackage();
-  if (playerChData[displayIndex()].companion) {
+  const starterPackage = getStarterPackage();
+  const companionValue = starterPackage.companion;
+  const specialInformationValue = starterPackage.specialInformation;
+  updatePlayerChDataProperty(displayIndex(), 'companion', companionValue);
+  updatePlayerChDataProperty(displayIndex(), 'specialInformation', specialInformationValue);
+
+  console.log('Companion check: ', displayIndex(), playerChData[displayIndex()].companion, playerChData[displayIndex()].specialInformation);
+  if (starterPackage.companion) {
     generateCompanion(displayIndex() + 1); // playerChData[1] is reserved for temporary companion generation.
   }
 }
@@ -209,9 +233,24 @@ function modifyPcAttribute(attribute, increment) {
 
   // Use the updatePlayer function to update the player at the specified index
   updatePlayerCh(index, 'data', updatedProperties);
-  console.log('modifyPcAttribute: ', index, attribute, updatedProperties);
+  console.log('modifyPcAttribute: ', index, playerChIndex(),attribute, updatedProperties);
 }
 
+// Function to update an attribute based on click type
+function updatePlayerData(attribute, increment) {
+  const index = displayIndex();
+  const currentValue = playerChData[index][attribute];
+  
+  // Make the necessary modification to the attribute value
+  const updatedValue = currentValue + increment;
+
+  // Create an updatedProperties object with the changed attribute value
+  const updatedProperties = { ...playerChData[index], [attribute]: updatedValue };
+
+  // Use the updatePlayer function to update the player at the specified index
+  updatePlayerCh(index, 'data', updatedProperties);
+  console.log('modifyPcAttribute: ', index, playerChIndex(),attribute, updatedProperties);
+}
 function closePlayerChModal() {
   setshowPlayerChModal(false);
 }

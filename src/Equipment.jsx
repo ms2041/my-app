@@ -36,6 +36,7 @@ export function reorderEquipment() {
   });
 }
 
+// Remove an item from inventory identified by slot number.
 function removeEquipment(slot) {
   setPlayerChEquipment((prevEquipment) => {
     const newEquipment = [...prevEquipment];
@@ -75,7 +76,7 @@ export function getItem(itemName) {
   console.log(`Searching for item: ${itemName}`);
   
   const foundItem = items.find(item => {
-    console.log(`Checking item: ${item.name}`);
+    // console.log(`Checking item: ${item.name}`);
     return item.name.toLowerCase() === itemName.toLowerCase();
   });
 
@@ -164,12 +165,15 @@ export function getStarterPackage() {
     updatedPlayerEquipment[index] = {
       ...updatedPlayerEquipment[index],
       equipment: updatedEquipment,
-      // specialInformation: selectedPackage.specialInformation,
-      // companion: selectedPackage.companion,
+      //specialInformation: selectedPackage.specialInformation,
+      //companion: selectedPackage.companion,
     };
-    console.log('updatedPlayerEquipment: ', updatedPlayerEquipment);
+    console.log('companion value 1: ', index);
+    // console.log('updatedPlayerEquipment: ', updatedPlayerEquipment);
     return updatedPlayerEquipment;
   });
+
+  console.log('companion value 2: ', index);
 
   if (selectedPackage.arcanum) {
     let selectedArcana = getArcana();
