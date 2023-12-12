@@ -1,5 +1,7 @@
 import { supabase } from './supabase.js';
-import { playerChData } from './Cast.jsx';
+import {
+  playerChData,
+} from './Cast.jsx';
 import { getNextFreeIndex } from './Cast';
 import { getRandomInt } from './generalUtils.js';
 
@@ -96,6 +98,20 @@ export async function readPlayerChPosition() {
   } catch (error) {
     console.error('Error fetching player characters:', error, error.message);
     return [];
+  }
+}
+
+// Function to reset Supabase table with default values
+async function resetSupabaseTable(tableName, dataArray) {
+  try {
+    for (let i = 0; i < dataArray.length; i++) {
+      const { id, ...properties } = dataArray[i];
+      await updatePlayerChProps(tableName, id, properties);
+    }
+
+    console.log(`Table '${tableName}' reset successfully.`);
+  } catch (error) {
+    console.error(`Error resetting ${tableName}:`, error.message);
   }
 }
 

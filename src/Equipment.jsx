@@ -3,7 +3,7 @@ import { playerChEquipment, setPlayerChEquipment, playerChData, companionIndex, 
 import { starterPackages, arcanum, items } from './oddpendium';
 import { getRandomInt } from './generalUtils';
 import { createSignal } from 'solid-js';
-import { MAX_EQUIPMENT_SLOTS, MAX_PLAYER_CHS } from './constants';
+import { MAX_EQUIPMENT_SLOTS, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants';
 
 import EquipmentModal from './EquipmentModal';
 
@@ -21,7 +21,7 @@ export function reorderEquipment() {
     // Remove empty strings from the equipment array
     const filteredEquipment = currentEquipment.equipment.filter(item => item !== '');
 
-    // Add empty strings to maintain a length of 10
+    // Add empty strings to maintain a length of MAX_EQUIPMENT_SLOTS.
     while (filteredEquipment.length < MAX_EQUIPMENT_SLOTS) {
       filteredEquipment.push('');
     }
@@ -43,7 +43,7 @@ function removeEquipment(slot) {
 
     const index = displayIndex();
 
-    if (index >= 0 && index < 8) {
+    if (index >= 0 && index < MAX_PLAYERS) {
       const { equipment } = newEquipment[index];
 
       // Replace the item at the specified slot with an empty string
@@ -143,6 +143,7 @@ export function addEquipment(item, slot) {
   });
 }
 
+// Read starter package based on player attributes and populate player tables.
 export function getStarterPackage() {
   const index = displayIndex();
   const playerHP = playerChData[index]?.hp ?? 1;
@@ -153,19 +154,20 @@ export function getStarterPackage() {
   console.log('getStarterPackage Column, Row: ', index, starterPackages.length, starterPackages[0].length, i, j, starterPackages[i][j]);
 
   const newEquipment = [...selectedPackage.equipment];
-  const updatedEquipment = Array(10).fill(''); // Create an array of length 10 filled with empty strings
+  const updatedEquipment = Array(MAX_EQUIPMENT_SLOTS).fill(''); // Create an array of length MAX_EQUIPMENT_SLOTS filled with empty strings
 
   // Fill updatedEquipment with newEquipment data if available
   newEquipment.forEach((item, index) => {
     updatedEquipment[index] = item;
   });
 
+  // Fill PlayerChEquipment array from the starter package.
   setPlayerChEquipment((prevEquipment) => {
     const updatedPlayerEquipment = [...prevEquipment];
     updatedPlayerEquipment[index] = {
       ...updatedPlayerEquipment[index],
       equipment: updatedEquipment,
-      //specialInformation: selectedPackage.specialInformation,
+      //characteristics: selectedPackage.characteristics,
       //companion: selectedPackage.companion,
     };
     console.log('companion value 1: ', index);
@@ -212,6 +214,7 @@ function closeEquipmentModal() {
   setShowEquipmentModal(false);
 }
 
+// Equipment component.
 function Equipment() {
   const equipment = playerChEquipment;
   console.log('Equipment: ', equipment);

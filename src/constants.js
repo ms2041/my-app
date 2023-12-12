@@ -1,5 +1,8 @@
 export const MAX_PLAYER_CHS = 16 + 2; // 8 player characters, 8 companions, 1 character + companion temp slot.
 export const MAX_EQUIPMENT_SLOTS = 10;
+export const MAX_PLAYERS = 16 + 2;
+export const GENERATED_PLAYER_INDEX = 0;
+export const GENERATED_COMPANION_INDEX = 1;
 
 export const sobriquets =
   [

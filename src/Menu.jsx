@@ -1,4 +1,3 @@
-import { fetchPlayerChProps, writeXY, readXY } from './dbUtils';
 import { setAb, readAb } from './testHarness';
 import { playerChData, displayIndex, playerChEquipment, savePlayerCh, goHome } from './Cast';
 import { generatePlayerCh } from './PlayerCh';
@@ -18,7 +17,7 @@ function Menu() {
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => goHome()}>Home</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => savePlayerCh()}>Save</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => generatePlayerCh()}>Roll</div>
-      <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => setAb()}>setAb</div>
+      <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => generatePlayerCh()}>Roll</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => getData()}>gData</div>
       <div class="pl-6 hover:text-blue-300 cursor-pointer" on:click={() => getEqt()}>gEqt</div>
     </div>

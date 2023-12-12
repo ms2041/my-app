@@ -1,5 +1,5 @@
 import { generatePlayerCh } from './PlayerCh';
-import { playerChData, displayIndex, setDisplayIndex, playerChIndex, setPlayerChIndex } from './Cast.jsx'; // Replace './Cast.jsx' with the correct path
+import { playerChData, displayIndex, setDisplayIndex, playerChIndex, setPlayerChIndex, setCompanionIndex } from './Cast.jsx'; // Replace './Cast.jsx' with the correct path
 import { createSignal } from 'solid-js';
 // ...
 
@@ -18,7 +18,8 @@ function PlayerChModal({ onClose }) {
     // Your logic to add player character to the scene using the index
     setDisplayIndex(index);
     setPlayerChIndex(index);
-    console.log(`Adding player character with index ${index} to the scene`);
+    setCompanionIndex(index + 1);
+    console.log('Adding player character with index ', index, ' to the scene ', displayIndex(), playerChIndex());
   };
 
   const handleMouseOver = (index) => {

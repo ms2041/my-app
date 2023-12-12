@@ -2,18 +2,18 @@ import { createSignal, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { creatureList } from './oddpendium.jsx';
 import { fetchPlayerChProps, updateWholeTable } from './dbUtils.js';
-import { MAX_PLAYER_CHS } from './constants.js';
+import { GENERATED_COMPANION_INDEX, GENERATED_PLAYER_INDEX, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants.js';
 
-const [playerChIndex, setPlayerChIndex] = createSignal(0);
+const [playerChIndex, setPlayerChIndex] = createSignal(GENERATED_PLAYER_INDEX);
 export { playerChIndex, setPlayerChIndex };
-const [companionIndex, setCompanionIndex] = createSignal(1);
+const [companionIndex, setCompanionIndex] = createSignal(GENERATED_COMPANION_INDEX);
 export { companionIndex, setCompanionIndex };
 
 // Signal to store index used to display playerCh arrays.
 const [displayIndex, setDisplayIndex] = createSignal(0);
 export { displayIndex, setDisplayIndex };
 
-// Declare player character stores.
+// Declare player stores.
 const playerChDataArray = [];
 const playerChAbilitiesArray = [];
 const playerChEquipmentArray = [];
@@ -24,15 +24,15 @@ const playerChPositionArray = [];
 for (let i = 0; i < MAX_PLAYER_CHS; i++) {
   const playerChDataObject = {
     id: 0,
-    classification: '',
-    category:'',
-    name: '',
-    str: 0,
-    dex: 0,
-    wil: 0,
-    hp: 0,
-    specialInformation: '',
-    companion: '',
+    classification: '',     // player, companion, nonPlayer
+    category:'',            // friendly, unfriendly, neutral
+    name: '',               // name, alias, companionType
+    str: 0,                 // strength
+    dex: 0,                 // dexterity
+    wil: 0,                 // will
+    hp: 0,                  // hit protection
+    characteristics: '', // ability, handicap
+    companion: '',          // name of companion
   }
   playerChDataArray.push(playerChDataObject);
   const abilitiesObject = {
@@ -54,14 +54,14 @@ for (let i = 0; i < MAX_PLAYER_CHS; i++) {
   playerChMoneyArray.push(moneyObject);
   const stateObject = {
     id: 0,
-    condition: "",
+    condition: "",          // alive, dead, confused, sick, poisoned
   }
   playerChStateArray.push(stateObject);
   const positionObject = {
     id: 0,
     x: 0,
     y: 0,
-    onScreen: false,
+    active: false,
   }
   playerChPositionArray.push(positionObject);
 }
@@ -72,14 +72,14 @@ export const [playerChMoney, setPlayerChMoney] = createStore(playerChMoneyArray)
 export const [playerChState, setPlayerChState] = createStore(playerChStateArray);
 export const [playerChPosition, setPlayerChPosition] = createStore(playerChPositionArray);
 
+export function isCreature(name) {
+  return creatureList.includes(name);
+}
+
 function PcsToJson() {
 }
 
 function JsonToPcs() {
-}
-
-export function isCreature(name) {
-  return creatureList.includes(name);
 }
 
 /* Copy new data to playerCh arrays, identified by index (int) and propertyType ('data',
@@ -201,7 +201,7 @@ function copyRowWithoutId(sourceIndex, destinationIndex, sourceStore, setDestina
   }
 }
 
-// Check if playerCh[0] exists elsewhere in the playerCh array.
+// Check if playerCh exists elsewhere in the playerCh array.
 export function playerChExists(playerChName) {
   console.log('Check if player name exists: ', playerChName, playerChData[displayIndex()].name, playerChData[playerChIndex()].name)
   let playerChFound = false;
@@ -214,14 +214,17 @@ export function playerChExists(playerChName) {
   return(playerChFound);
 }
 
+// Save player (including companion) to player tables and Supabase.
 export function savePlayerCh() {
   console.log('savePlayerCh - before: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex());
   let index = 0;
-  if (!playerChExists(playerChData[0].name)){
+  if (!playerChExists(playerChData[displayIndex()].name)){
     index = getNextFreeIndex();
     setPlayerChIndex(index);
+    setCompanionIndex(index + 1);
   } else {
     console.log('Player Ch already exists - no new slot required: ', displayIndex());
+    index = displayIndex();
   }
   console.log('savePlayerCh - after: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex(), index);
 
@@ -235,7 +238,7 @@ export function savePlayerCh() {
     copyRowWithoutId(displayIndex(), index, playerChPosition, setPlayerChPosition);
 
     // Check if companion assigned. If true, copy companion.
-    if (playerChData[0].companion) {
+    if (playerChData[displayIndex()].companion) {
       console.log('Copy companion: ', playerChData[displayIndex() + 1].companion);
       copyRowWithoutId(displayIndex() + 1, index + 1, playerChData, setPlayerChData);
       copyRowWithoutId(displayIndex() + 1, index + 1, playerChAbilities, setPlayerChAbilities);

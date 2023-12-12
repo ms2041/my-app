@@ -9,97 +9,97 @@ export const starterPackages = [
       equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Sword', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Sword : d6', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Sword : d6', 'Pistol', 'Modern Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby unearthly beings',
+      characteristics: 'Sense nearby unearthly beings',
     },
     {
       equipment: ['Rifle ', 'Bayonet'],
       arcanum: true,
       companion: 'Lighter Boy',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Rifle', 'Modern Armour'],
       arcanum: true,
       companion: 'Hound',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Club', 'Throwing Knives'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Pistol', 'Ether', 'Poison'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Cane (d6)', 'Acid', 'Spyglass'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Brace of Pistols', 'Canary', 'Ether'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Musket', 'Pocket-watch', 'Bomb'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Halberd (d8 B)', 'Fake Pistol', 'Artificial Lung'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Garotte', 'Musket'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Mute',
+      characteristics: 'Mute',
     },
   ],
   // 2 HP
@@ -108,97 +108,97 @@ export const starterPackages = [
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Sword', 'Flashbang'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Sense nearby Arcana'
+      characteristics: 'Sense nearby Arcana'
     },
     {
       equipment: ['Musket', 'Hatchet'],
       arcanum: true,
       companion: 'Hawk',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Hatchet', 'Pistol', 'Bolt-Cutters'],
       arcanum: true,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Musket'],
       arcanum: true,
       companion: 'Mule',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Sword', 'Pistol', 'Simple Armour'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Pistol', 'Bell', 'Steel Wire', 'Smoke-bomb'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Longaxe', 'Fire Oil'],
       arcanum: false,
       companion: 'Ferret',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Staff (d6 B)', 'Tongs', 'Glue'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Pistol', 'Net', 'Trumpet'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Prosthetic Leg'
+      characteristics: 'Prosthetic Leg'
     },
     {
       equipment: ['Pistol', 'Grease', 'Hacksaw'],
       arcanum: false,
       companion: '',
-      specialInformation: 'One Arm'
+      characteristics: 'One Arm'
     }
   ],
   // 3 HP
@@ -207,97 +207,97 @@ export const starterPackages = [
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Club'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Immunity to extreme heat and cold',
+      characteristics: 'Immunity to extreme heat and cold',
     },
     {
       equipment: ['Musket', 'Protective Gloves'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Musket', 'Mallet', 'Marbles', 'Fancy Hat'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Pick-Axe (d6)', 'Manacles'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Pistol', 'Smoke-bomb', 'Shovel'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Longaxe', 'Throwing Axes', 'Fire Oil'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Club', 'Ether', 'Crowbar', 'Flute'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Hatchet', 'Net', 'Fire Oil'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Burnt Face',
+      characteristics: 'Burnt Face',
     },
     {
       equipment: ['Club', 'Paint', 'Crowbar'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Loud Lungs',
+      characteristics: 'Loud Lungs',
     },
     {
       equipment: ['Pistol', 'Cigars', 'Poison'],
       arcanum: false,
       companion: 'Fugitive',
-      specialInformation: '',
+      characteristics: '',
     },
   ],
   // 4 HP
@@ -306,97 +306,97 @@ export const starterPackages = [
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Pistol', 'Knife'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Telepathy if target fails WIL Save',
+      characteristics: 'Telepathy if target fails WIL Save',
     },
     {
       equipment: ['Claymore', 'Pistol', '2 Acid Flasks'],
       arcanum: true,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Musket', 'Bayonet'],
       arcanum: false,
       companion: 'Mutt with telepathic link',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Pistol', 'Rocket'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Toxin-Immune',
+      characteristics: 'Toxin-Immune',
     },
     {
       equipment: ['Musket', 'Portable Ram', 'Game Set'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Pistol', 'Saw', 'Animal Trap', 'Spyglass'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Bow (d6 B)', 'Knife', 'Rocket', 'Fire Oil'],
       arcanum: false,
       companion: '',
-      specialInformation: '',
+      characteristics: '',
     },
     {
       equipment: ['Pistol', 'Whip', 'Cigars'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Lost Eye',
+      characteristics: 'Lost Eye',
     },
     {
       equipment: ['Musket', 'Accordion.'],
       arcanum: false,
       companion: '',
-      specialInformation: 'No Nose/Scent',
+      characteristics: 'No Nose/Scent',
     },
     {
       equipment: ['Sword', 'Shield'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Illiterate',
+      characteristics: 'Illiterate',
     },
   ],
   // 5 HP
@@ -405,97 +405,97 @@ export const starterPackages = [
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Blunderbuss', 'Hatchet'],
       arcanum: false,
       companion: 'Mutt',
-      specialInformation: 'Dreams show your undiscovered surroundings'
+      characteristics: 'Dreams show your undiscovered surroundings'
     },
     {
       equipment: ['Brace of Pistols', 'Steel Wire', 'Grappling Hook'],
       arcanum: true,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Machete', 'Brace of Pistols'],
       arcanum: false,
       companion: 'Talking Parrot',
-      specialInformation: 'Never Sleep'
+      characteristics: 'Never Sleep'
     },
     {
       equipment: ['Harpoon Gun', 'Baton', 'Acid'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Slightly Magnetic'
+      characteristics: 'Slightly Magnetic'
     },
     {
       equipment: ['Bolt-Cutters', 'Blunderbuss', 'Fiddle'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Pistol', 'Grease', 'Hand Drill', 'Drum'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Sword & Dagger (d8 B)', 'Magnifying Glass'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Lost Eye'
+      characteristics: 'Lost Eye'
     },
     {
       equipment: ['Pistol', 'Acid', 'Animal Repellent'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Prosthetic Hand'
+      characteristics: 'Prosthetic Hand'
     },
     {
       equipment: ['Sword', 'Steel Wire'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Ugly Mutation'
+      characteristics: 'Ugly Mutation'
     },
     {
       equipment: ['Sword', 'Tattered Clothes'],
       arcanum: false,
       companion: 'Ferret',
-      specialInformation: 'Debt (3G)'
+      characteristics: 'Debt (3G)'
     }
   ],
   // 6 HP
@@ -504,97 +504,97 @@ export const starterPackages = [
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Musket', 'Hatchet', 'Flashbang'],
       arcanum: true,
       companion: '',
-      specialInformation: 'Iron Limb'
+      characteristics: 'Iron Limb'
     },
     {
       equipment: ['Rifle', 'Mace', 'Poison'],
       arcanum: false,
       companion: 'Eagle',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Club', '3 Bombs', 'Rocket'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Darkvision'
+      characteristics: 'Darkvision'
     },
     {
       equipment: ['Maul', 'Dagger', 'Chain'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Longaxe', 'Rum', 'Bomb'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Dagger', 'Fire Oil', 'Mirror'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Pistol', 'Knife', 'Bomb', 'Saw'],
       arcanum: false,
       companion: '',
-      specialInformation: 'Glowing Eyes'
+      characteristics: 'Glowing Eyes'
     },
     {
       equipment: ['Pistol', 'Bomb', 'Shovel'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Staff (d6 B)', 'Throwing Knives (d6)'],
       arcanum: false,
       companion: '',
-      specialInformation: ''
+      characteristics: ''
     },
     {
       equipment: ['Mace'],
       arcanum: false,
       companion: 'Pigeon',
-      specialInformation: 'Disfigured'
+      characteristics: 'Disfigured'
     }
   ]
 ];
@@ -613,219 +613,232 @@ export const creatureList = [
 
 export const companions = [
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Canary',
     str: getRandom1d6(),
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Claws (1)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Claws (1)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Canary',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Eagle',
     str: getRandom1d6(),
     dex: 10,
     wil: 4,
     hp: 0,
-    abilities: ['Claws (1d6)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Claws (1d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Eagle',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
-    onScreen: false,
-    category: 'companion',
+    condition: '',
+    x: 0,
+    y: 0,
+    active: false,
   },
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Ferret',
     str: getRandom1d6(),
     dex: 12,
     wil: 4,
     hp: 0,
-    abilities: ['Bite (1d4)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Bite (1d4)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Ferret',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Fugitive',
     str: 10,
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Hand Attack (1d4)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Hand Attack (1d4)', '', '', '', '', '', '', '', '', ''],
     equipment: ['Dagger (1d6)', '', '', '', '', '', '', '', '', ''],
     companion: 'Fugitive',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
 
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Hawk',
     str: 8,
     dex: 12,
     wil: 4,
     hp: 0,
-    abilities: ['Claws (d6)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Claws (d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Hawk',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
   {
     id: 0,
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Hound',
     str: getRandom2d6(),
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Bite (d6)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Bite (d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Hound',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
-    onScreen: false,
-    category: 'companion',
+    condition: '',
+    x: 0,
+    y: 0,
+    active: false,
   },
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Lighter Boy',
     str: getRandom2d6(),
     dex: 10,
     wil: 10,
     hp: 1,
-    abilities: ['', '', '', '', '', '', '', '', '', ''],
+    ability: ['', '', '', '', '', '', '', '', '', ''],
     equipment: ['Club', 'Lantern', '', '', '', '', '', '', '', ''],
     companion: 'Lighter Boy',
-    specialInformation: '',
+    characteristics: '',
     shillings: 1,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Mule',
     str: 10,
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Bite (1d6)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Bite (1d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Mule',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
-    onScreen: false,
-    category: 'companion',
+    condition: '',
+    x: 0,
+    y: 0,
+    active: false,
   },
   {
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Mutt',
     str: 10,
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Bite (d6)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Bite (d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Mutt',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
   {
     id: 0,
-    classification: '',
+    classification: 'companion',
+    category: '',
     name: 'Mutt with telepathic link',
     str: 10,
     dex: 10,
     wil: 10,
     hp: 0,
-    abilities: ['Bite (d6)', '', '', '', '', '', '', '', '', ''],
+    ability: ['Bite (d6)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Mutt with telepathic link',
-    specialInformation: '',
-    shillings: 0,
-    pennies: 0,
-    guilders: 0,
-    onScreen: false,
-    category: 'companion',
-  },
-  {
-    id: 0,
-    classification: '',
-    name: 'Pigeon',
-    str: getRandom1d6(),
-    dex: 10,
-    wil: 4,
-    hp: 0,
-    abilities: ['Claws (1)', 'Messenger', '', '', '', '', '', '', '', ''],
-    equipment: ['', '', '', '', '', '', '', '', '', ''],
-    companion: 'Pigeon',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
   {
-    classification: '',
+    id: 0,
+    classification: 'companion',
+    category: '',
+    name: 'Pigeon',
+    str: getRandom1d6(),
+    dex: 10,
+    wil: 4,
+    hp: 0,
+    ability: ['Claws (1)', 'Messenger', '', '', '', '', '', '', '', ''],
+    equipment: ['', '', '', '', '', '', '', '', '', ''],
+    companion: 'Pigeon',
+    characteristics: '',
+    shillings: 0,
+    pennies: 0,
+    guilders: 0,
+    condition: '',
+    x: 0,
+    y: 0,
+    active: false,
+  },
+  {
+    classification: 'companion',
+    category: '',
     name: 'Talking Parrot',
     str: getRandom1d6(),
     dex: 10,
@@ -834,15 +847,14 @@ export const companions = [
     abilites: ['Claws (1d4)', '', '', '', '', '', '', '', '', ''],
     equipment: ['', '', '', '', '', '', '', '', '', ''],
     companion: 'Talking Parrot',
-    specialInformation: '',
+    characteristics: '',
     shillings: 0,
     pennies: 0,
     guilders: 0,
     condition: '',
     x: 0,
     y: 0,
-    onScreen: false,
-    category: 'companion',
+    active: false,
   },
 
 ];

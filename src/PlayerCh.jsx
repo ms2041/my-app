@@ -19,7 +19,7 @@ import {
   playerChState,
   playerChPosition
 } from './Cast';
-import { MAX_PLAYER_CHS } from './constants';
+import { GENERATED_PLAYER_INDEX, MAX_PLAYER_CHS } from './constants';
 
 import Equipment from './Equipment';
 import Money from './Money'
@@ -58,6 +58,7 @@ export function getHighestAbility() {
 
 // Toggle between player character index and companion index
 function displayCompanionToggle() {
+  console.log('indices before displayCompanionToggle: ', displayIndex(), playerChIndex());
   if (playerChData[displayIndex()].companion) {
     if (displayIndex() == playerChIndex()) {
       setDisplayIndex(companionIndex());
@@ -65,6 +66,7 @@ function displayCompanionToggle() {
       setDisplayIndex(playerChIndex());
     }
   }
+  console.log('indices after displayCompanionToggle: ', displayIndex(), playerChIndex());
 }
 
 function handleNameClick() {
@@ -92,11 +94,11 @@ function extractCompanionInfo(companionProperty, companionObject) {
       extractedInfo.dex = companionObject.dex;
       extractedInfo.wil = companionObject.wil;
       extractedInfo.hp = companionObject.hp;
-      extractedInfo.specialInformation = companionObject.specialInformation;
+      extractedInfo.characteristics = companionObject.characteristics;
       extractedInfo.companion = companionObject.companion;
       break;
     case 'abilities':
-      extractedInfo.abilities = companionObject.abilities;
+      extractedInfo.ability = companionObject.ability;
       break;
     case 'equipment':
       extractedInfo.equipment = companionObject.equipment;
@@ -112,7 +114,7 @@ function extractCompanionInfo(companionProperty, companionObject) {
     case 'position':
       extractedInfo.x = companionObject.x;
       extractedInfo.y = companionObject.y;
-      extractedInfo.onScreen = companionObject.onScreen;
+      extractedInfo.active = companionObject.active;
       break;
     default:
       console.error('Invalid companionProperty:', companionProperty);
@@ -150,7 +152,7 @@ export function generatePlayerChData() {
 
 export function generatePlayerChAbilities() {
   const newPlayerChAbilities = {
-    abilities: ['', '', '', '', '', '', '', '', '', ''],
+    ability: ['', '', '', '', '', '', '', '', '', ''],
   }
   return(newPlayerChAbilities);
 }
@@ -182,7 +184,7 @@ export function generatePlayerChPosition() {
   const newPlayerChPosition = {
     x: 0,
     y: 0,
-    onscreen: false,
+    active: false,
   }
   return(newPlayerChPosition);
 }
@@ -202,7 +204,7 @@ function updatePlayerChDataProperty(index, propertyName, propertyValue) {
 
 // Called when the Roll button is clicked. Generates a player ch and companion if defined by starter package.
 export function generatePlayerCh() {
-  setDisplayIndex(0); // playerChData[0] is reserved for temp player character generation.
+  setDisplayIndex(GENERATED_PLAYER_INDEX); // playerChData[GENERATED_PLAYER_INDEX] is reserved for temp player character generation.
 
   // Use the updatePlayerCh function to update the player character at the specified index.
   updatePlayerCh(displayIndex(), 'data', generatePlayerChData());
@@ -210,11 +212,11 @@ export function generatePlayerCh() {
 
   const starterPackage = getStarterPackage();
   const companionValue = starterPackage.companion;
-  const specialInformationValue = starterPackage.specialInformation;
+  const characteristicsValue = starterPackage.characteristics;
   updatePlayerChDataProperty(displayIndex(), 'companion', companionValue);
-  updatePlayerChDataProperty(displayIndex(), 'specialInformation', specialInformationValue);
+  updatePlayerChDataProperty(displayIndex(), 'characteristics', characteristicsValue);
 
-  console.log('Companion check: ', displayIndex(), playerChData[displayIndex()].companion, playerChData[displayIndex()].specialInformation);
+  console.log('Companion check: ', displayIndex(), playerChData[displayIndex()].companion, playerChData[displayIndex()].characteristics);
   if (starterPackage.companion) {
     generateCompanion(displayIndex() + 1); // playerChData[1] is reserved for temporary companion generation.
   }
@@ -298,7 +300,7 @@ function PlayerCh() {
             <Money />
         </div>
       </div>
-      <div class="col-span-8 row-start-3 rounded">{playerChData[displayIndex()].specialInformation}</div>
+      <div class="col-span-8 row-start-3 rounded">{playerChData[displayIndex()].characteristics}</div>
       <div class="col-span-8 row-span-2 row-start-4 rounded">Haiku goes here!</div>
       {showPlayerChModal() && (
         <PlayerChModal onClose={closePlayerChModal} />
