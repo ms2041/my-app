@@ -19,9 +19,10 @@ import {
   playerChState,
   playerChPosition
 } from './Cast';
-import { GENERATED_PLAYER_INDEX, MAX_PLAYER_CHS } from './constants';
+import { GENERATED_PLAYER_INDEX, GENERATED_COMPANION_INDEX, MAX_PLAYER_CHS } from './constants';
 
 import Equipment from './Equipment';
+import Abilities from './Abilities';
 import Money from './Money'
 import PlayerChModal from './PlayerChModal';
 
@@ -31,8 +32,12 @@ const [equipmentToggle, setEquipmentToggle] = createSignal(true);
 export { equipmentToggle, setEquipmentToggle };
 
 function toggleEquipmentDisplay() {
-  console.log('toggleEquipmentDisplay');
-  setEquipmentToggle(prevValue => !prevValue);
+  if (equipmentToggle()) {
+    setEquipmentToggle(false);
+  } else {
+    setEquipmentToggle(true);
+  }
+  console.log('toggleEquipmentDisplay: ', equipmentToggle());
 }
 
 let item = {
@@ -124,8 +129,9 @@ function extractCompanionInfo(companionProperty, companionObject) {
 }
 
 // Generates playerCh arrays from the companion object.
-function generateCompanion() {
+function generateCompanion(atIndex) {
   const newCompanion = getCompanion(playerChData[displayIndex()].companion);
+  console.log('generateCompanion at index: ', atIndex, companionIndex());
   // Split companion into the separate tables of playerCh.
   updatePlayerCh(companionIndex(), 'data', extractCompanionInfo('data', newCompanion));
   updatePlayerCh(companionIndex(), 'abilities', extractCompanionInfo('abilities', newCompanion));
@@ -133,7 +139,7 @@ function generateCompanion() {
   updatePlayerCh(companionIndex(), 'money', extractCompanionInfo('money', newCompanion));
   updatePlayerCh(companionIndex(), 'state', extractCompanionInfo('state', newCompanion));
   updatePlayerCh(companionIndex(), 'position', extractCompanionInfo('position', newCompanion));
-  console.log('generateCompanion:', newCompanion);
+  console.log('generateCompanion:', companionIndex(), newCompanion, playerChData);
 }
 
 // Generate random player name and attributes.
@@ -205,6 +211,7 @@ function updatePlayerChDataProperty(index, propertyName, propertyValue) {
 // Called when the Roll button is clicked. Generates a player ch and companion if defined by starter package.
 export function generatePlayerCh() {
   setDisplayIndex(GENERATED_PLAYER_INDEX); // playerChData[GENERATED_PLAYER_INDEX] is reserved for temp player character generation.
+  setCompanionIndex(GENERATED_COMPANION_INDEX);
 
   // Use the updatePlayerCh function to update the player character at the specified index.
   updatePlayerCh(displayIndex(), 'data', generatePlayerChData());
@@ -216,7 +223,7 @@ export function generatePlayerCh() {
   updatePlayerChDataProperty(displayIndex(), 'companion', companionValue);
   updatePlayerChDataProperty(displayIndex(), 'characteristics', characteristicsValue);
 
-  console.log('Companion check: ', displayIndex(), playerChData[displayIndex()].companion, playerChData[displayIndex()].characteristics);
+  console.log('Companion check: ', displayIndex(), companionIndex(), playerChData[displayIndex()].companion, playerChData[displayIndex()].characteristics);
   if (starterPackage.companion) {
     generateCompanion(displayIndex() + 1); // playerChData[1] is reserved for temporary companion generation.
   }
@@ -265,7 +272,7 @@ function PlayerCh() {
       <div class="col-span-1 rounded text-right cursor-pointer" onClick={displayCompanionToggle}>{playerChData[displayIndex()].companion ? '&' : null}</div> {/* '&' displayed if companion==true */}
       <div class="co-span-1 text-right hover:text-blue-300 cursor-pointer" on:click={() => toggleEquipmentDisplay()}>*</div>
       <div class="col-span-9 row-span-5 col-start-10">
-        <Equipment />
+      {equipmentToggle() ? <Equipment /> : <Abilities />}
       </div>
       <div class="col-span-8 row-start-2">
         <div class="grid grid-cols-6 select-none text-lg h-full tracking-widest text-blue-200 rounded">

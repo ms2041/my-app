@@ -2,7 +2,7 @@ import { createSignal, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { creatureList } from './oddpendium.jsx';
 import { fetchPlayerChProps, updateWholeTable } from './dbUtils.js';
-import { GENERATED_COMPANION_INDEX, GENERATED_PLAYER_INDEX, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants.js';
+import { GENERATED_COMPANION_INDEX, GENERATED_PLAYER_INDEX, INITIAL_PLAYER_INDEX, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants.js';
 
 const [playerChIndex, setPlayerChIndex] = createSignal(GENERATED_PLAYER_INDEX);
 export { playerChIndex, setPlayerChIndex };
@@ -214,7 +214,7 @@ export function playerChExists(playerChName) {
   return(playerChFound);
 }
 
-// Save player (including companion) to player tables and Supabase.
+// Save player (including companion) from generated indices to player tables and Supabase.
 export function savePlayerCh() {
   console.log('savePlayerCh - before: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex());
   let index = 0;
@@ -239,7 +239,7 @@ export function savePlayerCh() {
 
     // Check if companion assigned. If true, copy companion.
     if (playerChData[displayIndex()].companion) {
-      console.log('Copy companion: ', playerChData[displayIndex() + 1].companion);
+      console.log('Copy companion: ', playerChData[displayIndex()].companion, 'to ', index + 1);
       copyRowWithoutId(displayIndex() + 1, index + 1, playerChData, setPlayerChData);
       copyRowWithoutId(displayIndex() + 1, index + 1, playerChAbilities, setPlayerChAbilities);
       copyRowWithoutId(displayIndex() + 1, index + 1, playerChEquipment, setPlayerChEquipment);
@@ -307,6 +307,8 @@ function Cast() {
   onMount(() => {
     // Call the loadPlayerChArray function to fetch and set data on component mount
     loadPlayerChArray();
+    setDisplayIndex(INITIAL_PLAYER_INDEX);
+    setCompanionIndex(INITIAL_PLAYER_INDEX + 1);
   });
   
   return (
