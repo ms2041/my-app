@@ -10,7 +10,7 @@ import AbilitiesModal from './AbilitiesModal';
 
 const [showAbilitiesModal, setShowAbilitiesModal] = createSignal(false);
 const [selectedItem, setSelectedItem] = createSignal(null);
-const [selectedSlot, setSelectedSlot] = createSignal(null);
+const [slotNumber, setSlotNumber] = createSignal(null);
 
 // After an item is added or deleted, the Abilities array is reordered.
 export function reorderAbilities() {
@@ -192,8 +192,8 @@ function selectAbilities(index) {
 }
 
 function handleLeftClick(slot) {
-  setSelectedSlot(slot);
-  console.log('handleLeftClick: ', slot, displayIndex(), playerChAbilities[displayIndex()].ability, ' Slot: ', selectedSlot());
+  setSlotNumber(slot);
+  console.log('handleLeftClick: ', slot, displayIndex(), playerChAbilities[displayIndex()].ability, ' Slot: ', slotNumber());
   if (playerChAbilities[displayIndex()].ability[slot] === '') {
     setSelectedItem(null); // Reset selected item when selecting an empty slot
     setShowAbilitiesModal(true);
@@ -212,14 +212,14 @@ function Abilities() {
   return (
     <div class="grid grid-cols-2 grid-rows-5 h-full gap-1 text-base">
       {abilities[displayIndex()] && abilities[displayIndex()].ability && (
-        abilities[displayIndex()].ability.map((abilityItem, index) => (
-          <div class="rounded p-1 hover:text-blue-300 bg-neutral-800 cursor-pointer px-2" on:click={() => handleLeftClick(index)}>
-            {abilityItem || ''}
+        abilities[displayIndex()].ability.map((abilityEntry, slot) => (
+          <div class="rounded p-1 hover:text-blue-300 bg-neutral-800 cursor-pointer px-2" on:click={() => handleLeftClick(slot)}>
+            {abilityEntry || ''}
           </div>
         ))
       )}
       {showAbilitiesModal() && (
-        <AbilitiesModal onClose={closeAbilitiesModal} selectedSlot={[selectedSlot, setSelectedSlot]} />
+        <AbilitiesModal onClose={closeAbilitiesModal} slotNumber={[slotNumber, setSlotNumber]}/>
       )}
     </div>
   );

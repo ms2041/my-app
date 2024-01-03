@@ -15,16 +15,26 @@ function PlayerChModal({ onClose }) {
 
   // Function to add player character to scene based on index
   const addPlayerChToScene = (index) => {
-    // Your logic to add player character to the scene using the index
-    setDisplayIndex(index);
-    setPlayerChIndex(index);
-    setCompanionIndex(index + 1);
-    console.log('Adding player character with index ', index, ' to the scene ', displayIndex(), playerChIndex());
+    if ((playerChData[index].classification === 'playerCh') || (playerChData[index].classification === 'companion')) {
+      // Your logic to add player character to the scene using the index
+      setDisplayIndex(index);
+      setPlayerChIndex(index);
+
+      // If a companion is selected then the player index is the predecessor to the curent index.
+      if (playerChData[displayIndex()].companion === 'this') {
+       setCompanionIndex(index - 1);
+      } else if (playerChData[displayIndex()].companion) {
+        setCompanionIndex(index + 1);
+      }
+      console.log('Adding player character with index ', index, ' to the scene ', displayIndex(), playerChIndex());
+    }
   };
 
   const handleMouseOver = (index) => {
     // Update display index to the hovered item's index
-    setDisplayIndex(index);
+    if ((playerChData[index].classification === 'playerCh') || (playerChData[index].classification === 'companion')) {
+      setDisplayIndex(index);
+    }
   };
 
   const handleMouseLeave = () => {

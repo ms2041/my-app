@@ -100,7 +100,7 @@ function extractCompanionInfo(companionProperty, companionObject) {
       extractedInfo.wil = companionObject.wil;
       extractedInfo.hp = companionObject.hp;
       extractedInfo.characteristics = companionObject.characteristics;
-      extractedInfo.companion = companionObject.companion;
+      extractedInfo.companion = 'this';
       break;
     case 'abilities':
       extractedInfo.ability = companionObject.ability;
