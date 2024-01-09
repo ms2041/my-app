@@ -55,11 +55,13 @@ function EquipmentModal({ onClose, selectedSlot: [selectedSlot, setSelectedSlot]
                       onMouseLeave={() => setHoveredItem(null)}
                       onClick={() => {
                         setSelectedItem(item); // Update the selected item
+                        console.log('Modal add equipment: ', item.name, item.slots, 'free slots:', freeSlots());
                         if (freeSlots() >= item.slots) {
                           addEquipment(item.name, selectedSlot());
                           reorderEquipment();
-                          console.log('Modal add equipment: ', playerChEquipment);
+                          onClose();
                         } else {
+                          // Need to implement an alert here.
                           console.log('Not enough equipment slots to add.');
                         }
                       }}

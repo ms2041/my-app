@@ -74,18 +74,14 @@ function getArcana() {
 
 // Search items array for item that matches a itemName.
 export function getItem(itemName) {
-  console.log(`Searching for item: ${itemName}`);
-  
   const foundItem = items.find(item => {
-    // console.log(`Checking item: ${item.name}`);
     return item.name.toLowerCase() === itemName.toLowerCase();
   });
 
   if (foundItem) {
-    console.log(`Item '${itemName}' found:`, foundItem);
     return foundItem;
   } else {
-    console.log(`Item '${itemName}' not found.`);
+    console.log(`Item '${itemName}' not found:`, foundItem);
     return null;
   }
 }
@@ -95,12 +91,13 @@ export function freeSlots() {
   const index = displayIndex();
   let slotsSum = 0;
   for (let i = 0; i < playerChEquipment[index].equipment.length; i++) {
-    const item = getItem(playerChEquipment[index].equipment[i]);
-    if ((item != null) && (item.name != "")) {
-      slotsSum = slotsSum + item.slots;
+    if (playerChEquipment[index].equipment[i] !== "") {
+      const item = getItem(playerChEquipment[index].equipment[i]);
+      if ((item != null) && (item.name != "")) {
+        slotsSum = slotsSum + item.slots;
+      }
     }
   }
-  console.log('freeSlots: ', MAX_EQUIPMENT_SLOTS - slotsSum);
   return (MAX_EQUIPMENT_SLOTS - slotsSum);
 }
 
@@ -200,7 +197,7 @@ function selectEquipment(index) {
 
 function handleLeftClick(slot) {
   setSelectedSlot(slot);
-  console.log('handleLeftClick: ', slot, playerChEquipment[displayIndex()].equipment, ' Slot: ', selectedSlot());
+  console.log('handleLeftClick: ', slot);
   if (playerChEquipment[displayIndex()].equipment[slot] === '') {
     setSelectedItem(null); // Reset selected item when selecting an empty slot
     setShowEquipmentModal(true);

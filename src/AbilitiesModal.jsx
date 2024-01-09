@@ -14,20 +14,6 @@ function AbilitiesModal({ onClose, slotNumber: [slotNumber, setSlotNumber]}) {
     setAbilityDescription('');
   };
 
-  // Function to save ability name to playerChAbilities array
-  function saveAbility(slot) {
-    const slotValue = slotNumber();
-    console.log('slotValue: ', slotValue);
-    if (slotValue !== null) {
-      const index = slotValue;
-      const updatedAbilities = [...playerChAbilities]; // Shallow copy the array
-      console.log('updatedAbilities: ', updatedAbilities, playerChAbilities, index);
-      updatedAbilities[displayIndex()].ability[index] = abilityName();
-      console.log('saveAbility: ', index, slotValue, abilityName(), ' updatedAbilities', updatedAbilities);
-      setPlayerChAbilities(updatedAbilities);
-    }
-  }
-
   return (
     <div class="fixed top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-xl shadow-md w-128 h-128">
       <div class="flex justify-end">
@@ -65,7 +51,7 @@ function AbilitiesModal({ onClose, slotNumber: [slotNumber, setSlotNumber]}) {
           <button className="text-gray-500 hover:text-slate-700" onClick={resetFields}>
             Cancel
           </button>
-          <button className="text-gray-500 hover:text-slate-700" onClick={() => {addAbility(abilityName, slotNumber()); reorderAbilities()}}>
+          <button className="text-gray-500 hover:text-slate-700" onClick={() => {addAbility(abilityName, slotNumber()); reorderAbilities(); onClose();}}>
             Save
           </button>
         </div>
