@@ -205,8 +205,23 @@ function handleLeftClick(slot) {
   }
 }
 
-export function handlePlayerChAbilitiesUpdate(updateData) {
-  console.log('handlePlayerChAbilitiesUpdate called');
+export function handlePlayerChAbilitiesUpdate(updatedData) {
+  console.log('handlePlayerChAbilitiesUpdate called ', updatedData);
+  console.log('data payload: ', updatedData.new);
+  const newData = [...playerChData]; // Create a copy of the current playerChData store
+  let index = updatedData.new.id - 1;
+
+  setPlayerChAbilities((prevData) => {
+    return prevData.map((item, i) => {
+      if (i === index) {
+        return {
+          id: updatedData.new.id,
+          ability: updatedData.new.ability,
+        };
+      }
+      return item;
+    });
+  });
 }
 
 // Abilities component.

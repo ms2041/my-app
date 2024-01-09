@@ -46,9 +46,14 @@ export function subscribeToPlayerChAbilities(callback) {
       schema: 'public',
       table: 'player_ch_abilities',
     },
-    (payload) => console.log('abilities received: ', payload)
-    )
-    .subscribe();
+    (payload) => {
+      console.log('data received: ', payload); // Optional: Log the payload
+      if (callback) {
+        callback(payload);
+      }
+    }
+  )
+  .subscribe();
 
   return () => {
     abilitiesChannel.unsubscribe();
@@ -66,9 +71,14 @@ export function subscribeToPlayerChEquipment(callback) {
       schema: 'public',
       table: 'player_ch_equipment',
     },
-    (payload) => console.log('equipment recieved: ', payload)
-    )
-    .subscribe();
+    (payload) => {
+      console.log('data received: ', payload); // Optional: Log the payload
+      if (callback) {
+        callback(payload);
+      }
+    }
+  )
+  .subscribe();
 
   return () => {
     equipmentChannel.unsubscribe();
@@ -86,7 +96,12 @@ export function subscribeToPlayerChState(callback) {
       schema: 'public',
       table: 'player_ch_state',
     },
-    (payload) => console.log('state recieved: ', payload)
+    (payload) => {
+      console.log('data received: ', payload); // Optional: Log the payload
+      if (callback) {
+        callback(payload);
+      }
+    }
     )
     .subscribe();
 
@@ -106,7 +121,12 @@ export function subscribeToPlayerChMoney(callback) {
       schema: 'public',
       table: 'player_ch_money',
     },
-    (payload) => console.log('money recieved: ', payload)
+    (payload) => {
+      console.log('data received: ', payload); // Optional: Log the payload
+      if (callback) {
+        callback(payload);
+      }
+    }
     )
     .subscribe();
 

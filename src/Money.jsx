@@ -38,8 +38,24 @@ function handleCurrencyClick(event, currency) {
   }
 }
 
-export function handlePlayerChMoneyUpdate(updateData) {
-  console.log('handlePlayerChMoneyUpdate called');
+export function handlePlayerChMoneyUpdate(updatedData) {
+  console.log('handlePlayerChMoneyUpdate called: ', updatedData.new);
+  let index = updatedData.new.id - 1;
+
+  setPlayerChMoney((prevData) => {
+    return prevData.map((item, i) => {
+      if (i === index) {
+        return {
+          id: updatedData.new.id,
+          shillings: updatedData.new.shillings,
+          pennies: updatedData.new.pennies,
+          guilders: updatedData.new.guilders,
+        };
+      }
+      return item;
+    });
+  });
+
 }
 
 

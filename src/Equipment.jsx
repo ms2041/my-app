@@ -215,8 +215,24 @@ function closeEquipmentModal() {
   setShowEquipmentModal(false);
 }
 
-export function handlePlayerChEquipmentUpdate(updateData) {
-  console.log('handlePlayerChEquipmentUpdate called');
+export function handlePlayerChEquipmentUpdate(updatedData) {
+  console.log('handlePlayerChEquipmentUpdate called:', updatedData);
+  console.log('data payload: ', updatedData.new);
+  const newData = [...playerChData]; // Create a copy of the current playerChData store
+  let index = updatedData.new.id - 1;
+
+  setPlayerChEquipment((prevData) => {
+    return prevData.map((item, i) => {
+      if (i === index) {
+        return {
+          id: updatedData.new.id,
+          equipment: updatedData.new.equipment,
+        };
+      }
+      return item;
+    });
+  });
+
 }
 
 // Equipment component.

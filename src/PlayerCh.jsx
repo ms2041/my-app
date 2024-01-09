@@ -21,6 +21,7 @@ import {
   playerChEquipment,
   playerChMoney,
   playerChState,
+  setPlayerChState,
   playerChPosition
 } from './Cast';
 import { GENERATED_PLAYER_INDEX, GENERATED_COMPANION_INDEX, MAX_PLAYER_CHS } from './constants';
@@ -270,8 +271,7 @@ function closePlayerChModal() {
 }
 
 export function handlePlayerChDataUpdate(updatedData) {
-  console.log('Received updated playerChData from Supabase:', updatedData);
-  console.log('data payload: ', updatedData.new);
+  console.log('handlePlayerChDataUpdate: ', updatedData.new);
   const newData = [...playerChData]; // Create a copy of the current playerChData store
   let index = updatedData.new.id - 1;
 
@@ -297,7 +297,21 @@ export function handlePlayerChDataUpdate(updatedData) {
 }
 
 export function handlePlayerChStateUpdate(updatedData) {
-  console.log('Received updated playerChState from Supabase:', updatedData);
+  console.log('handlePlayerChStateUpdate: ', updatedData);
+  let index = updatedData.new.id - 1;
+
+  setPlayerChState((prevData) => {
+    return prevData.map((item, i) => {
+      if (i === index) {
+        return {
+          id: updatedData.new.id,
+          condition: updatedData.new.condition,
+        };
+      }
+      return item;
+    });
+  });
+
 }
 
 function PlayerCh() {
