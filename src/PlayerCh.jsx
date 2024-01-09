@@ -3,7 +3,8 @@ import { createSignal, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { getStarterPackage } from './Equipment';
 import { getRandomInt, getRandom3d6} from './generalUtils';
-import { 
+import {
+  updatePlayerChProps,
   subscribeToPlayerChData,
   subscribeToPlayerChState } from './dbUtils';
 import { starterPackages, arcanum, names, companions } from './oddpendium';
@@ -234,20 +235,39 @@ export function generatePlayerCh() {
   }
 }
 
-// Function to modify an attribute based on click type
+async function updateAttributes(index, propertiesToUpdate) {
+  try {
+    await updatePlayerChProps('player_ch_data', index, propertiesToUpdate);
+  } catch (error) {
+    console.error('Error updating an attribute in Supabase:', error.message);
+  }
+}
+
+async function updateState(index, propertiesToUpdate) {
+  try {
+    await updatePlayerChProps('player_ch_state', index, propertiesToUpdate);
+  } catch (error) {
+    console.error('Error updating state in Supabase:', error.message);
+  }
+}
+
+// Function to modify an attribute based on click type.
 function modifyPcAttribute(attribute, increment) {
   const index = displayIndex();
   const currentValue = playerChData[index][attribute];
   
-  // Make the necessary modification to the attribute value
+  // Make the necessary modification to the attribute value.
   const updatedValue = currentValue + increment;
 
-  // Create an updatedProperties object with the changed attribute value
+  // Create an updatedProperties object with the changed attribute value.
   const updatedProperties = { ...playerChData[index], [attribute]: updatedValue };
 
-  // Use the updatePlayer function to update the player at the specified index
+  // Use the updatePlayer function to update the player at the specified index.
   updatePlayerCh(index, 'data', updatedProperties);
   console.log('modifyPcAttribute index:', index, 'playerIndex:', playerChIndex(), 'attribute:', attribute, 'updatedProperties:', updatedProperties);
+
+  // Update supabase table.
+  updateAttributes(index + 1, updatedProperties);
 }
 
 // Function to update an attribute based on click type

@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import { playerChAbilities, setPlayerChAbilities, displayIndex } from './Cast';
-import { addAbility } from './Abilities';
+import { addAbility, reorderAbilities } from './Abilities';
 
 function AbilitiesModal({ onClose, slotNumber: [slotNumber, setSlotNumber]}) {
   const [selectedAbilitySlot, setSelectedAbilitySlot] = createSignal(slotNumber);
@@ -65,7 +65,7 @@ function AbilitiesModal({ onClose, slotNumber: [slotNumber, setSlotNumber]}) {
           <button className="text-gray-500 hover:text-slate-700" onClick={resetFields}>
             Cancel
           </button>
-          <button className="text-gray-500 hover:text-slate-700" onClick={() => addAbility(abilityName, slotNumber())}>
+          <button className="text-gray-500 hover:text-slate-700" onClick={() => {addAbility(abilityName, slotNumber()); reorderAbilities()}}>
             Save
           </button>
         </div>

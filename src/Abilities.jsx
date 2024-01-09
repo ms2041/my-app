@@ -49,21 +49,21 @@ function removeAbilities(slot) {
     const index = displayIndex();
 
     if (index >= 0 && index < MAX_PLAYERS) {
-      const { ability } = newAbilities[index];
+      const playerAbility = newAbilities[index];
+
+      // Make a copy of the ability array for modification
+      const updatedAbility = [...playerAbility.ability];
 
       // Replace the item at the specified slot with an empty string
-      ability[slot] = '';
+      updatedAbility[slot] = '';
 
+      // Update the ability array in the newAbilities array
       newAbilities[index] = {
-        ...newAbilities[index],
-        ability: Abilities,
+        ...playerAbility,
+        ability: updatedAbility,
       };
 
-      console.log('removeAbilities: ', slot, playerChAbilities[displayIndex()].ability);
-
-      newAbilities[index] = {
-        ...newAbilities[index],
-      };
+      console.log('removeAbilities:', slot, newAbilities[index].ability);
     }
 
     return newAbilities;
@@ -126,7 +126,7 @@ function getNextFreeSlot() {
 
 // Add an item to a player character's Abilities array.
 export function addAbility(ability, slot) {
-  console.log('addAbility: ', ability, slot);
+  console.log('addAbility: ', ability(), slot);
 
   setPlayerChAbilities((prevAbilities) => {
     const index = displayIndex();
@@ -137,7 +137,7 @@ export function addAbility(ability, slot) {
 
       // Create a new copy of the Abilities array within the player's Abilities object
       const updatedAbilitiesArray = [...updatedPlayerAbilities.ability];
-      updatedAbilitiesArray[slot] = ability; // Update the specific slot with the new item
+      updatedAbilitiesArray[slot] = ability(); // Update the specific slot with the new item
       updatedPlayerAbilities.ability = updatedAbilitiesArray; // Update the Abilities array in the copied object
 
       updatedAbilities[index] = updatedPlayerAbilities; // Update the player's Abilities object in the main array
@@ -194,7 +194,8 @@ function selectAbilities(index) {
 
 function handleLeftClick(slot) {
   setSlotNumber(slot);
-  console.log('handleLeftClick: ', slot, displayIndex(), playerChAbilities[displayIndex()].ability, ' Slot: ', slotNumber());
+  let currentAbilities = playerChAbilities[displayIndex()].ability;
+  console.log('handleLeftClick: ', slot, displayIndex(), currentAbilities, ' Slot: ', slotNumber());
   if (playerChAbilities[displayIndex()].ability[slot] === '') {
     setSelectedItem(null); // Reset selected item when selecting an empty slot
     setShowAbilitiesModal(true);
