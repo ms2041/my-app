@@ -2,7 +2,8 @@ import { getHighestAbility, equipmentToggle } from './PlayerCh';
 import { playerChEquipment, setPlayerChEquipment, playerChData, companionIndex, displayIndex} from './Cast';
 import { starterPackages, arcanum, items } from './oddpendium';
 import { getRandomInt } from './generalUtils';
-import { createSignal } from 'solid-js';
+import { subscribeToPlayerChEquipment } from './dbUtils';
+import { createSignal, onMount } from 'solid-js';
 import { MAX_EQUIPMENT_SLOTS, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants';
 
 import EquipmentModal from './EquipmentModal';
@@ -214,10 +215,25 @@ function closeEquipmentModal() {
   setShowEquipmentModal(false);
 }
 
+export function handlePlayerChEquipmentUpdate(updateData) {
+  console.log('handlePlayerChEquipmentUpdate called');
+}
+
 // Equipment component.
 function Equipment() {
   const equipment = playerChEquipment;
   console.log('Equipment: ', equipment);
+
+  onMount(() => {
+
+    // Subscribe to player_ch_data updates when the component mounts
+    const unsubscribe = subscribeToPlayerChEquipment(handlePlayerChEquipmentUpdate);
+
+    // To unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  });
 
   return (
     <div class="grid grid-cols-2 grid-rows-5 h-full gap-1 text-base">

@@ -2,7 +2,8 @@ import { getHighestAbility, equipmentToggle } from './PlayerCh';
 import { playerChAbilities, setPlayerChAbilities, playerChData, companionIndex, displayIndex} from './Cast';
 import { starterPackages, arcanum, items } from './oddpendium';
 import { getRandomInt } from './generalUtils';
-import { createSignal } from 'solid-js';
+import { subscribeToPlayerChAbilities } from './dbUtils';
+import { createSignal, onMount } from 'solid-js';
 import { MAX_ABILITIES_SLOTS, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants';
 
 import AbilitiesModal from './AbilitiesModal';
@@ -204,10 +205,25 @@ function handleLeftClick(slot) {
   }
 }
 
+export function handlePlayerChAbilitiesUpdate(updateData) {
+  console.log('handlePlayerChAbilitiesUpdate called');
+}
+
 // Abilities component.
 function Abilities() {
   const abilities = playerChAbilities;
   console.log('Abilities: ', abilities);
+
+  onMount(() => {
+
+    // Subscribe to player_ch_data updates when the component mounts
+    const unsubscribe = subscribeToPlayerChAbilities(handlePlayerChAbilitiesUpdate);
+
+    // To unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  });
 
   return (
     <div class="grid grid-cols-2 grid-rows-5 h-full gap-1 text-base">

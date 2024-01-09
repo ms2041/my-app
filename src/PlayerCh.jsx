@@ -1,7 +1,11 @@
-import { createSignal } from 'solid-js';
+/* PlayerCh component encapsulates player data which includes attributes, money, state and position */
+import { createSignal, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { getStarterPackage } from './Equipment';
 import { getRandomInt, getRandom3d6} from './generalUtils';
+import { 
+  subscribeToPlayerChData,
+  subscribeToPlayerChState } from './dbUtils';
 import { starterPackages, arcanum, names, companions } from './oddpendium';
 import {
   updatePlayerCh,
@@ -242,7 +246,7 @@ function modifyPcAttribute(attribute, increment) {
 
   // Use the updatePlayer function to update the player at the specified index
   updatePlayerCh(index, 'data', updatedProperties);
-  console.log('modifyPcAttribute: ', index, playerChIndex(),attribute, updatedProperties);
+  console.log('modifyPcAttribute index:', index, 'playerIndex:', playerChIndex(), 'attribute:', attribute, 'updatedProperties:', updatedProperties);
 }
 
 // Function to update an attribute based on click type
@@ -258,14 +262,58 @@ function updatePlayerData(attribute, increment) {
 
   // Use the updatePlayer function to update the player at the specified index
   updatePlayerCh(index, 'data', updatedProperties);
-  console.log('modifyPcAttribute: ', index, playerChIndex(),attribute, updatedProperties);
+  console.log('updatePlayerData: ', index, playerChIndex(),attribute, updatedProperties);
 }
+
 function closePlayerChModal() {
   setshowPlayerChModal(false);
 }
 
+export function handlePlayerChDataUpdate(updatedData) {
+  console.log('Received updated playerChData from Supabase:', updatedData);
+  console.log('data payload: ', updatedData.new);
+  const newData = [...playerChData]; // Create a copy of the current playerChData store
+  let index = updatedData.new.id - 1;
+
+  setPlayerChData((prevData) => {
+    return prevData.map((item, i) => {
+      if (i === index) {
+        return {
+          id: updatedData.new.id,
+          classification: updatedData.new.classification,
+          category: updatedData.new.category,
+          name: updatedData.new.name,
+          str: updatedData.new.str,
+          dex: updatedData.new.dex,
+          wil: updatedData.new.wil,
+          hp: updatedData.new.hp,
+          characteristics: updatedData.new.characteristics,
+          companion: updatedData.new.companion,
+        };
+      }
+      return item;
+    });
+  });
+}
+
+export function handlePlayerChStateUpdate(updatedData) {
+  console.log('Received updated playerChState from Supabase:', updatedData);
+}
 
 function PlayerCh() {
+  onMount(() => {
+
+    // Subscribe to player_ch_data updates when the component mounts
+    const dataUnsubscribe = subscribeToPlayerChData(handlePlayerChDataUpdate);
+    const stateUnsubscribe = subscribeToPlayerChState(handlePlayerChStateUpdate);
+
+    // To unsubscribe when the component unmounts
+    return () => {
+      dataUnsubscribe();
+      stateUnsubscribe();
+    };
+  });
+
   return (
     <div class="w-full h-full grid grid-cols-18 grid-rows-5 gap-1 font-hultog-italic select-none">
       <div class="col-span-7 rounded cursor-pointer text-xl" onClick={handleNameClick}>{playerChData[displayIndex()].name}</div>

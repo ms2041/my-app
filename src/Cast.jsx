@@ -1,7 +1,7 @@
 import { createSignal, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { creatureList } from './oddpendium.jsx';
-import { fetchPlayerChProps, updateWholeTable } from './dbUtils.js';
+import { fetchPlayerChProps, updateWholeTable, updatePlayerChProps } from './dbUtils.js';
 import { GENERATED_COMPANION_INDEX, GENERATED_PLAYER_INDEX, INITIAL_PLAYER_INDEX, MAX_PLAYER_CHS, MAX_PLAYERS } from './constants.js';
 
 const [playerChIndex, setPlayerChIndex] = createSignal(GENERATED_PLAYER_INDEX);
@@ -82,10 +82,10 @@ function PcsToJson() {
 function JsonToPcs() {
 }
 
-/* Copy new data to playerCh arrays, identified by index (int) and propertyType ('data',
+/* Copy new data to playerCh arrays, identified by index and propertyType ('data',
    'abilities', 'equipment', 'money', 'state', 'position'. They are Supabase tables. */
 export function updatePlayerCh(index, propertyType, updatedProperties) {
-  console.log('updatePlayerCh: ', index, propertyType, updatedProperties);
+  console.log('updatePlayerCh index:', index, 'propertyType:', propertyType, 'updatedProperties:', updatedProperties);
   
   const updateFunctions = {
     data: setPlayerChData,
@@ -128,7 +128,7 @@ export function getNextFreeIndex() {
 export function savePlayerChData(index) {
   const playerChDataCopy = { ...playerChData[displayIndex()] };
 
-  // Update the playerChData at getNextFreeIndex with the copied data
+  // Update the playerChData at getNextFreeIndex with the copied data. Should be renamed to copyPlayerChData.
   setPlayerChData((prevPlayerChData) => {
     const updatedPlayerChData = [...prevPlayerChData];
     updatedPlayerChData[index] = playerChDataCopy;
@@ -203,7 +203,7 @@ function copyRowWithoutId(sourceIndex, destinationIndex, sourceStore, setDestina
 
 // Check if playerCh exists elsewhere in the playerCh array.
 export function playerChExists(playerChName) {
-  console.log('Check if player name exists: ', playerChName, playerChData[displayIndex()].name, playerChData[playerChIndex()].name)
+  console.log('playerExists() playerChName:', playerChName, 'displayIndex:', playerChData[displayIndex()].name, 'playerIndex:', playerChData[playerChIndex()].name)
   let playerChFound = false;
   for (let i = 2; i < MAX_PLAYER_CHS; i++) {
     if (playerChName === playerChData[i].name) {
@@ -216,7 +216,6 @@ export function playerChExists(playerChName) {
 
 // Save player (including companion) from generated indices to player tables and Supabase.
 export function savePlayerCh() {
-  console.log('savePlayerCh - before: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex());
   let index = 0;
   if (!playerChExists(playerChData[displayIndex()].name)){
     index = getNextFreeIndex();
@@ -226,7 +225,6 @@ export function savePlayerCh() {
     console.log('Player Ch already exists - no new slot required: ', displayIndex());
     index = displayIndex();
   }
-  console.log('savePlayerCh - after: playerChIndex ', playerChIndex(), 'displayIndex: ', displayIndex(), index);
 
   if (index !== -1) {
     // displayIndex() returns 0 normally, but not always.
@@ -252,7 +250,7 @@ export function savePlayerCh() {
 
     setDisplayIndex(index); // Display index is set to any player that is saved, whether existing or rolled.
     console.log('savePlayerCh - data: ', playerChData, 'displayIndex: ',displayIndex(), 'playerChIndex: ', playerChIndex());
-    updatePlayerChArraysInSupabase()
+    updateOnePlayerChArraysInSupabase(displayIndex())
   } else {
     console.log('Maximum Player Characters reached.');
   }
@@ -283,6 +281,29 @@ async function updatePlayerChArraysInSupabase() {
     console.log('Arrays updated in Supabase successfully');
   } catch (error) {
     console.error('Error updating arrays in Supabase:', error.message);
+  }
+}
+
+async function updateOnePlayerChArraysInSupabase(index) {
+  console.log('updateOnePlayerChArraysInSupabase called');
+  try {
+    const playerChDataArray = playerChData;
+    const playerChAbilitiesArray = playerChAbilities;
+    const playerChEquipmentArray = playerChEquipment;
+    const playerChMoneyArray = playerChMoney;
+    const playerChStateArray = playerChState;
+    const playerChPositionArray = playerChPosition;
+
+    await updatePlayerChProps('player_ch_data', index + 1, playerChDataArray[index]);
+    await updatePlayerChProps('player_ch_abilities', index + 1, playerChAbilitiesArray[index]);
+    await updatePlayerChProps('player_ch_equipment', index + 1, playerChEquipmentArray[index]);
+    await updatePlayerChProps('player_ch_money', index + 1, playerChMoneyArray[index]);
+    await updatePlayerChProps('player_ch_state', index + 1, playerChStateArray[index]);
+    await updatePlayerChProps('player_ch_position', index + 1, playerChPositionArray[index]);
+
+    console.log('Arrays for 1 player updated in Supabase successfully');
+  } catch (error) {
+    console.error('Error updating 1 player arrays in Supabase:', error.message);
   }
 }
 

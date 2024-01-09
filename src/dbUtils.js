@@ -4,6 +4,116 @@ import {
 } from './Cast.jsx';
 import { getNextFreeIndex } from './Cast';
 import { getRandomInt } from './generalUtils.js';
+import { handlePlayerChDataUpdate, handlePlayerChStateUpdate } from './PlayerCh';
+import { handlePlayerChAbilitiesUpdate } from './Abilities';
+import { handlePlayerChEquipmentUpdate } from './Equipment.jsx';
+import { handlePlayerChMoneyUpdate } from './Money';
+
+// Functions to subsribe to Supabase. Called when a component mounts.
+export function subscribeToPlayerChData(callback) {
+  console.log('subscribeToPlayerChData called');
+  const dataChannel = supabase
+  .channel('data-db-changes')
+  .on(
+    'postgres_changes',
+    {
+      event: '*',
+      schema: 'public',
+      table: 'player_ch_data',
+    },
+    (payload) => {
+      console.log('data received: ', payload); // Optional: Log the payload
+      if (callback) {
+        callback(payload);
+      }
+    }
+  )
+  .subscribe();
+
+  return () => {
+    dataChannel.unsubscribe();
+  };
+}
+
+export function subscribeToPlayerChAbilities(callback) {
+  console.log('subscribeToPlayerChAbilities called');
+  const abilitiesChannel = supabase
+  .channel('abilities-db-changes')
+  .on(
+    'postgres_changes',
+    {
+      event: '*',
+      schema: 'public',
+      table: 'player_ch_abilities',
+    },
+    (payload) => console.log('abilities received: ', payload)
+    )
+    .subscribe();
+
+  return () => {
+    abilitiesChannel.unsubscribe();
+  };
+}
+
+export function subscribeToPlayerChEquipment(callback) {
+  console.log('subscribeToPlayerChEquipment called');
+  const equipmentChannel = supabase
+  .channel('equipment-db-changes')
+  .on(
+    'postgres_changes',
+    {
+      event: '*',
+      schema: 'public',
+      table: 'player_ch_equipment',
+    },
+    (payload) => console.log('equipment recieved: ', payload)
+    )
+    .subscribe();
+
+  return () => {
+    equipmentChannel.unsubscribe();
+  };
+}
+
+export function subscribeToPlayerChState(callback) {
+  console.log('subscribeToPlayerChState called');
+  const stateChannel = supabase
+  .channel('state-db-changes')
+  .on(
+    'postgres_changes',
+    {
+      event: '*',
+      schema: 'public',
+      table: 'player_ch_state',
+    },
+    (payload) => console.log('state recieved: ', payload)
+    )
+    .subscribe();
+
+  return () => {
+    stateChannel.unsubscribe();
+  };
+}
+
+export function subscribeToPlayerChMoney(callback) {
+  console.log('subscribeToPlayerChMoney called');
+  const moneyChannel = supabase
+  .channel('money-db-changes')
+  .on(
+    'postgres_changes',
+    {
+      event: '*',
+      schema: 'public',
+      table: 'player_ch_money',
+    },
+    (payload) => console.log('money recieved: ', payload)
+    )
+    .subscribe();
+
+  return () => {
+    moneyChannel.unsubscribe();
+  };
+}
 
 // Debug functions to test Supabase.
 export async function getCastFromDb() {
@@ -134,6 +244,7 @@ export async function updateWholeTable(tableName, newData) {
 
 // Update Player Character properties to Supabase.
 export async function updatePlayerChProps(tableName, id, propertiesToUpdate) {
+  console.log('updatePlayerProps: ', tableName, id, propertiesToUpdate);
   try {
     const { data, error } = await supabase
       .from(tableName)

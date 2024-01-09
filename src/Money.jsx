@@ -1,5 +1,6 @@
-import { createSignal } from 'solid-js';
+import { createSignal, onMount } from 'solid-js';
 import { playerChMoney, setPlayerChMoney, displayIndex, setDisplayIndex } from './Cast';
+import { subscribeToPlayerChMoney } from './dbUtils';
 import { MAX_PLAYER_CHS } from './constants';
 
 function updateMoney(currency, amount) {
@@ -37,7 +38,23 @@ function handleCurrencyClick(event, currency) {
   }
 }
 
+export function handlePlayerChMoneyUpdate(updateData) {
+  console.log('handlePlayerChMoneyUpdate called');
+}
+
+
 function Money() {
+
+  onMount(() => {
+
+    // Subscribe to player_ch_data updates when the component mounts
+    const unsubscribe = subscribeToPlayerChMoney(handlePlayerChMoneyUpdate);
+
+    // To unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  });
 
   return (
     <div class="flex">
