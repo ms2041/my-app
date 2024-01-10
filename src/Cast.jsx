@@ -333,7 +333,7 @@ function Cast() {
   });
   
   return (
-    <div class="text-base tracking-widest font-hultog-italic">
+    <div class="text-base tracking-widest font-hultog-italic text-amber-50">
       Cast
     </div>
   );

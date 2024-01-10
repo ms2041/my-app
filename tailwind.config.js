@@ -6,6 +6,7 @@ module.exports = {
       gridRow: {
         'span-14': 'span 14 / span 14',
         'span-15': 'span 15 / span 15',
+        'span-17': 'span 17 / span 17',
       },
       gridColumn: {
         'span-8': 'span 8 / span 8',
@@ -13,7 +14,8 @@ module.exports = {
         'span-18': 'span 18 / span 18',
       },
       gridTemplateRows: {
-        '22': 'repeat(22, minmax(0, 1fr))'
+        '22': 'repeat(22, minmax(0, 1fr))',
+        '17': 'repeat(17, minmax(0, 1fr))',
       },
       gridTemplateColumns: {
         '9': 'repeat(9, minmax(0, 1fr))',
